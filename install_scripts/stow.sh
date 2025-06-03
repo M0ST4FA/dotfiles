@@ -6,6 +6,7 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TARGET_DIR="$HOME"
 
 CONFIGS=(
+  zsh
   nvim
   git
   hyprland
