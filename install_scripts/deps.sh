@@ -32,6 +32,7 @@ SYSTEM_PACKAGES=(
 
   wezterm
   kitty
+  foot
 )
 
 # Define npm global packages needed

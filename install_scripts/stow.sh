@@ -13,6 +13,7 @@ CONFIGS=(
 
   wezterm
   kitty
+  foot
 )
 
 info "Changing directory to dotfiles repository: $DOTFILES_DIR"
