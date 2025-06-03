@@ -1,26 +1,13 @@
 #!/usr/bin/env bash
-set -e # Exit on error
+set -euo pipefail
 
-echo "Installing dependencies..."
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/install_scripts" && pwd)"
+source "$SCRIPT_DIR/utils.sh"
 
-echo "🌀 Installing dotfiles with GNU Stow..."
+info "Starting installation..."
 
-# List of stow packages
-PACKAGES=(
-  "hyprland" 
-  "nvim" 
-  "zsh" 
-  "ssh"
-  "git" 
-  "bat" 
-  "htop" 
-  "kitty" 
-  "scripts"
-)
+source "$SCRIPT_DIR/deps.sh"
+source "$SCRIPT_DIR/stow.sh"
 
-for pkg in "${PACKAGES[@]}"; do
-  echo "🔗 Stowing $pkg..."
-  stow -v -R "$pkg"
-done
+success "✅ All done!"
 
-echo "✅ Dotfiles installed!"
