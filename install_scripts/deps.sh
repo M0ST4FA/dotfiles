@@ -29,6 +29,9 @@ SYSTEM_PACKAGES=(
   glow
 
   wl-clipboard
+
+  wezterm
+  kitty
 )
 
 # Define npm global packages needed
@@ -37,6 +40,10 @@ NPM_PACKAGES=(
   typescript
   typescript-language-server
 )
+
+info "Updating git submodules..."
+git submodule update --init --recursive
+success "Submodules updated."
 
 info "Updating system package database and upgrading..."
 sudo pacman -Syu --noconfirm

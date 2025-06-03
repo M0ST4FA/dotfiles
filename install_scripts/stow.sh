@@ -10,6 +10,9 @@ CONFIGS=(
   nvim
   git
   hyprland
+
+  wezterm
+  kitty
 )
 
 info "Changing directory to dotfiles repository: $DOTFILES_DIR"
