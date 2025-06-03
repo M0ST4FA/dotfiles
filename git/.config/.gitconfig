@@ -1,0 +1,14 @@
+[credential]
+	helper = store
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[user]
+	name = M0sT4fa
+	email = mostafa2018a3s@gmail.com
+[core]
+	editor = nvim
+	excludesfile = /home/m0st4fa/.gitignore_global
+[color]
+	ui = auto
+[advice]
+	addIgnoredFile = false

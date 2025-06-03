@@ -45,6 +45,16 @@ return {
     build = ':TSUpdate',
     config = function()
       require'nvim-treesitter.configs'.setup {
+        -- Parsers to install
+        ensure_installed = {
+          "c",
+          "cpp",
+          "bash",       -- for shell scripts
+          "html",
+          "css",
+          "javascript",
+          "typescript",
+        },
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,

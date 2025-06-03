@@ -1,5 +1,26 @@
-#!/usr/bin/bash
-stow hyprland
+#!/usr/bin/env bash
+set -e # Exit on error
 
-git clone https://github.com/folke/lazy.nvim ~/.local/share/nvim/lazy/lazy.nvim --depth=1 --branch=stable
-stow nvim
+echo "Installing dependencies..."
+
+echo "🌀 Installing dotfiles with GNU Stow..."
+
+# List of stow packages
+PACKAGES=(
+  "hyprland" 
+  "nvim" 
+  "zsh" 
+  "ssh"
+  "git" 
+  "bat" 
+  "htop" 
+  "kitty" 
+  "scripts"
+)
+
+for pkg in "${PACKAGES[@]}"; do
+  echo "🔗 Stowing $pkg..."
+  stow -v -R "$pkg"
+done
+
+echo "✅ Dotfiles installed!"

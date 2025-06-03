@@ -62,7 +62,6 @@ return {
     end
   },
 
-
   -- Autopairing
   {
     'windwp/nvim-autopairs',

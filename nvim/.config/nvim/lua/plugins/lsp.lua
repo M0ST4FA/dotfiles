@@ -1,8 +1,16 @@
 return {
   { 'neovim/nvim-lspconfig', config = function()
     require('lspconfig').clangd.setup{}
+
+    -- Scripting languages
     require('lspconfig').pyright.setup{}
+    require('lspconfig').bashls.setup{}
+
+    -- Web 
+    require('lspconfig').html.setup{}
+    require('lspconfig').cssls.setup{}
     require('lspconfig').ts_ls.setup{}
+
   end },
    -- Completion engine
   { "hrsh7th/nvim-cmp", event = "InsertEnter", dependencies = {

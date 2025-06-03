@@ -5,7 +5,11 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
-vim.cmd [[ syntax on ]]
+vim.cmd [[
+  syntax enable
+  filetype plugin indent on
+]]
+
 
 -- Clipboard for Wayland
 vim.g.clipboard = {
