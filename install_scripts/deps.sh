@@ -33,6 +33,8 @@ SYSTEM_PACKAGES=(
   wezterm
   kitty
   foot
+
+  archlinux-wallpaper
 )
 
 # Define npm global packages needed
