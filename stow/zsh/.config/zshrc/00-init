@@ -4,3 +4,9 @@
 export EDITOR=nvim
 export ZSH="$HOME/.oh-my-zsh"
 export PATH="~/.local/bin:$PATH"
+
+# -----------------------------------------------------
+# Enable zinit
+# -----------------------------------------------------
+export ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
+source "$ZINIT_HOME/zinit.zsh"

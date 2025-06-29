@@ -1,9 +1,5 @@
 # -----------------------------------------------------
-# oh-myzsh themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# -----------------------------------------------------
-
-# -----------------------------------------------------
-# Plugins
+# Theme and plugins
 # -----------------------------------------------------
 
 # Theme
@@ -20,25 +16,51 @@ zinit snippet OMZ::plugins/colored-man-pages
 zinit snippet OMZ::plugins/copyfile
 zinit snippet OMZ::plugins/copybuffer
 zinit snippet OMZ::plugins/dirhistory
-# zinit snippet OMZ::plugins/colors/colors.zsh
 zinit snippet OMZ::plugins/command-not-found
 
 # Core Zsh GitHub Plugins
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-history-substring-search
 zinit light hlissner/zsh-autopair
 zinit light MichaelAquilina/zsh-you-should-use
 zinit light Aloxaf/fzf-tab
-
-# Highlighting — must be last!
 zinit light zdharma-continuum/fast-syntax-highlighting
 
 # -----------------------------------------------------
-# Set-up FZF key bindings (CTRL R for fuzzy history finder)
+# key bindings
 # -----------------------------------------------------
 source <(fzf --zsh)
 
-# zsh history
+# Use Emacs (default) keybindings
+bindkey -e
+
+# Fix Alt + ← / → for word movement
+bindkey '^[^[[C' forward-word
+bindkey '^[^[[D' backward-word
+bindkey '\e[1;3C' forward-word
+bindkey '\e[1;3D' backward-word
+
+# Fix arrow key search (history substring compatible)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# Fix Alt + W
+# Kill everything from cursor to beginning of line, keep the rest
+kill-left-but-keep-right() {
+  LBUFFER=""
+}
+zle -N kill-left-but-keep-right
+bindkey '^[w' kill-left-but-keep-right
+
+# -----------------------------------------------------
+# History and completion
+# -----------------------------------------------------
+# Completion setup
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+compinit
+
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
