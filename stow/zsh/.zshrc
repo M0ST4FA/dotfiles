@@ -16,8 +16,8 @@
 # -----------------------------------------------------
 # Enable zinit
 # -----------------------------------------------------
-export ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
-source "${ZINIT_HOME}/zinit.zsh"
+export ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit"
+source "$ZINIT_HOME/zinit.zsh"
 
 # -----------------------------------------------------
 # Load modular configarion

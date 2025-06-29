@@ -6,7 +6,7 @@ TARGET_DIR="$HOME"
 ROOT_TARGET_DIR="/"
 
 CONFIGS=()
-read_lines_to_array "$DEPS_DIR/stow.txt" CONFIGS
+parse_array_file "$DEPS_DIR/stow.txt" CONFIGS
 
 info "Changing directory to dotfiles repository: $DOTFILES_DIR."
 cd "$DOTFILES_DIR" || { error "Dotfiles directory not found!"; exit 1; }
