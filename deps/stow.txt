@@ -1,10 +1,10 @@
-zsh
-nvim
-git
-hyprland
+zsh $HOME
+nvim $HOME
+git $HOME
+hyprland $HOME
 
-wezterm
-kitty
-foot
+wezterm $HOME
+kitty $HOME
+foot $HOME
 
-wallpapers
+wallpapers /
