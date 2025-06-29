@@ -37,6 +37,14 @@ function update_git_submodules() {
   success "Submodules updated."
 }
 
+function install_weird_packages() {
+  
+  info "Installing weird packages..."
+  mkdir -p ~/.local/share/zinit
+  git clone https://github.com/zdharma-continuum/zinit.git ~/.local/share/zinit/zinit.git
+
+}
+
 function install_system_packages() {
   info "Updating system package database and upgrading..."
   sudo pacman -Syu --noconfirm
@@ -72,6 +80,7 @@ function install_npm_packages() {
 
 check_and_install_paru
 update_git_submodules
+install_weird_packages
 install_system_packages
 install_npm_packages
 

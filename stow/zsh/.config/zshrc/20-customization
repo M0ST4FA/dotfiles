@@ -1,36 +1,37 @@
 # -----------------------------------------------------
-# CUSTOMIZATION
-# -----------------------------------------------------
-
-# -----------------------------------------------------
 # oh-myzsh themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # -----------------------------------------------------
 
 # -----------------------------------------------------
-# oh-myzsh plugins
+# Plugins
 # -----------------------------------------------------
-plugins=(
-    git
-    sudo
-    web-search
-    archlinux
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    fast-syntax-highlighting
-    copyfile
-    copybuffer
-    dirhistory
-    colored-man-pages
-    zsh-autopair
-    you-should-use
-    zsh-completions
-    fzf-tab
-    colors
-    command-not-found
-)
 
-# Set-up oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+# Theme
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# OMZ Plugins
+zinit snippet OMZ::plugins/git
+zinit snippet OMZ::plugins/sudo
+zinit snippet OMZ::plugins/web-search
+zinit snippet OMZ::plugins/archlinux
+zinit snippet OMZ::plugins/colored-man-pages
+zinit snippet OMZ::plugins/copyfile
+zinit snippet OMZ::plugins/copybuffer
+zinit snippet OMZ::plugins/dirhistory
+# zinit snippet OMZ::plugins/colors/colors.zsh
+zinit snippet OMZ::plugins/command-not-found
+
+# Core Zsh GitHub Plugins
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light hlissner/zsh-autopair
+zinit light MichaelAquilina/zsh-you-should-use
+zinit light Aloxaf/fzf-tab
+
+# Highlighting — must be last!
+zinit light zdharma-continuum/fast-syntax-highlighting
 
 # -----------------------------------------------------
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
@@ -43,10 +44,3 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-# -----------------------------------------------------
-# Prompt
-# -----------------------------------------------------
-# eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
-
-# Shipped Theme
-# eval "$(oh-my-posh init zsh --config /usr/share/oh-my-posh/themes/powerlevel10k_rainbow.omp.json)"

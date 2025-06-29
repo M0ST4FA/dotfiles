@@ -14,15 +14,10 @@
 # -----------------------------------------------------
 
 # -----------------------------------------------------
-# Load powerlevel10k
+# Enable zinit
 # -----------------------------------------------------
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+export ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
+source "${ZINIT_HOME}/zinit.zsh"
 
 # -----------------------------------------------------
 # Load modular configarion
@@ -34,12 +29,3 @@ for f in ~/.config/zshrc/*; do
         [[ -f $c ]] && source $c || source $f
     fi
 done
-
-# -----------------------------------------------------
-# Continue loading powerlevel10k
-# -----------------------------------------------------
-source $ZSH_CUSTOM/themes/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# In your shell configuration file

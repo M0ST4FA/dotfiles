@@ -22,7 +22,8 @@ wezterm
 kitty
 foot
 fzf
-oh-my-zsh
+zoxide
+eza
 
 #miscellaneous
 archlinux-wallpaper
