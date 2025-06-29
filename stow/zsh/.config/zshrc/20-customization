@@ -37,14 +37,14 @@ source <(fzf --zsh)
 bindkey -e
 
 # Fix Alt + ← / → for word movement
-#bindkey '^[^[[C' forward-word
-#bindkey '^[^[[D' backward-word
-#bindkey '\e[1;3C' forward-word
-#bindkey '\e[1;3D' backward-word
+bindkey '^[^[[C' forward-word
+bindkey '^[^[[D' backward-word
+bindkey '\e[1;3C' forward-word
+bindkey '\e[1;3D' backward-word
 
 # Fix arrow key search (history substring compatible)
-#bindkey '^[[A' history-substring-search-up
-#bindkey '^[[B' history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # Fix Alt + W
 # Kill everything from cursor to beginning of line, keep the rest

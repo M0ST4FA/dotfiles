@@ -1,7 +1,11 @@
 zsh $HOME
+
 nvim $HOME
+
 git $HOME
+
 hyprland $HOME
+hyprpanel $HOME
 
 wezterm $HOME
 kitty $HOME
