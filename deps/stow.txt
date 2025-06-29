@@ -1,0 +1,10 @@
+zsh
+nvim
+git
+hyprland
+
+wezterm
+kitty
+foot
+
+wallpapers

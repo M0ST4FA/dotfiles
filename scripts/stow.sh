@@ -2,24 +2,13 @@
 set -euo pipefail
 
 # DOTFILES_DIR="$HOME/dotfiles"
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TARGET_DIR="$HOME"
 ROOT_TARGET_DIR="/"
 
-CONFIGS=(
-  zsh
-  nvim
-  git
-  hyprland
+CONFIGS=()
+read_lines_to_array "$DEPS_DIR/stow.txt" CONFIGS
 
-  wezterm
-  kitty
-  foot
-
-  wallpapers
-)
-
-info "Changing directory to dotfiles repository: $DOTFILES_DIR"
+info "Changing directory to dotfiles repository: $DOTFILES_DIR."
 cd "$DOTFILES_DIR" || { error "Dotfiles directory not found!"; exit 1; }
 
 info "Stowing dotfiles..."

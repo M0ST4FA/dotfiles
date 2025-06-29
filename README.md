@@ -10,6 +10,7 @@ This repository contains my personal dotfiles managed with [GNU Stow](https://ww
 * `kitty` – Kitty terminal with theming
 * `wezterm` - Wezterm terminal with theming
 * `foot` - Foot terminal with theming
+* `wallpapers` - Wallpapers
 
 ## 🚀 Setup
 

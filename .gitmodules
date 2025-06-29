@@ -1,9 +1,9 @@
-[submodule "kitty/.config/kitty/kitty-themes"]
-	path = kitty/.config/kitty/kitty-themes
+[submodule "stow/kitty/.config/kitty/kitty-themes"]
+	path = stow/kitty/.config/kitty/kitty-themes
 	url = https://github.com/dexpota/kitty-themes.git
-[submodule "wallpapers/usr/share/wallpapers/ArchPapers"]
-	path = wallpapers/usr/share/wallpapers/ArchPapers
+[submodule "stow/wallpapers/usr/share/wallpapers/ArchPapers"]
+	path = stow/wallpapers/usr/share/wallpapers/ArchPapers
 	url = https://github.com/connorslade/ArchPapers
-[submodule "wallpapers/usr/share/wallpapers/Nord"]
-	path = wallpapers/usr/share/wallpapers/Nord
+[submodule "stow/wallpapers/usr/share/wallpapers/Nord"]
+	path = stow/wallpapers/usr/share/wallpapers/Nord
 	url = https://github.com/dxnst/nord-backgrounds

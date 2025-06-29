@@ -1,0 +1,29 @@
+#git
+git
+lazygit
+
+#package management
+stow
+
+#text editors
+nvim
+
+#development
+base-devel
+gcc
+clang
+npm
+nodejs
+glow
+wl-clipboard
+
+#shells and terminals
+wezterm
+kitty
+foot
+fzf
+oh-my-zsh
+
+#miscellaneous
+archlinux-wallpaper
+
