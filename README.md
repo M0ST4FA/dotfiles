@@ -1,16 +1,6 @@
 # 🌟 My Dotfiles (Stow-based)
 
-This repository contains my personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
-
-## 📦 Current Configs
-
-* `nvim` – Neovim with LSP and Treesitter
-* `git` – Git config and aliases
-* `hyprland` – Wayland window manager setup
-* `kitty` – Kitty terminal with theming
-* `wezterm` - Wezterm terminal with theming
-* `foot` - Foot terminal with theming
-* `wallpapers` - Wallpapers
+This repository contains my personal dotfiles and system configuration managed with [GNU Stow](https://www.gnu.org/software/stow/). It more than manages my dotfiles: it also has their dependencies and most of the packages I use.
 
 ## 🚀 Setup
 
