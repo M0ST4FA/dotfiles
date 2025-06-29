@@ -25,6 +25,12 @@ fzf
 zoxide
 eza
 
+#fonts
+ttf-cascadia-code-nerd
+ttf-jetbrains-mono-nerd
+ttf-sourcecodepro-nerd
+ttf-recursive-nerd
+
 #miscellaneous
 archlinux-wallpaper
 
