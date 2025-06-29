@@ -46,7 +46,7 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # Fix Alt + W
- Kill everything from cursor to beginning of line, keep the rest
+# Kill everything from cursor to beginning of line, keep the rest
 kill-left-but-keep-right() {
   LBUFFER=""
 }
@@ -59,6 +59,7 @@ bindkey '^[w' kill-left-but-keep-right
 # Completion setup
 autoload -Uz compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 compinit
 
 HISTFILE=~/.zsh_history
