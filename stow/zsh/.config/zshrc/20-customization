@@ -26,6 +26,7 @@ zinit light hlissner/zsh-autopair
 zinit light MichaelAquilina/zsh-you-should-use
 zinit light Aloxaf/fzf-tab
 zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light jeffreytse/zsh-vi-mode
 
 # -----------------------------------------------------
 # key bindings
@@ -36,22 +37,22 @@ source <(fzf --zsh)
 bindkey -e
 
 # Fix Alt + ← / → for word movement
-bindkey '^[^[[C' forward-word
-bindkey '^[^[[D' backward-word
-bindkey '\e[1;3C' forward-word
-bindkey '\e[1;3D' backward-word
+#bindkey '^[^[[C' forward-word
+#bindkey '^[^[[D' backward-word
+#bindkey '\e[1;3C' forward-word
+#bindkey '\e[1;3D' backward-word
 
 # Fix arrow key search (history substring compatible)
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+#bindkey '^[[A' history-substring-search-up
+#bindkey '^[[B' history-substring-search-down
 
 # Fix Alt + W
 # Kill everything from cursor to beginning of line, keep the rest
-kill-left-but-keep-right() {
-  LBUFFER=""
-}
-zle -N kill-left-but-keep-right
-bindkey '^[w' kill-left-but-keep-right
+#kill-left-but-keep-right() {
+#  LBUFFER=""
+#}
+#zle -N kill-left-but-keep-right
+#bindkey '^[w' kill-left-but-keep-right
 
 # -----------------------------------------------------
 # History and completion
