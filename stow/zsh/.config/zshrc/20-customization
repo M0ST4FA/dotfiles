@@ -26,7 +26,6 @@ zinit light hlissner/zsh-autopair
 zinit light MichaelAquilina/zsh-you-should-use
 zinit light Aloxaf/fzf-tab
 zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light jeffreytse/zsh-vi-mode
 
 # -----------------------------------------------------
 # key bindings
@@ -47,12 +46,12 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # Fix Alt + W
-# Kill everything from cursor to beginning of line, keep the rest
-#kill-left-but-keep-right() {
-#  LBUFFER=""
-#}
-#zle -N kill-left-but-keep-right
-#bindkey '^[w' kill-left-but-keep-right
+ Kill everything from cursor to beginning of line, keep the rest
+kill-left-but-keep-right() {
+  LBUFFER=""
+}
+zle -N kill-left-but-keep-right
+bindkey '^[w' kill-left-but-keep-right
 
 # -----------------------------------------------------
 # History and completion
