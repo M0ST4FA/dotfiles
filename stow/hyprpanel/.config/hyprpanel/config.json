@@ -416,7 +416,7 @@
   "theme.font.label": "SauceCodePro Nerd Font Medium",
   "theme.matugen": false,
   "tear": false,
-  "theme.font.size": "0.9rem",
+  "theme.font.size": "1rem",
   "theme.bar.menus.menu.dashboard.scaling": 85,
   "theme.notification.scaling": 100,
   "theme.bar.menus.menu.notifications.scaling": 98,
