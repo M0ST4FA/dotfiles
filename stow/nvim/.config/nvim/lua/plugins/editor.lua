@@ -44,6 +44,27 @@ return {
     'stevearc/conform.nvim',
     config = function()
       require("conform").setup({
+
+        formatters = {
+
+          injected = {
+            options = {
+              ignore_errors = false,
+              lang_to_formatters = {
+                sql = { "sqlfluff" },
+              },
+              lang_to_ext = {
+                sql = "sql",
+              },
+            },
+          },
+
+          sqlfluff = {
+            command = "/usr/bin/sqlfluff",
+            args = { "fix", "--stdin-filepath", "$FILENAME", "--", "-" },
+          }, 
+        },
+
         formatters_by_ft = {
           html = { "prettier" },
           css = { "prettier" },
@@ -51,6 +72,7 @@ return {
           c = { "clang_format" },
           cpp = { "clang_format" },
           python = { "black" },
+          sql = { "sqlfluff", "injected" }
         },
       })
       vim.api.nvim_create_autocmd("BufWritePre", {

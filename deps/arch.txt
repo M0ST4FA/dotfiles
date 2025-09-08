@@ -16,6 +16,7 @@ npm
 nodejs
 glow
 wl-clipboard
+sqlfluff
 
 #shells and terminals
 wezterm
