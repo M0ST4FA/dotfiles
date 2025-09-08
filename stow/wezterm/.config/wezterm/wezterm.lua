@@ -36,7 +36,7 @@ return {
   window_padding = { left = 10, right = 10, top = 10, bottom = 10 },
 
   -- Enable and configure some other features if needed
-  window_background_opacity = 0.95,  -- Semi-transparent background (optional)
+  window_background_opacity = 0.70,  -- Semi-transparent background (optional)
   -- use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true, 
 }
