@@ -10,5 +10,6 @@ hyprpanel $HOME
 wezterm $HOME
 kitty $HOME
 foot $HOME
+btop $HOME
 
 wallpapers /
