@@ -1,0 +1,36 @@
+BasedOnStyle: Microsoft
+Language: Cpp
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 0
+
+BreakBeforeBraces: Allman
+
+PointerAlignment: Middle
+ReferenceAlignment: Middle
+
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: false
+
+BreakConstructorInitializers: BeforeComma
+
+SpaceAfterCStyleCast: false
+SpacesInAngles: false
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+SortIncludes: true
+IncludeBlocks: Preserve
+
+AlignOperands: AlignAfterOperator
+AlignConsecutiveAssignments: None
+AlignConsecutiveDeclarations: None
+AlignConsecutiveMacros: None
+
+ReflowComments: true
+

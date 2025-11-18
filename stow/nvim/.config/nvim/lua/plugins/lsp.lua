@@ -1,17 +1,28 @@
 return {
-  { 'neovim/nvim-lspconfig', config = function()
-    require('lspconfig').clangd.setup{}
+  { 'neovim/nvim-lspconfig', 
+    config = function()
 
-    -- Scripting languages
-    require('lspconfig').pyright.setup{}
-    require('lspconfig').bashls.setup{}
+      -- --- Configure individual servers using the modern vim.lsp.config API ---
 
-    -- Web 
-    require('lspconfig').html.setup{}
-    require('lspconfig').cssls.setup{}
-    require('lspconfig').ts_ls.setup{}
+      -- Define configurations for each server:
+      vim.lsp.config.clangd = {
+          cmd = { "clangd", "--background-index", "--clang-tidy", "--completion-style=detailed", "--header-insertion=never" },
+          init_options = { clangdFileStatus = true },
+      }
 
-  end },
+      -- --- Enable Servers using the modern API ---
+      -- This tells Neovim to start all configured servers when the appropriate filetype is opened.
+      vim.lsp.enable({
+        "clangd",
+        "pyright",
+        "bashls",
+        "html",
+        "cssls",
+        "tsserver",
+      })
+
+    end
+},
    -- Completion engine
   { "hrsh7th/nvim-cmp", event = "InsertEnter", dependencies = {
 
