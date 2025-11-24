@@ -61,6 +61,7 @@ __pycache__/
 *.rar
 *.gz
 *.lock
+*.idx
 
 # IDE-specific files (you can customize depending on your IDE)
 *.iml
@@ -83,3 +84,6 @@ out/
 # VS Code
 .vscode/
 
+# clang and others
+*.cache/
+*compile_commands.json

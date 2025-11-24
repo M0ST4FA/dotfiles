@@ -12,3 +12,5 @@
 	ui = auto
 [advice]
 	addIgnoredFile = false
+[init]
+	defaultBranch = main
