@@ -7,6 +7,8 @@ git $HOME
 hyprland $HOME
 hyprpanel $HOME
 
+niri $HOME
+
 wezterm $HOME
 kitty $HOME
 foot $HOME

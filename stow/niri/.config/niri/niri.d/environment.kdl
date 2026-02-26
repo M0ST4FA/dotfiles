@@ -1,0 +1,24 @@
+environment {
+  XDG_CURRENT_DESKTOP "niri"
+
+  // For Qt themes (Overrides the configuration files)
+  QT_QPA_PLATFORM "wayland"
+  QT_QPA_PLATFORMTHEME "gtk3" // Hyprland uses qt6ct
+  QT_QPA_PLATFORMTHEME_QT6 "gtk3" // Hyprland uses qt6ct
+  // QT_STYLE_OVERRIDE, kvantum
+
+  // For GTK theme (Overrides the configuration files)
+  // GTK_THEME, Adwaita-dark
+  GTK_APPLICATION_PREFER_DARK_THEME "1"
+  
+  XWAYLAND_SCALE "1"
+
+  // Electron settings
+  OZONE_PLATFORM "wayland"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+  ELECTRON_ENABLE_WAYLAND "1"
+
+  // For XCursors settings (Important for Qt apps as they don't have cursor configuration)
+  XCURSOR_PATH "${XCURSOR_PATH}:~/.local/share/icons:/local/share/icons"
+  XCURSOR_SIZE "32"
+}
