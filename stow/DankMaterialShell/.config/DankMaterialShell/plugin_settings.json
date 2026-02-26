@@ -1,0 +1,12 @@
+{
+  "dankBatteryAlerts": {
+    "enabled": true
+  },
+  "dankBitwarden": {
+    "enabled": true,
+    "trigger": "["
+  },
+  "asusControlCenter": {
+    "enabled": true
+  }
+}

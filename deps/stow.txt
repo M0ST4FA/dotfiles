@@ -9,6 +9,8 @@ hyprpanel $HOME
 
 niri $HOME
 
+DankMaterialShell $HOME
+
 wezterm $HOME
 kitty $HOME
 foot $HOME
