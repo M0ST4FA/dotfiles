@@ -1,0 +1,67 @@
+@define-color nord0 rgba(46, 52, 64, 1); /* #2E3440 */
+@define-color nord1 rgba(59, 66, 82, 1); /* #3B4252 */
+@define-color nord2 rgba(67, 76, 94, 1); /* #434C5E */
+@define-color nord3 rgba(76, 86, 106, 1); /* #4C566A */
+@define-color nord4 rgba(216, 222, 233, 1); /* #D8DEE9 */
+@define-color nord5 rgba(229, 233, 240, 1); /* #E5E9F0 */
+@define-color nord6 rgba(236, 239, 244, 1); /* #ECEFF4 */
+@define-color nord7 rgba(143, 188, 187, 1); /* #8FBCBB */
+@define-color nord8 rgba(136, 192, 208, 1); /* #88C0D0 */
+@define-color nord9 rgba(129, 161, 193, 1); /* #81A1C1 */
+@define-color nord10 rgba(94, 129, 172, 1); /* #5E81AC */
+@define-color nord11 rgba(191, 97, 106, 1); /* #BF616A */
+@define-color nord12 rgba(208, 135, 112, 1); /* #D08770 */
+@define-color nord13 rgba(235, 203, 139, 1); /* #EBCB8B */
+@define-color nord14 rgba(163, 190, 140, 1); /* #A3BE8C */
+@define-color nord15 rgba(180, 142, 173, 1); /* #B48EAD */
+
+/* Main window styling */
+#window {
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Dark semi-transparent background */
+  border-radius: 12px;
+  /* Rounded corners */
+  padding: 10px;
+}
+
+/* Entry box styling */
+#entry {
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  background-color: @nord1;
+  /* Slightly lighter background for contrast */
+  color: @nord8;
+  /* White text */
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* Match (suggestion) styling */
+#match {
+  background-color: transparent;
+  /* Transparent background */
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+/* Match hover effect */
+#match:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Slight highlight on hover */
+}
+
+/* Match title styling */
+#match-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Match description styling */
+#match-desc {
+  font-size: 12px;
+  color: #b0b0b0;
+  /* Light gray for descriptions */
+}

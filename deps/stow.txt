@@ -11,6 +11,8 @@ niri $HOME
 
 DankMaterialShell $HOME
 
+anyrun $HOME
+
 wezterm $HOME
 kitty $HOME
 foot $HOME

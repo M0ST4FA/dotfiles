@@ -1,0 +1,20 @@
+(
+    plugins: [
+        "libapplications.so",
+        "libsymbols.so",
+        "libkidex.so",
+        "librink.so"
+    ],
+     
+    // The horizontal position, adjusted so that Relative(0.5) always centers the runner
+    x: Fraction(0.5),
+    // The vertical position, works the same as `x`
+    y: Fraction(0.35),
+    width: Absolute(600),
+    height: Absolute(200),
+    font: "JetBrainsMono Nerd Font 8",
+    css: "style.css"
+    // Additional configurations...
+)
+
+
