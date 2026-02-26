@@ -11,6 +11,7 @@ hyprpanel $HOME
 niri $HOME
 
 DankMaterialShell $HOME
+noctalia          $HOME
 
 anyrun $HOME
 
@@ -19,5 +20,7 @@ kitty $HOME
 foot $HOME
 btop $HOME
 fastfetch $HOME
+
+wireshark $HOME
 
 wallpapers /
