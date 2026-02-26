@@ -6,6 +6,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
+vim.opt.pumheight = 5
 vim.cmd [[
   syntax enable
   filetype plugin indent on
@@ -27,3 +28,5 @@ vim.g.clipboard = {
 }
 vim.opt.clipboard = 'unnamedplus'
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "

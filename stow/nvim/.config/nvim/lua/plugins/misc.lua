@@ -4,6 +4,7 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
+  { 'ibhagwan/fzf-lua' },
 
   -- Comment toggling
   { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end },

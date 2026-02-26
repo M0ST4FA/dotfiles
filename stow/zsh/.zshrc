@@ -23,3 +23,13 @@ for f in ~/.config/zshrc/*; do
         [[ -f $c ]] && source $c || source $f
     fi
 done
+
+figlet -tc "m0st4fa" | rainbow
+
+# First login QOTD
+if [[ ! -f ~/.last_zsh_run ]] || [[ "$(cat ~/.last_zsh_run)" != "$(date +%Y-%m-%d)" ]]; then
+  QOTD="$(netcat djxmmx.net 17)"
+  echo $QOTD | rainbow
+
+  date +%Y-%m-%d > ~/.last_zsh_run
+fi

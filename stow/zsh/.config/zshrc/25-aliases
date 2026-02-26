@@ -2,6 +2,33 @@
 # General
 # -----------------------------------------------------
 alias ls='eza --icons=always'
+alias .='eza --icons=always'
 alias ll='eza -l --icons=always'
 alias lt='eza --tree --level=1 --icons=always'
+alias la='eza -la --icons=always'
+alias l.='eza --level=1 --icons=always .*'
+
+alias cp='cp -i'
+
 alias cat='bat'
+
+alias grep='grep --color=always -n'
+
+alias pacsyu='sudo pacman -Syu'
+alias csshk="eval $(ssh-agent -s) && ssh-add ~/.ssh/id_ed25519"
+alias parsyu='paru --aur -Syu'
+
+export WS=/home/m0st4fa/workspace
+alias w="cd $WS"
+alias wl="cd $WS/learning"
+alias wp="cd $WS/projects"
+alias wx="cd $WS/experiments"
+alias wk="cd $WS/kernel"
+alias ..='cd ..'
+
+alias flutter="fvm flutter"
+
+alias gdb="gdb -q"
+
+alias man="batman"
+alias diff="batdiff"

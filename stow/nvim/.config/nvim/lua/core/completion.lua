@@ -11,10 +11,7 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),  -- Scroll docs up
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),   -- Scroll docs down
     ["<C-Space>"] = cmp.mapping.complete(),   -- Trigger completion menu
-    ["<C-e>"] = cmp.mapping.abort(),           -- Close completion window
     ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Confirm selection
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then

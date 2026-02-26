@@ -20,8 +20,6 @@ Desktop.ini         # Windows folder config
 
 # Logs and databases
 *.log
-*.sql
-*.sqlite
 
 # Compiled object files
 *.o

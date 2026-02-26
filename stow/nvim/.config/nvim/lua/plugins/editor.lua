@@ -6,9 +6,8 @@ return {
     config = function()
       require('aerial').setup({
         backends = { "lsp", "treesitter", "markdown" },
-        on_attach = function(bufnr)
-          vim.api.nvim_buf_set_keymap(bufnr, 'n', '{', '<cmd>AerialPrev<CR>', {})
-          vim.api.nvim_buf_set_keymap(bufnr, 'n', '}', '<cmd>AerialNext<CR>', {})
+        on_attach = function(client, bufnr)
+          vim.keymap.set('n', '<leader>o', '<cmd>AerialToggle<CR>')
         end,
       })
     end
@@ -26,7 +25,10 @@ return {
         shading_factor = 2,
         start_in_insert = true,
         persist_size = true,
-        direction = 'horizontal'
+        direction = 'horizontal',
+        on_attach = function(client, bufnr)
+          vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm<CR>')
+        end
       }
     end
   },
@@ -45,6 +47,7 @@ return {
     config = function()
       require("conform").setup({
 
+        -- Options per formatter
         formatters = {
 
           injected = {
@@ -62,19 +65,27 @@ return {
           sqlfluff = {
             command = "/usr/bin/sqlfluff",
             args = { "fix", "--stdin-filepath", "$FILENAME", "--", "-" },
-          }, 
+          },
         },
 
+        -- Formatter to use per language
         formatters_by_ft = {
-          html = { "prettier" },
-          css = { "prettier" },
-          javascript = { "prettier" },
+          html = { "prettierd" },
+          css = { "biome", "prettierd" },
+          javascript = { "biome", "prettierd" },
+          typescript = { "biome", "prettierd" },
           c = { "clang_format" },
           cpp = { "clang_format" },
           python = { "black" },
-          sql = { "sqlfluff", "injected" }
+          sql = { "sqlfluff", "injected" },
+          go = { "goimports", "gofmt" },
+          json = { "jq" },
+          jsonc = { "prettierd" },
+          lua = { "lua_ls " },
         },
       })
+
+      -- Format on save
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*",
         callback = function()
@@ -91,7 +102,6 @@ return {
       require("nvim-autopairs").setup {}
     end
   },
-
 
   -- Git signs in gutter
   {
