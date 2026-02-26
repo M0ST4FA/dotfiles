@@ -4,6 +4,7 @@ nvim $HOME
 
 git $HOME
 clangd $HOME
+gdb $HOME
 
 hyprland $HOME
 hyprpanel $HOME

@@ -1,0 +1,40 @@
+# --- Misc
+set history save on
+set history size 1000
+
+set debuginfod enabled off
+
+set width 0
+set height 0
+set print sevenbit-strings on
+
+set print pretty on
+set pagination off
+
+# --- Layout
+tui new-layout main regs 1 src 1 asm 1 status 0 cmd 1
+# layout main
+
+# --- Autoloading
+set auto-load safe-path / /usr/share
+
+# --- Load plugins
+
+# --- Macros
+define rl
+  source ~/.config/gdb/gdbinit
+  echo ~~~ gdbinit reloaded ~~~\n
+end
+
+define init-pwndbg
+  source /usr/share/pwndbg/gdbinit.py
+  set show-banner off
+  set context-sections "regs disasm code stack backtrace" 
+  set context-code-lines 8
+  set context-disasm-lines 15
+  set context-stack-lines 8
+  set context-clear-screen on
+  set context-registers-color green
+  set context-registers-changed-color green
+  set banner-color cyan,bold
+end
