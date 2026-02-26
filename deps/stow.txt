@@ -18,5 +18,6 @@ wezterm $HOME
 kitty $HOME
 foot $HOME
 btop $HOME
+fastfetch $HOME
 
 wallpapers /
