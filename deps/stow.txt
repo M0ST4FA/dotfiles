@@ -3,6 +3,7 @@ zsh $HOME
 nvim $HOME
 
 git $HOME
+clangd $HOME
 
 hyprland $HOME
 hyprpanel $HOME
