@@ -1,0 +1,73 @@
+// Settings that influence how windows are positioned and sized.
+// Find more information on the wiki:
+// https://yalter.github.io/niri/Configuration:-Layout
+layout {
+    gaps 6
+
+    // Set transparent workspace background color so you see the backdrop at all times.
+    background-color "transparent"
+    center-focused-column "never"
+    default-column-display "normal"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    // preset-window-heights { }
+
+    // You can change the default width of the new windows.
+    default-column-width { proportion 0.5; }
+    // If you leave the brackets empty, the windows themselves will decide their initial width.
+    // default-column-width {}
+
+    focus-ring {
+        width 2
+        off
+    }
+
+    border {
+        width 2
+        on
+    }
+
+    tab-indicator {
+        hide-when-single-tab
+        width 2
+        gap 2
+        length total-proportion=0.98
+        position "top"
+        place-within-column
+    }
+
+    shadow {
+        on
+        draw-behind-window true
+
+        // Softness controls the shadow blur radius.
+        softness 30
+
+        // Spread expands the shadow.
+        spread 5
+
+        // Offset moves the shadow relative to the window.
+        offset x=0 y=5
+
+        color "#0007"
+    }
+
+    // Struts shrink the area occupied by windows, similarly to layer-shell panels.
+    // You can think of them as a kind of outer gaps. They are set in logical pixels.
+    // Left and right struts will cause the next window to the side to always be visible.
+    // Top and bottom struts will simply add outer gaps in addition to the area occupied by
+    // layer-shell panels and regular gaps.
+    struts {
+        // left 4
+        // right 4
+        // top 4
+        // bottom 4
+    }
+}
+
+

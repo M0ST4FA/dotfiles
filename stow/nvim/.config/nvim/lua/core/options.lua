@@ -28,5 +28,14 @@ vim.g.clipboard = {
 }
 vim.opt.clipboard = 'unnamedplus'
 
+-- Keymaps
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- Folding
+vim.opt.foldenable = true
+vim.opt.foldmethod = 'expr'
+vim.opt.foldcolumn = '1'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99

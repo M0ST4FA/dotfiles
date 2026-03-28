@@ -14,8 +14,11 @@ source "$SCRIPT_DIR/utils.sh"
 
 info "Starting installation..."
 
-source "$SCRIPT_DIR/install_deps.sh"
-source "$SCRIPT_DIR/stow.sh"
+if [[ $1 = 'stow' ]]; then
+  source "$SCRIPT_DIR/stow.sh"
+else
+  source "$SCRIPT_DIR/install_deps.sh"
+  source "$SCRIPT_DIR/stow.sh"
+fi
 
 success "All done!"
-

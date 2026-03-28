@@ -12,17 +12,22 @@ include "niri.d/layout.kdl"
 
 include "niri.d/workspaces.kdl"
 include "niri.d/windowrules.kdl"
+include "niri.d/layerrules.kdl"
 
-include "dms/alttab.kdl"
-include "dms/binds.kdl"
-include "dms/colors.kdl"
-include "dms/cursor.kdl"
-include "dms/layout.kdl"
-include "dms/outputs.kdl"
-include "dms/windowrules.kdl"
-include "dms/wpblur.kdl"
+include "niri.d/colors.kdl"
 
-spawn-at-startup "wezterm"
+// include "dms/alttab.kdl"
+// include "dms/binds.kdl"
+// include "dms/colors.kdl"
+// include "dms/cursor.kdl"
+// include "dms/layout.kdl"
+// include "dms/outputs.kdl"
+// include "dms/windowrules.kdl"
+// include "dms/wpblur.kdl"
+
+spawn-at-startup "qs" "-c" "noctalia-shell" "--no-duplicate"
+spawn-at-startup "kitty"
+spawn-sh-at-startup "niri msg action focus-workspace 'main' && niri msg action maximize-window"
 spawn-sh-at-startup "wl-paste --watch cliphist store &"
 spawn-sh-at-startup "foot --title btop btop"
 hotkey-overlay {
@@ -39,4 +44,9 @@ prefer-no-csd
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Pictures/Screenshots/screenshot-from-%Y-%m-%d %H-%M-%S.png"
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}

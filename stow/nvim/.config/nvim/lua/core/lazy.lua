@@ -18,4 +18,4 @@ require('lazy').setup({
   { import = 'plugins.misc' },
 })
 
-
+vim.notify = require('notify')

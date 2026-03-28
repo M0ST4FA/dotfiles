@@ -13,4 +13,7 @@ CompileFlags:
     '-fmin-function-alignment=16',
     '-fconserve-stack',
     '-mrecord-mcount',
+    '-fno-ipa-cp-clone',
+    '-fno-partial-inlining',
+    '-fsanitize=bounds-strict'
   ]

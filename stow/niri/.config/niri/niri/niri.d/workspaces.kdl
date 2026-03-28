@@ -1,0 +1,5 @@
+workspace "main"
+workspace "browser"
+workspace "tool"
+workspace "btop"
+workspace "chat"

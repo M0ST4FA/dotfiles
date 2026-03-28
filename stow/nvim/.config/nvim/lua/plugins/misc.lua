@@ -1,8 +1,12 @@
 return {
   -- Fuzzy finder and utilities
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+{
+    'nvim-telescope/telescope.nvim', version = '*',
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        -- optional but recommended
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    }
   },
   { 'ibhagwan/fzf-lua' },
 
@@ -10,10 +14,20 @@ return {
   { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end },
 
   -- Indentation guides
-  { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
-
-  -- Icons for filetypes etc.
-  { 'nvim-tree/nvim-web-devicons' },
+  { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {
+    exclude = {
+      filetypes = {
+        "dashboard",
+        "alpha",
+        "starter",
+      },
+      buftypes = {
+        "terminal",
+        "nofile",
+      }
+    }
+  },
+  },
 
   -- Surround text objects easily
   { 'kylechui/nvim-surround', config = function() require('nvim-surround').setup() end },
@@ -24,8 +38,4 @@ return {
 
   -- Emmet for HTML/CSS
   { 'mattn/emmet-vim' },
-
-  -- Color highlighter for CSS etc.
-  { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end },
 }
-

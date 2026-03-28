@@ -15,7 +15,7 @@ for cfg in "${!CONFIGS[@]}"; do
   TARGET_DIR=$(eval echo "${CONFIGS[$cfg]}")
 
   if [[ -d "$cfg" ]]; then
-    if [[ "$TARGET_DIR" == /usr/* || "$TARGET_DIR" == /etc/* ]]; then
+    if [[ "$TARGET_DIR" == /usr/* || "$TARGET_DIR" == /etc/* || "$TARGET_DIR" == / ]]; then
       info "Stowing $cfg to $TARGET_DIR (sudo)..."
       sudo stow -v -t "$TARGET_DIR" "$cfg"
     else

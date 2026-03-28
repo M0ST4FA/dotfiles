@@ -25,6 +25,7 @@ alias wp="cd $WS/projects"
 alias wx="cd $WS/experiments"
 alias wk="cd $WS/kernel"
 alias ..='cd ..'
+unalias zi
 
 alias flutter="fvm flutter"
 
@@ -32,3 +33,7 @@ alias gdb="gdb -q"
 
 alias man="batman"
 alias diff="batdiff"
+
+alias f="yazi"
+
+alias getmusic="yt-dlp -x --audio-format opus --embed-metadata --embed-thumbnail --remux-video opus"
