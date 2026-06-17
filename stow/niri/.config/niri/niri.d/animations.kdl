@@ -2,11 +2,7 @@
 // The wiki explains how to configure individual animations:
 // https://yalter.github.io/niri/Configuration:-Animations
 animations {
-    // This replaces your "global" and general window settings
-    // A 'spring' looks like: stiffness damping-ratio
-    
-    // 'springy' equivalent (bounce)
-    // 0.7 damping ratio allows for slight overshoot
+
     slowdown 1.2 // Global speed multiplier (lower is faster)
 
     workspace-switch {
@@ -15,15 +11,15 @@ animations {
     }
 
     window-open {
-        spring stiffness=600 damping-ratio=0.6 epsilon=0.0001
+        spring stiffness=600 damping-ratio=0.5 epsilon=0.0001
     }
 
     window-close {
-        spring stiffness=800 damping-ratio=0.7 epsilon=0.0001
+        spring stiffness=800 damping-ratio=0.5 epsilon=0.0001
     }
 
     window-movement {
         // General dragging/tiled movement
-        spring stiffness=500 damping-ratio=0.9 epsilon=0.0001
+        spring stiffness=500 damping-ratio=0.7 epsilon=0.0001
     }
 }

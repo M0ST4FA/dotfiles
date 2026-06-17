@@ -2,6 +2,36 @@
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
+// ------ General window rules ------------------------------------------------
+window-rule {
+  // Make windows non-maximized by default
+  open-maximized false
+
+  // Rounded corners for a modern look.
+  geometry-corner-radius 20
+
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry true
+
+  // opacity 0.90
+
+  background-effect {
+    blur true
+    xray false
+  }
+
+  tiled-state true
+  draw-border-with-background false
+}
+
+blur {
+  // off
+  passes 4
+  offset 4
+  noise 0.02
+  saturation 1.6
+}
+
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
@@ -10,80 +40,86 @@ window-rule {
     // You can get away with just app-id="wezterm" if you want.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
+    open-maximized false
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
-window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    open-floating true
-}
-
-
-// Fixed Workspace Assignments (btop, qemu, mame)
+// ------ Fixed Workspace Assignments (btop, qemu, mame) ----------------------
 window-rule {
     match title="btop"
     open-on-workspace "btop"
-    open-maximized true
 }
 
 window-rule {
     match app-id="qemu"
     match app-id="mame"
     open-on-workspace "tool"
-    open-maximized true
 }
 
 window-rule {
     match app-id="org.telegram.desktop"
     open-on-workspace "chat"
-    open-maximized true
-}
-
-// Emoji Picker (Floating & Centered)
-window-rule {
-    match app-id="^org.kde.plasma.emojier$"
-    open-floating true
-    // Niri centers floating windows by default, 
-    // but you can set a specific size if it looks tiny:
-    default-column-width { proportion 0.75; }
-    default-window-height { fixed 400; }
 }
 
 window-rule {
     match app-id="^WebApp.*"
     match app-id="firefox"
-    match app-id="org.kde.okular"
     
     opacity 1.0
     open-on-workspace "browser"
 }
 
-// Open DMS windows as floating by default
+// ------ Maximized apps ------------------------------------------------------
 window-rule {
-    match app-id=r#"org.quickshell$"#
-    open-floating true
+  match title="btop"
+
+  match app-id="qemu"
+  match app-id="mame"
+
+  match app-id="^WebApp.*"
+
+  open-maximized true
 }
 
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
+// ------ Floating non-maximized apps -----------------------------------------
 window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+  // This app-id regular expression will work for both:
+  // - host Firefox (app-id is "firefox")
+  // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
 
-    block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
+  open-floating true
+  open-maximized false
 }
 
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
+// ------ VRR apps ------------------------------------------------------------
 /-window-rule {
-    geometry-corner-radius 12
-    clip-to-geometry true
+  match app-id="mpv" is-active=true is-floating=false
+
+  variable-refresh-rate true
 }
 
+// ------ Apps blocked from screen capture ------------------------------------
+window-rule {
+  match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+  match app-id=r#"^org\.gnome\.World\.Secrets$"#
 
+  block-out-from "screen-capture"
+
+  // Use this instead if you want them visible on third-party screenshot tools.
+  // block-out-from "screencast"
+}
+
+window-rule {
+  match is-urgent=true
+
+  shadow {
+    on
+    softness 40
+    spread 10
+    offset x=0 y=5
+    draw-behind-window false
+    color "#81a1c170"
+    // color "#7d0d2d70"
+    // inactive-color "#00000064"
+  }
+}

@@ -3,9 +3,9 @@ environment {
 
   // For Qt themes (Overrides the configuration files)
   QT_QPA_PLATFORM "wayland"
-  QT_QPA_PLATFORMTHEME "gtk3" // Hyprland uses qt6ct
-  QT_QPA_PLATFORMTHEME_QT6 "gtk3" // Hyprland uses qt6ct
-  // QT_STYLE_OVERRIDE, kvantum
+  QT_QPA_PLATFORMTHEME "qt6ct" // Hyprland uses qt6ct
+  QT_QPA_PLATFORMTHEME_QT6 "qt6ct" // Hyprland uses qt6ct
+  QT_STYLE_OVERRIDE "kvantum"
 
   // For GTK theme (Overrides the configuration files)
   // GTK_THEME, Adwaita-dark

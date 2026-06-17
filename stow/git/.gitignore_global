@@ -85,3 +85,6 @@ out/
 # clang and others
 *.cache/
 *compile_commands.json
+cscope.out
+.gdb*
+temp.sh

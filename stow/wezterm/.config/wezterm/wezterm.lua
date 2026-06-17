@@ -16,7 +16,7 @@ config.font_size = 12.0
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 
 -- color_scheme = 'Mariana',
-config.color_scheme = 'nord'
+config.color_scheme = "Noctalia"
 
 -- Customize the cursor style to Underlined
 config.cursor_thickness = 2.0  -- Set cursor thickness to 2

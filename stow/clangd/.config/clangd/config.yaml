@@ -15,5 +15,7 @@ CompileFlags:
     '-mrecord-mcount',
     '-fno-ipa-cp-clone',
     '-fno-partial-inlining',
-    '-fsanitize=bounds-strict'
+    '-fsanitize=bounds-strict',
+    '-mapcs-frame',
+    '-fdiagnostics-show-context=2'
   ]

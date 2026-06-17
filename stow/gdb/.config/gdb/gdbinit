@@ -16,7 +16,9 @@ tui new-layout main regs 1 src 1 asm 1 status 0 cmd 1
 # layout main
 
 # --- Autoloading
-set auto-load safe-path / /usr/share
+set auto-load python-scripts on
+
+add-auto-load-safe-path /home/m0st4fa/workspace/kernel
 
 # --- Load plugins
 

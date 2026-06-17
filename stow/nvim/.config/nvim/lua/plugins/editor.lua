@@ -1,114 +1,118 @@
 return {
 
-  -- Code outline sidebar
-  {
-    'stevearc/aerial.nvim',
-    config = function()
-      require('aerial').setup({
-        backends = { "lsp", "treesitter", "markdown" },
-        on_attach = function(client, bufnr)
-          vim.keymap.set('n', '<leader>o', '<cmd>AerialToggle<CR>')
-        end,
-      })
-    end
-  },
+	-- Code outline sidebar
+	{
+		"stevearc/aerial.nvim",
+		config = function()
+			require("aerial").setup({
+				backends = { "lsp", "treesitter", "markdown" },
+				on_attach = function(client, bufnr)
+					vim.keymap.set("n", "<leader>o", "<cmd>AerialToggle<CR>")
+				end,
+			})
+		end,
+	},
 
-  -- Floating terminal
-  {
-    'akinsho/toggleterm.nvim',
-    config = function()
-      require("toggleterm").setup{
-        size = 20,
-        open_mapping = [[<c-\>]],
-        shade_filetypes = {},
-        shade_terminals = true,
-        shading_factor = 2,
-        start_in_insert = true,
-        persist_size = true,
-        direction = 'horizontal',
-        on_attach = function(client, bufnr)
-          vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm<CR>')
-        end
-      }
-    end
-  },
+	-- Floating terminal
+	{
+		"akinsho/toggleterm.nvim",
+		config = function()
+			require("toggleterm").setup({
+				size = 20,
+				open_mapping = [[<c-\>]],
+				shade_filetypes = {},
+				shade_terminals = true,
+				shading_factor = 2,
+				start_in_insert = true,
+				persist_size = true,
+				direction = "horizontal",
+				on_attach = function(client, bufnr)
+					vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<CR>")
+				end,
+			})
+		end,
+	},
 
-  -- Smooth scrolling
-  {
-    'karb94/neoscroll.nvim',
-    config = function()
-      require('neoscroll').setup()
-    end
-  },
+	-- Smooth scrolling
+	{
+		"karb94/neoscroll.nvim",
+		config = function()
+			require("neoscroll").setup()
+		end,
+	},
 
-  -- Code formatter
-  {
-    'stevearc/conform.nvim',
-    config = function()
-      require("conform").setup({
+	-- Code formatter
+	{
+		"stevearc/conform.nvim",
+		config = function()
+			require("conform").setup({
 
-        -- Options per formatter
-        formatters = {
+				-- Options per formatter
+				formatters = {
 
-          injected = {
-            options = {
-              ignore_errors = false,
-              lang_to_formatters = {
-                sql = { "sqlfluff" },
-              },
-              lang_to_ext = {
-                sql = "sql",
-              },
-            },
-          },
+					injected = {
+						options = {
+							ignore_errors = false,
+							lang_to_formatters = {
+								sql = { "sqlfluff" },
+							},
+							lang_to_ext = {
+								sql = "sql",
+							},
+						},
+					},
 
-          sqlfluff = {
-            command = "/usr/bin/sqlfluff",
-            args = { "fix", "--stdin-filepath", "$FILENAME", "--", "-" },
-          },
-        },
+					sqlfluff = {
+						command = "/usr/bin/sqlfluff",
+						args = { "fix", "--stdin-filepath", "$FILENAME", "--", "-" },
+					},
+				},
 
-        -- Formatter to use per language
-        formatters_by_ft = {
-          html = { "prettierd" },
-          css = { "biome", "prettierd" },
-          javascript = { "biome", "prettierd" },
-          typescript = { "biome", "prettierd" },
-          c = { "clang_format" },
-          cpp = { "clang_format" },
-          python = { "black" },
-          sql = { "sqlfluff", "injected" },
-          go = { "goimports", "gofmt" },
-          json = { "jq" },
-          jsonc = { "prettierd" },
-          lua = { "lua_ls " },
-        },
-      })
+				-- Formatter to use per language
+				formatters_by_ft = {
+					html = { "prettierd" },
+					css = { "biome", "prettierd" },
+					javascript = { "biome", "prettierd" },
+					typescript = { "biome", "prettierd" },
+					c = { "clang_format" },
+					cpp = { "clang_format" },
+					python = { "black" },
+					sql = { "sqlfluff", "injected" },
+					go = { "goimports", "gofmt" },
+					json = { "jq" },
+					jsonc = { "prettierd" },
+					lua = { "stylua" },
+					kdl = { "kdlfmt" },
+					yaml = { "prettierd" },
+					markdown = { "prettierd" },
+					haskell = { "ormolu" },
+					makefile = { "mbake" },
+				},
+			})
 
-      -- Format on save
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function()
-          require("conform").format()
-        end,
-      })
-    end
-  },
+			-- Format on save
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				pattern = "*",
+				callback = function()
+					require("conform").format()
+				end,
+			})
+		end,
+	},
 
-  -- Autopairing
-  {
-    'windwp/nvim-autopairs',
-    config = function()
-      require("nvim-autopairs").setup {}
-    end
-  },
+	-- Autopairing
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup({})
+		end,
+	},
 
-  -- Git signs in gutter
-  {
-    'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup()
-    end
-  },
+	-- Git signs in gutter
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	},
 }
-

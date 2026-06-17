@@ -1,18 +1,18 @@
 # Theme
-include theme.conf
+include current-theme.conf
 
 enable_ligatures always
 
 # Font with icon support
 font_family      FiraCode Nerd Font
-font_size        15.0
+font_size        12.0
 box_drawing_scale 0.001,0.001,0.001,0.001 
 icon_size 1.2
 line_height 1.5
 
-# Transparency and blur (requires Hyprland config)
-background_opacity 0.85
-background_blur 25
+# Transparency and blur
+background_opacity 0.5
+background_blur 0
 
 # Padding
 window_padding_width 12
@@ -27,3 +27,30 @@ tab_title_template "{index}: {title}"
 # Cursor
 cursor_shape block
 cursor_blink_interval 0.5
+
+cursor_trail 40
+cursor_trail_decay 0.1 0.3
+# cursor_trail_threshold 2
+
+# Theme
+# include current-theme.conf
+
+# Keybinds
+map f1 launch --cwd=current --type=tab
+map f2 launch --cwd=current
+
+map ctrl+1 goto_tab 1
+map ctrl+2 goto_tab 2
+map ctrl+3 goto_tab 3
+map ctrl+4 goto_tab 4
+map ctrl+5 goto_tab 5
+map ctrl+6 goto_tab 6
+map ctrl+7 goto_tab 7
+map ctrl+8 goto_tab 8
+map ctrl+9 goto_tab 9
+
+
+# BEGIN_KITTY_THEME
+# Noctalia
+# include current-theme.conf
+# END_KITTY_THEME

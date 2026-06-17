@@ -14,28 +14,25 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Application launchers
-    Mod+T { spawn "wezterm"; }
+    Mod+T { spawn "kitty"; }
     Mod+B { spawn "firefox"; }
     Mod+R { spawn "okular"; }
     Mod+E { spawn "dolphin"; }
-    Mod+Period { spawn "plasma-emojier"; }
+    Mod+Period { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
     /- Mod+V { spawn-sh "cliphist list | wofi --dmenu | cliphist decode | wl-copy"; }
     Alt+Space hotkey-overlay-title="Application Launcher" {
-        spawn "dms" "ipc" "call" "spotlight" "toggle";
+        spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle";
     }
     Mod+V hotkey-overlay-title="Clipboard Manager" {
-        spawn "dms" "ipc" "call" "clipboard" "toggle";
-    }
-    Mod+M hotkey-overlay-title="Task Manager" {
-        spawn "dms" "ipc" "call" "processlist" "focusOrToggle";
+        spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "clipboard"; 
     }
     Mod+Comma hotkey-overlay-title="Settings" {
-        spawn "dms" "ipc" "call" "settings" "focusOrToggle";
+        spawn "qs" "-c" "noctalia-shell" "ipc" "call" "settings" "toggle";
     }
     Mod+N hotkey-overlay-title="Notification Center" {
-        spawn "dms" "ipc" "call" "notifications" "toggle";
+        spawn "qs" "-c" "noctalia-shell" "ipc" "call" "notifications" "toggleHistory";
     }
-    Mod+Shift+I { spawn "dms" "ipc" "call" "bar" "toggle" "index" "0"; }
+    Mod+Shift+I { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "bar" "toggle"; }
 
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
@@ -43,11 +40,11 @@ binds {
 
     // Window management
     Mod+Q repeat=false { close-window; }
-    Mod+X repeat=false { spawn "dms" "ipc" "powermenu" "toggle"; }
+    Mod+X repeat=false { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
     Ctrl+Alt+Delete { quit; }
     Mod+Shift+P { power-off-monitors; }
     Mod+Alt+L hotkey-overlay-title="Lock Screen" {
-        spawn "dms" "ipc" "call" "lock" "lock";
+        spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock";
     }
 
     Mod+F { maximize-column; }

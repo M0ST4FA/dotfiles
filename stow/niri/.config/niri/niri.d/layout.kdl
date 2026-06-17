@@ -2,10 +2,12 @@
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-    gaps 32
-    // background-color "transparent"
+    gaps 6
+
+    // Set transparent workspace background color so you see the backdrop at all times.
+    background-color "transparent"
     center-focused-column "never"
-    default-column-display "tabbed"
+    default-column-display "normal"
 
     preset-column-widths {
         proportion 0.33333
@@ -21,10 +23,12 @@ layout {
     // default-column-width {}
 
     focus-ring {
+        width 2
         off
     }
 
     border {
+        width 2
         on
     }
 
@@ -50,7 +54,6 @@ layout {
         // Offset moves the shadow relative to the window.
         offset x=0 y=5
 
-        // You can also change the shadow color and opacity.
         color "#0007"
     }
 
@@ -60,10 +63,10 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        left 4
-        right 4
-        top 4
-        bottom 4
+        // left 4
+        // right 4
+        // top 4
+        // bottom 4
     }
 }
 
