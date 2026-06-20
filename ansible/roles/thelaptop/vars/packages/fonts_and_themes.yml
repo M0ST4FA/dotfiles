@@ -1,0 +1,11 @@
+fonts_and_themes:
+  - noto-fonts-cjk
+  - noto-fonts-emoji
+  - ttf-meslo-nerd
+  - ttf-fira-code
+  - ttf-firacode-nerd
+  - ttf-jetbrains-mono-nerd
+  - papirus-icon-theme
+  - colloid-nord-gtk-theme-git
+  - bibata-cursor-theme-bin
+  - archlinux-wallpaper

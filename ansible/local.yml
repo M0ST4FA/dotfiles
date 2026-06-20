@@ -1,0 +1,7 @@
+- name: Configure my main workstation
+  hosts: localhost
+  connection: local
+  become: true
+  roles:
+    # - role: ansible/roles/thelaptop
+    - thelaptop # Found in a standard location

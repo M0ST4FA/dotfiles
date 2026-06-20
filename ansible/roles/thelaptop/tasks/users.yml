@@ -1,0 +1,7 @@
+- name: Ensure 'm0st4fa' user exists and is configured
+  ansible.builtin.user:
+    name: m0st4fa
+    state: present
+    shell: /bin/zsh
+    groups: wireshark, docker, libvirt, input, wheel, android-sdk
+    append: yes

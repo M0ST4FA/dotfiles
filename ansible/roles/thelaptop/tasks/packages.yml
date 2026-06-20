@@ -1,0 +1,18 @@
+- name: Ensure paru is installed
+  community.general.pacman:
+    name: paru
+    state: present
+  become: true
+
+- name: Include variables referencing packages
+  ansible.builtin.include_vars:
+    dir: packages
+
+- name: Install all official and AUR packages
+  kewlfft.aur.aur:
+    use: "{{ aur_helper }}"
+    name: "{{ core + security + desktop + fonts_and_themes }}"
+    state: present
+    extra_args: --skipreview
+  become: true
+  become_user: "{{ system_user }}"

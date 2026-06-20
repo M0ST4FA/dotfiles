@@ -1,0 +1,16 @@
+security:
+  - ghidra
+  - radare2
+  - iaito
+  - pwndbg
+  - checksec
+  - bettercap
+  - wireshark-qt
+  - wireshark-cli
+  - nmap
+  - ufw
+  - fail2ban
+  - gocryptfs
+  - bitwarden
+  - docker
+  - docker-compose

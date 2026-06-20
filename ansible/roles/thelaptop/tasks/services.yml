@@ -1,0 +1,35 @@
+- name: Enable services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop:
+    - greetd
+    - autovt@2.service
+    - autovt@3.service
+    - autovt@4.service
+    - autovt@5.service
+    - autovt@tty6.service
+
+    - bluetooth
+    - chronyd
+    - iwd
+    - systemd-resolved
+
+    - supergfxd
+    - switcheroo-control
+    - tlp
+
+    - docker.socket
+    - systemd-resolved-monitor.socket
+    - systemd-resolved-varlink.socket
+    - systemd-userdbd.socket
+
+    - fstrim.timer
+  become: true
+  register: service_statuses
+
+- name: Output results from the loop
+  ansible.builtin.debug:
+    msg: "Service {{ item.item }} state is {{ item.status.ActiveState }}"
+  loop: "{{ service_statuses.results }}"

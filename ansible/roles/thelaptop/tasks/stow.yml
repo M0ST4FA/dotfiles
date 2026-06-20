@@ -1,0 +1,32 @@
+- name: Stow all user configuration
+  ansible.builtin.command:
+    cmd: "stow -v -d ~/dotfiles/stow -t ~ {{ item }}"
+  loop:
+    - zsh
+
+    - nvim
+
+    - git
+    - clangd
+    - gdb
+
+    - hyprland
+    - hyprpanel
+    - niri
+    - noctalia
+    - anyrun
+
+    - kitty
+    - wezterm
+    - foot
+    - fastfetch
+    - btop
+
+    - wireshark
+  register: stow_res
+  failed_when: stow_res.rc != 0
+  changed_when:
+    - stow_res.rc == 0
+    - "'LINK' in stow_res.stderr"
+  become: true
+  become_user: "{{ system_user }}"
