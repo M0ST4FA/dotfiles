@@ -2,3 +2,4 @@
 - ansible.builtin.import_tasks: services.yml
 - ansible.builtin.import_tasks: stow.yml
 - ansible.builtin.import_tasks: users.yml
+- ansible.builtin.import_tasks: system.yml

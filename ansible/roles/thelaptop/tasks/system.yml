@@ -1,0 +1,12 @@
+- name: Symlink wallpaper directories
+  ansible.builtin.file:
+    src: "/home/{{ system_user }}/dotfiles/ansible/roles/thelaptop/files/wallpapers/{{ item }}"
+    dest: "/usr/share/wallpapers/{{ item }}"
+    state: link
+    force: true
+  loop:
+    - Nord
+    - AltNord
+    - Favorites
+    - ArchPapers
+  become: true
