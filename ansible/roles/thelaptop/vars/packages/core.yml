@@ -26,3 +26,4 @@ core:
   - zip
   - unzip
   - tlp
+  - typescript
