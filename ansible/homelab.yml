@@ -1,0 +1,5 @@
+- name: Automate Homelab Infrastructure
+  hosts: homelab
+  become: true
+  roles:
+    - homelab_pki

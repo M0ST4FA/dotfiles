@@ -1,0 +1,6 @@
+all:
+  children:
+    homelab:
+      hosts:
+        m0st4fa.home:
+          ansible_user: root

@@ -1,0 +1,74 @@
+- name: Make sure the private directory for each domain exists
+  ansible.builtin.file:
+    path: "/etc/ssl/private/{{ item.key }}/"
+    state: "directory"
+    recurse: true
+    mode: "0700" # Only root can enter this directory
+    owner: root
+  loop: "{{ homelab_domains | dict2items }}"
+
+- name: Make sure the public cert directory for each domain exists
+  ansible.builtin.file:
+    path: "/etc/ssl/certs/{{ item.key }}/"
+    state: "directory"
+    recurse: true
+  loop: "{{ homelab_domains | dict2items }}"
+
+- name: Ensure private key exists for the domain
+  community.crypto.openssl_privatekey:
+    path: "/etc/ssl/private/{{ item.key }}/{{ item.key }}.key.pem"
+    type: ECC
+    curve: secp384r1
+    mode: "0600" # Only root can read/write the key
+    owner: root
+  loop: "{{ homelab_domains | dict2items }}"
+
+- name: Generate CSR
+  community.crypto.openssl_csr:
+    path: "/etc/ssl/private/{{ item.key }}/{{ item.key }}.csr.pem"
+    privatekey_path: "/etc/ssl/private/{{ item.key }}/{{ item.key }}.key.pem"
+
+    # [ req_distinguished_name ]
+    country_name: "{{ ca_country }}"
+    state_or_province_name: "{{ ca_state }}"
+    organization_name: "{{ ca_org }}"
+    organizational_unit_name: "{{ item.value.ou }}"
+    common_name: "{{ item.value.common_name }}"
+
+    # [ v3_req ]
+    basic_constraints: "CA:FALSE"
+    key_usage:
+      - nonRepudiation
+      - digitalSignature
+      - keyEncipherment
+    extended_key_usage:
+      - serverAuth
+    subject_alt_name: "{{ item.value.alt_names }}"
+
+  loop: "{{ homelab_domains | dict2items }}"
+
+- name: Sign certificate
+  community.crypto.x509_certificate:
+    provider: "ownca"
+    ownca_not_after: "+398d"
+    backup: true
+
+    csr_path: "/etc/ssl/private/{{ item.key }}/{{ item.key }}.csr.pem"
+
+    ownca_path: "/etc/ssl/m0st4fa-int-ca/int-ca.cert.pem"
+    ownca_privatekey_path: "/etc/ssl/m0st4fa-int-ca/private/int-ca.key.pem"
+    ownca_create_authority_key_identifier: true
+
+    privatekey_path: "/etc/ssl/private/{{ item.key }}/{{ item.key }}.key.pem"
+    path: "/etc/ssl/certs/{{ item.key }}/{{ item.key }}.cert.pem"
+
+  loop: "{{ homelab_domains | dict2items }}"
+  register: signed_certs
+
+- name: Build the fullchain bundle
+  ansible.builtin.shell: |
+    cat /etc/ssl/certs/{{ item.item.key }}/{{ item.item.key }}.cert.pem \
+    /etc/ssl/m0st4fa-int-ca/ca-chain.pem > \
+    /etc/ssl/certs/{{ item.item.key }}/{{ item.item.key }}.fullchain.pem
+  loop: "{{ signed_certs.results }}"
+  when: item.changed

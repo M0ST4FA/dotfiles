@@ -1,0 +1,69 @@
+ca_country: "AQ"
+ca_state: "/dev/urandom"
+ca_org: "/dev/null"
+base_domain: "m0st4fa.home"
+
+homelab_domains:
+  proxmox:
+    common_name: "proxmox.{{ base_domain }}"
+    ou: "virt"
+    alt_names:
+      - "DNS:{{ base_domain }}"
+      - "DNS:proxmox.{{ base_domain }}"
+      - "DNS:*.proxmox.{{ base_domain }}"
+      - "DNS:proxmox"
+      - "IP:192.168.1.42"
+
+  nextcloud:
+    common_name: "nextcloud.{{ base_domain }}"
+    ou: "storage"
+    alt_names:
+      - "DNS:nextcloud.{{ base_domain }}"
+      - "DNS:*.nextcloud.{{ base_domain }}"
+      - "DNS:nextcloud"
+      - "DNS:*.nextcloud"
+
+  portainer:
+    common_name: "portainer.{{ base_domain }}"
+    ou: "virt"
+    alt_names:
+      - "DNS:portainer.{{ base_domain }}"
+      - "DNS:*.portainer.{{ base_domain }}"
+      - "DNS:portainer"
+      - "DNS:*.portainer"
+
+  authelia:
+    common_name: "authelia.{{ base_domain }}"
+    ou: "auth"
+    alt_names:
+      - "DNS:authelia.{{ base_domain }}"
+      - "DNS:*.authelia.{{ base_domain }}"
+      - "DNS:authelia"
+      - "DNS:*.authelia"
+
+  auth:
+    common_name: "auth.{{ base_domain }}"
+    ou: "auth"
+    alt_names:
+      - "DNS:auth.{{ base_domain }}"
+      - "DNS:*.auth.{{ base_domain }}"
+      - "DNS:auth"
+      - "DNS:*.auth"
+
+  ldap:
+    common_name: "ldap.{{ base_domain }}"
+    ou: "auth"
+    alt_names:
+      - "DNS:ldap.{{ base_domain }}"
+      - "DNS:*.ldap.{{ base_domain }}"
+      - "DNS:ldap"
+      - "DNS:*.ldap"
+
+  lldap:
+    common_name: "lldap.{{ base_domain }}"
+    ou: "auth"
+    alt_names:
+      - "DNS:lldap.{{ base_domain }}"
+      - "DNS:*.lldap.{{ base_domain }}"
+      - "DNS:lldap"
+      - "DNS:*.lldap"
