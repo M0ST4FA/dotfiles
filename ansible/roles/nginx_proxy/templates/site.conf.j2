@@ -1,0 +1,35 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{ item.value.common_name }};
+
+    # Redirect HTTP to HTTPS
+    return 301 https://$host$request_uri;
+}
+
+server {
+  listen 443 ssl;
+  server_name {{ item.value.common_name }};
+  http2 on;
+
+  ssl_certificate       /etc/ssl/certs/{{ item.key }}/{{ item.key }}.fullchain.pem;
+  ssl_certificate_key   /etc/ssl/private/{{ item.key }}/{{ item.key }}.key.pem;
+
+  include /etc/nginx/snippets/ssl.conf;
+  proxy_redirect off;
+
+  location / {
+  	resolver 192.168.1.254;
+
+	set $upstream http://{{ item.value.common_name }}:{{ item.value.upstream_port | default(80) }};
+    proxy_pass $upstream;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_redirect off;
+
+    include /etc/nginx/snippets/security_headers.conf;
+
+  }
+}
