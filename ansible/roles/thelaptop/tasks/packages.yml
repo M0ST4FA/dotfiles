@@ -1,14 +1,17 @@
 - name: Ensure paru is installed
+  tags: thelaptop,packages
   community.general.pacman:
     name: paru
     state: present
   become: true
 
 - name: Include variables referencing packages
+  tags: thelaptop,packages
   ansible.builtin.include_vars:
     dir: packages
 
 - name: Install all official and AUR packages
+  tags: thelaptop,packages
   kewlfft.aur.aur:
     use: "{{ aur_helper }}"
     name: "{{ core + security + desktop + fonts_and_themes }}"
