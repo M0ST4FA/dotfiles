@@ -1,0 +1,11 @@
+-- All plugins were commented out in the original plugins.conf
+-- If you want to enable them later, use the following format:
+--
+-- hl.config({
+--     plugin = {
+--         hyprexpo = {
+--             columns = 3,
+--             -- etc
+--         }
+--     }
+-- })

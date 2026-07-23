@@ -1,0 +1,10 @@
+local vars = require("variables")
+
+hl.on("hyprland.start", function()
+    hl.dispatch(hl.dsp.exec_cmd(vars.shell))
+    hl.dispatch(hl.dsp.exec_cmd("wayland-pipewire-idle-inhibit"))
+    hl.dispatch(hl.dsp.exec_cmd(vars.storePastedText))
+    hl.dispatch(hl.dsp.exec_cmd(vars.storePastedImage))
+    hl.dispatch(hl.dsp.exec_cmd("foot --title btop btop"))
+    hl.dispatch(hl.dsp.exec_cmd(vars.terminal))
+end)
