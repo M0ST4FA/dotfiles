@@ -13,6 +13,8 @@ homelab_domains:
       - "DNS:*.proxmox.{{ base_domain }}"
       - "DNS:proxmox"
       - "IP:192.168.1.42"
+    nginx_template: nextcloud.conf.j2
+    upstream_port: 8006
 
   nextcloud:
     common_name: "nextcloud.{{ base_domain }}"
@@ -22,6 +24,7 @@ homelab_domains:
       - "DNS:*.nextcloud.{{ base_domain }}"
       - "DNS:nextcloud"
       - "DNS:*.nextcloud"
+    nginx_template: nextcloud.conf.j2
 
   portainer:
     common_name: "portainer.{{ base_domain }}"
@@ -41,6 +44,8 @@ homelab_domains:
       - "DNS:*.authelia.{{ base_domain }}"
       - "DNS:authelia"
       - "DNS:*.authelia"
+    nginx_template: auth.conf.j2
+    upstream_port: 9091
 
   auth:
     common_name: "auth.{{ base_domain }}"

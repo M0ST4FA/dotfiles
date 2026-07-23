@@ -1,0 +1,16 @@
+- name: Setup nginx config for domains
+  tags: nginx
+  ansible.builtin.template:
+    src: "{{ item.value.nginx_template | default('base.conf.j2') }}"
+    dest: "/etc/nginx/sites-available/{{ item.key }}.conf"
+    owner: root
+  loop: "{{ homelab_domains | dict2items }}"
+  notify: reload-nginx
+
+- name: Enable nginx config for domains
+  tags: nginx
+  ansible.builtin.file:
+    src: "/etc/nginx/sites-available/{{ item.key }}.conf"
+    dest: "/etc/nginx/sites-enabled/{{ item.key }}.conf"
+    state: link
+  loop: "{{ homelab_domains | dict2items }}"

@@ -55,7 +55,7 @@ return {
 					"prismals",
 					"asm_lsp",
 					"ty",
-					-- "hls",
+					"hls",
 					"yamlls",
 				},
 				function(server_name)
@@ -81,6 +81,28 @@ return {
 							clangdFileStatus = true,
 						},
 					}
+				end,
+				["hls"] = function()
+					vim.lsp.config.hls = {
+						settings = {
+							haskell = {
+								checkProject = true,
+								formattingProvider = "ormolu",
+								hlintOn = true,
+								plugin = {
+									-- Enable code lenses (e.g., "Evaluate..." or "Add type signature")
+									codeLens = { globalOn = true },
+
+									-- Optimize autocomplete limits to prevent slow-downs
+									completion = { snippetsOn = true, maxCompletions = 40 },
+
+									-- Toggle specific refactorings if needed
+									stan = { globalOn = false }, -- Static analysis (usually off by default)
+								},
+							},
+						},
+					}
+					require("lspconfig").hls.setup({})
 				end,
 				["gopls"] = function()
 					vim.lsp.config.gopls = {
@@ -137,7 +159,7 @@ return {
 				"asm_lsp",
 				"ty",
 				"lua_ls",
-				-- "hls",
+				"hls",
 			})
 		end,
 	},

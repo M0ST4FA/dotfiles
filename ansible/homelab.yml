@@ -3,3 +3,4 @@
   become: true
   roles:
     - homelab_pki
+    - nginx_proxy

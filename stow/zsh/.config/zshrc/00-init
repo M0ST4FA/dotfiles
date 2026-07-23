@@ -37,3 +37,5 @@ export PATH=$PATH:/opt/flutter/bin
 # Haskell
 [ -f "/home/m0st4fa/.ghcup/env" ] && source "/home/m0st4fa/.ghcup/env" # ghcup-env
 
+# Vagrant
+export VAGRANT_DEFAULT_PROVIDER=libvirt

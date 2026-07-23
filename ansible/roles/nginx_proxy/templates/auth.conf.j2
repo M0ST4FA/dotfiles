@@ -1,0 +1,17 @@
+{% extends "base.conf.j2" %}
+
+{% block custom_locations %}
+	location / {
+        include /etc/nginx/snippets/proxy.conf;
+
+        proxy_pass $upstream;
+    }
+
+    location = /api/verify {
+        proxy_pass $upstream;
+    }
+
+    location /api/authz/ {
+        proxy_pass $upstream;
+    }
+{% endblock custom_locations %}
