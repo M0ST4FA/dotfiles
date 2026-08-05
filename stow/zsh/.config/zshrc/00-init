@@ -39,4 +39,4 @@ export PATH=$PATH:/opt/flutter/bin
 
 # Vagrant
 export VAGRANT_DEFAULT_PROVIDER=libvirt
-export VAGRANT_HOME="~/workspace/infra/vagrant"
+export VAGRANT_HOME="$HOME/workspace/infra/vagrant"

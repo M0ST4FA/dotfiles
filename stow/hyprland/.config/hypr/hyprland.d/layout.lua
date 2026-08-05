@@ -17,6 +17,7 @@ hl.config({
 			enabled = true,
 			respect_gaps = true,
 		},
+		modal_parent_blocking = false,
 	},
 	group = {
 		col = {
