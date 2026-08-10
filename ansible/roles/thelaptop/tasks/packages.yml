@@ -1,9 +1,35 @@
-- name: Ensure paru is installed
+- name: Check if paru is installed
   tags: thelaptop,packages
-  community.general.pacman:
-    name: paru
-    state: present
+  ansible.builtin.command: pacman -Qs paru
+  register: paru_check
+  failed_when: false
+  changed_when: false
+
+- name: Clone paru repo
+  tags: thelaptop,packages
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/paru.git
+    dest: /tmp/paru
+  when: paru_check.rc != 0
+
+- name: Change ownership of paru build directory
+  tags: thelaptop,packages
+  ansible.builtin.file:
+    path: /tmp/paru
+    state: directory
+    owner: m0st4fa
+    group: m0st4fa
+    recurse: yes
+  when: paru_check.rc != 0
+
+- name: Build and install paru
+  tags: thelaptop,packages
+  ansible.builtin.command:
+    cmd: makepkg -si --noconfirm
+    chdir: /tmp/paru
   become: true
+  become_user: m0st4fa
+  when: paru_check.rc != 0
 
 - name: Include variables referencing packages
   tags: thelaptop,packages

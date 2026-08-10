@@ -26,6 +26,7 @@
     - systemd-userdbd.socket
 
     - fstrim.timer
+    - reflector.timer
   become: true
   register: service_statuses
 

@@ -3,16 +3,19 @@ desktop:
   - hypridle
   - hyprlock
   - hyprsunset
+  - hyprpolkitagent
   - nwg-look
   - wl-clipboard
   - grim
   - slurp
   - kitty
   - wezterm
+  - foot
   - firefox
   - discord
   - obsidian
   - pavucontrol
+  - bluez-utils
   - greetd-tuigreet
   - xdg-desktop-portal-hyprland
   - xdg-desktop-portal-wlr

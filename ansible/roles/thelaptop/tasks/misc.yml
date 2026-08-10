@@ -1,3 +1,24 @@
+- name: Set timezone
+  tags: misc
+  ansible.builtin.timezone:
+    name: Etc/GMT-2
+
+- name: Ensure primary locale is generated
+  tags: misc,locale
+  community.general.locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Set default system locale
+  tags: misc,locale
+  ansible.builtin.command: localectl set-locale LANG=en_US.UTF-8
+  changed_when: false
+
+- name: Set hostname
+  tags: misc
+  ansible.builtin.hostname:
+    name: "thelaptop"
+
 - name: Symlink wallpaper directories
   tags: misc
   ansible.builtin.file:
