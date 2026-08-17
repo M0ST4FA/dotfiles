@@ -1,17 +1,25 @@
+- name: Ensure all required system groups exist
+  tags: thelaptop,users
+  ansible.builtin.group:
+    name: "{{ item }}"
+    system: yes
+    state: present
+  loop: "{{ system_groups.split(',') | map('trim') | list }}"
+
 - name: Ensure 'm0st4fa' user exists and is configured
   tags: thelaptop,users
   ansible.builtin.user:
-    name: m0st4fa
+    name: "{{ user }}"
     state: present
     shell: /bin/zsh
-    groups: wireshark, docker, libvirt, input, wheel, tss, android-sdk, openrazer
+    groups: "{{ system_groups }}"
     append: yes
 
-- name: Allow 'wheel' group to use sudo
+- name: Allow 'wheel' group to use sudo (passwordless)
   tags: thelaptop,users
   ansible.builtin.lineinfile:
     path: /etc/sudoers
     state: present
     regexp: "^%wheel ALL="
-    line: "%wheel ALL=(ALL:ALL) ALL"
+    line: "%wheel ALL=(ALL:ALL) NOPASSWD: ALL"
     validate: "/usr/sbin/visudo -cf %s"

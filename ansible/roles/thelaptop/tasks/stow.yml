@@ -29,4 +29,4 @@
     - stow_res.rc == 0
     - "'LINK' in stow_res.stderr"
   become: true
-  become_user: "{{ system_user }}"
+  become_user: "{{ user }}"

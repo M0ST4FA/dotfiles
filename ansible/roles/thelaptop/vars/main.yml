@@ -1,2 +1,3 @@
 aur_helper: paru
-system_user: m0st4fa
+user: m0st4fa
+system_groups: wireshark, docker, libvirt, input, wheel, tss, android-sdk, openrazer

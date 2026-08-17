@@ -1,3 +1,9 @@
+- name: Update pacman cache and upgrade
+  tags: thelaptop,packages
+  community.general.pacman:
+    update_cache: yes
+    upgrade: yes
+
 - name: Check if paru is installed
   tags: thelaptop,packages
   ansible.builtin.command: pacman -Qs paru
@@ -28,7 +34,7 @@
     cmd: makepkg -si --noconfirm
     chdir: /tmp/paru
   become: true
-  become_user: m0st4fa
+  become_user: "{{ user }}"
   when: paru_check.rc != 0
 
 - name: Include variables referencing packages
@@ -43,3 +49,5 @@
     name: "{{ core + security + desktop + fonts_and_themes }}"
     state: present
     extra_args: --skipreview
+  become: true
+  become_user: "{{ user }}"
