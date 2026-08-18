@@ -1,0 +1,1 @@
+KERNEL=="card*", KERNELS=="0000:01:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", ATTRS{device}=="0x2520", ATTRS{vendor}=="0x10de", SYMLINK+="dri/dgpu"

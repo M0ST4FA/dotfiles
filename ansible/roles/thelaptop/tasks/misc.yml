@@ -22,7 +22,7 @@
 - name: Ensure wallpaper directory exists
   tags: misc
   ansible.builtin.file:
-    path: /usr/share/wallpapers
+    path: "/usr/share/wallpapers"
     state: directory
     mode: "0755"
   become: true

@@ -1,0 +1,8 @@
+- name: Install custom system configuration for various packages
+  tags: sysconf
+  ansible.builtin.copy:
+    src: "etc/"
+    dest: "/etc"
+    owner: root
+    group: root
+  become: true
