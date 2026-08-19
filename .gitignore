@@ -1,0 +1,18 @@
+lazy-lock.json
+stow/**/.gitignore
+stow/DankMaterialShell/.config/DankMaterialShell/plugins
+stow/wireshark/.config/wireshark/recent*
+stow/wireshark/.config/wireshark/profiles/*/recent*
+.luarc.json
+setup.sh
+
+# Private and generated data must never enter Stow packages.
+stow/neomutt/.config/neomutt/credentials.rc
+stow/mpd/.config/mpd/database
+stow/mpd/.config/mpd/state
+stow/mpd/.config/mpd/sticker.sql
+stow/yazi/.config/yazi/plugins/
+stow/yazi/.config/yazi/flavors/
+stow/mame/.mame/nvram/
+stow/mame/.mame/snap/
+stow/mame/.mame/sta/

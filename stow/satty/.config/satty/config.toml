@@ -1,0 +1,25 @@
+[general]
+fullscreen = true
+floating-hack = true
+early-exit = false
+
+initial-tool = "brush"
+
+copy-command = "wl-copy"
+save-after-copy = false
+
+disable-notifications = false
+
+[font]
+family = "JetBrainsMono Nerd Font"
+
+#
+# [colors]
+# background = "#2E3440"  # nord0
+# foreground = "#D8DEE9"  # nord4
+# primary = "#88C0D0"     # nord8
+# secondary = "#81A1C1"   # nord9
+# accent = "#5E81AC"      # nord10
+# error = "#BF616A"       # nord11
+# warning = "#EBCB8B"     # nord13
+# success = "#A3BE8C"     # nord14

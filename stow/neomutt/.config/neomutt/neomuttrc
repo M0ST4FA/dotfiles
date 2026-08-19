@@ -1,0 +1,24 @@
+# User metadata
+set realname = "Nerdio Infrastructure"
+set from = "infra@nerdio.app"
+set use_from = yes
+
+# Incoming mail settings
+set imap_user = "infra@nerdio.app"
+source ~/.config/neomutt/credentials.rc
+
+# IMAP config (port 993)
+set folder = "imaps://mail.nerdio.app:993/"
+set spoolfile = "+INBOX"
+set postponed = "+drafts"
+set record = "+sent"
+set trash = "+trash"
+
+# Outgoing mail settings
+set smtp_url = "smtps://infra@nerdio.app:HfE9gDEzZv6PsE8oZfrKBa@mail.nerdio.app:465/"
+
+# Connection and cache enhancements
+set header_cache = "~/.config/neomutt/cache/headers"
+set message_cachedir = "~/.config/neomutt/cache/bodies"
+set imap_keepalive = 300
+set mail_check = 60
