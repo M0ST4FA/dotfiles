@@ -4,6 +4,7 @@
     name: "{{ item }}"
     enabled: true
   loop:
+    - nord-console.service
     - greetd.service
 
     - kmsconvt@tty2.service
@@ -33,4 +34,44 @@
   ansible.builtin.systemd_service:
     name: iwd.service
     enabled: false
+  become: true
+
+- name: Create user systemd enablement directories
+  tags: services
+  ansible.builtin.file:
+    path: "/home/{{ user }}/.config/systemd/user/{{ item }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "0755"
+  loop:
+    - graphical-session.target.wants
+    - sockets.target.wants
+  become: true
+
+- name: Enable user services and sockets
+  tags: services
+  ansible.builtin.file:
+    src: "/usr/lib/systemd/user/{{ item.unit }}"
+    dest: "/home/{{ user }}/.config/systemd/user/{{ item.target }}.wants/{{ item.unit }}"
+    state: link
+    owner: "{{ user }}"
+    group: "{{ user }}"
+  loop:
+    - unit: mpd.socket
+      target: sockets.target
+    - unit: ssh-agent.socket
+      target: sockets.target
+    - unit: hyprsunset.service
+      target: graphical-session.target
+  become: true
+
+- name: Disable user services replaced by Noctalia
+  tags: services
+  ansible.builtin.file:
+    path: "/home/{{ user }}/.config/systemd/user/graphical-session.target.wants/{{ item }}"
+    state: absent
+  loop:
+    - hypridle.service
+    - hyprpolkitagent.service
   become: true

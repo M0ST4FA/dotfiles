@@ -15,6 +15,7 @@ desktop:
   - discord
   - obsidian
   - pavucontrol
+  - mpd
   - bluez
   - bluez-utils
   - greetd-tuigreet
