@@ -6,7 +6,7 @@ vt = 1
 # The default session, also known as the greeter.
 [default_session]
 
-command = "bash -c '/usr/local/bin/nord-vconsole && sleep 1 && tuigreet --time --remember --remember-session --asterisks --theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'"
+command = "/usr/local/bin/nord-vconsole && exec tuigreet --time --remember --remember-session --asterisks --theme 'border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red'"
 
 # The user to run the command as. The privileges this user must have depends
 # on the greeter. A graphical greeter may for example require the user to be

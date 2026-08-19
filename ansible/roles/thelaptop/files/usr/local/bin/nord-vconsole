@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Apply the Nord palette to the active Linux virtual console.
+printf '\033]P02E3440'
+printf '\033]P1BF616A'
+printf '\033]P2A3BE8C'
+printf '\033]P3EBCB8B'
+printf '\033]P481A1C1'
+printf '\033]P5B48EAD'
+printf '\033]P688C0D0'
+printf '\033]P7D8DEE9'
+printf '\033]P84C566A'
+printf '\033]P9BF616A'
+printf '\033]PAA3BE8C'
+printf '\033]PBEBCB8B'
+printf '\033]PC81A1C1'
+printf '\033]PDB48EAD'
+printf '\033]PE8FBCBB'
+printf '\033]PFECEFF4'
+clear

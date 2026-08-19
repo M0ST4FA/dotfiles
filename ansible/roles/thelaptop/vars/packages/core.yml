@@ -29,3 +29,8 @@ core:
   - unzip
   - tlp
   - typescript
+  - kmscon
+  - iwd
+  - chrony
+  - reflector
+  - libvirt

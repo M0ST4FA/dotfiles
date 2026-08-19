@@ -15,6 +15,7 @@ desktop:
   - discord
   - obsidian
   - pavucontrol
+  - bluez
   - bluez-utils
   - greetd-tuigreet
   - xdg-desktop-portal-hyprland
@@ -24,3 +25,5 @@ desktop:
   - waydroid
   - polychromatic
   - gimp
+  - switcheroo-control
+  - supergfxctl

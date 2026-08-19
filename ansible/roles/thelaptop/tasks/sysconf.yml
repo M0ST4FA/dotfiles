@@ -6,3 +6,33 @@
     owner: root
     group: root
   become: true
+
+- name: Install local system scripts
+  tags: sysconf
+  ansible.builtin.copy:
+    src: usr/local/bin/nord-vconsole
+    dest: /usr/local/bin/nord-vconsole
+    owner: root
+    group: root
+    mode: "0755"
+  become: true
+
+- name: Create the tuigreet state directory
+  tags: sysconf
+  ansible.builtin.file:
+    path: /var/cache/tuigreet
+    state: directory
+    owner: greeter
+    group: greeter
+    mode: "0755"
+  become: true
+
+- name: Connect resolv.conf to systemd-resolved
+  tags: sysconf
+  ansible.builtin.file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: true
+  become: true
+  when: (ansible_connection | default('smart')) != 'chroot'

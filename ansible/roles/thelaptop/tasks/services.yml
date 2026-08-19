@@ -1,36 +1,36 @@
 - name: Enable services
-  ansible.builtin.systemd:
+  tags: services
+  ansible.builtin.systemd_service:
     name: "{{ item }}"
     enabled: true
-    state: started
   loop:
-    - greetd
-    - autovt@2.service
-    - autovt@3.service
-    - autovt@4.service
-    - autovt@5.service
-    - autovt@tty6.service
+    - greetd.service
 
-    - bluetooth
-    - chronyd
-    - iwd
-    - systemd-resolved
+    - kmsconvt@tty2.service
+    - kmsconvt@tty3.service
+    - kmsconvt@tty4.service
+    - kmsconvt@tty5.service
+    - getty@tty6.service
 
-    - supergfxd
-    - switcheroo-control
-    - tlp
+    - NetworkManager.service
+    - systemd-resolved.service
+    - bluetooth.service
+    - chronyd.service
+
+    - supergfxd.service
+    - switcheroo-control.service
+    - tlp.service
 
     - docker.socket
-    - systemd-resolved-monitor.socket
-    - systemd-resolved-varlink.socket
-    - systemd-userdbd.socket
+    - libvirtd.socket
 
     - fstrim.timer
     - reflector.timer
   become: true
-  register: service_statuses
 
-- name: Output results from the loop
-  ansible.builtin.debug:
-    msg: "Service {{ item.item }} state is {{ item.status.ActiveState }}"
-  loop: "{{ service_statuses.results }}"
+- name: Let NetworkManager manage iwd
+  tags: services
+  ansible.builtin.systemd_service:
+    name: iwd.service
+    enabled: false
+  become: true

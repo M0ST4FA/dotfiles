@@ -5,7 +5,10 @@ fonts_and_themes:
   - ttf-fira-code
   - ttf-firacode-nerd
   - ttf-jetbrains-mono-nerd
+  - terminus-font
   - papirus-icon-theme
   - colloid-nord-gtk-theme-git
   - bibata-cursor-theme-bin
   - archlinux-wallpaper
+  - figlet
+  - go-rainbow-git

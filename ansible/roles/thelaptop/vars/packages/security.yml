@@ -8,8 +8,6 @@ security:
   - wireshark-qt
   - wireshark-cli
   - nmap
-  - ufw
-  - fail2ban
   - gocryptfs
   - bitwarden
   - docker
