@@ -8,7 +8,8 @@ hl.env("XWAYLAND_SCALE", "1")
 hl.env("OZONE_PLATFORM", "wayland")
 hl.env("ELECTRON_ENABLE_WAYLAND", "1")
 
-hl.env("XCURSOR_PATH", "${XCURSOR_PATH}:~/.local/share/icons:/local/share/icons")
+hl.env("XCURSOR_PATH", "/home/m0st4fa/.icons:/home/m0st4fa/.local/share/icons:/usr/local/share/icons:/usr/share/icons")
+hl.env("XCURSOR_THEME", "Nordic-cursors")
 hl.env("XCURSOR_SIZE", "32")
 
 hl.env("GTK_APPLICATION_PREFER_DARK_THEME", "1")
