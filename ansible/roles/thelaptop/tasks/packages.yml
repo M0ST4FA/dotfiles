@@ -1,3 +1,11 @@
+- name: Trust the Pharo repository signing key
+  tags: thelaptop,packages
+  community.general.pacman_key:
+    id: 536316AFF4E2E8B89ECD38E5CD55515EEBDB2B90
+    url: https://download.opensuse.org/repositories/devel:/languages:/pharo:/stable/Arch/x86_64/devel_languages_pharo_stable_Arch.key
+    state: present
+    ensure_trusted: true
+
 - name: Update pacman cache and upgrade
   tags: thelaptop,packages
   community.general.pacman:

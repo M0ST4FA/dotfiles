@@ -1,4 +1,5 @@
 - name: Stow all user configuration
+  tags: stow
   ansible.builtin.command:
     cmd: "stow -v -d ~/dotfiles/stow -t ~ {{ item }}"
   loop:
@@ -7,6 +8,7 @@
     - nvim
 
     - git
+    - clang
     - clangd
     - gdb
 
@@ -46,6 +48,7 @@
   become_user: "{{ user }}"
 
 - name: Restore locked Yazi plugins and flavors
+  tags: stow
   ansible.builtin.command:
     cmd: ya pkg install
   environment:
