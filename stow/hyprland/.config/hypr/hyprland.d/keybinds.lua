@@ -13,10 +13,10 @@ hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd(vars.toggleBar))
 hl.bind("ALT + space", hl.dsp.exec_cmd(vars.menu))
 
 -- Screenshots
-hl.bind("PRINT", hl.dsp.exec_cmd("grimblast --notify copysave output"))
-hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("grimblast --notify copysave area"))
-hl.bind("CTRL + PRINT", hl.dsp.exec_cmd("grimblast --notify edit output"))
-hl.bind("ALT + PRINT", hl.dsp.exec_cmd("grimblast --notify copysave active"))
+hl.bind("PRINT", hl.dsp.exec_cmd(vars.screenshot))
+hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(vars.areaScreenshot))
+hl.bind("CTRL + PRINT", hl.dsp.exec_cmd(vars.editScreenshot))
+hl.bind("ALT + PRINT", hl.dsp.exec_cmd(vars.activeScreenshot))
 
 -- OCR
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("~/.config/hypr/scripts/ocr.sh"))

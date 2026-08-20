@@ -1,0 +1,12 @@
+[Plymouth Theme]
+Name=Flame Frappé
+Description=Blue Flame animation with a Catppuccin Frappé unlock prompt
+Comment=Based on Flame by Aditya Shakya (adi1090x)
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/flame-frappe
+ScriptFile=/usr/share/plymouth/themes/flame-frappe/flame-frappe.script
+Font=DejaVu Sans 12
+MonospaceFont=DejaVu Sans Mono 12
+ConsoleLogBackgroundColor=0x00000000

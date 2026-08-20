@@ -5,6 +5,7 @@ desktop:
   - hyprsunset
   - hyprpolkitagent
   - greetd-tuigreet
+  - noctalia
 
   - wl-clipboard
   - cliphist
@@ -17,7 +18,9 @@ desktop:
   - bluez-utils
   - xdg-desktop-portal-hyprland
   - xdg-desktop-portal-wlr
-  - electron-32-bin # Many depend on it; downloads -git by default, so this forces -bin
+  - electron32-bin # Many depend on it; downloads -git by default, so this forces -bin
+  - tesseract-data-eng
+  - tesseract-data-ara
 
   - kitty
   - wezterm
@@ -30,3 +33,5 @@ desktop:
   - obsidian
   - mpd
   - polychromatic
+  - zathura
+  - zathura-pdf-mupdf

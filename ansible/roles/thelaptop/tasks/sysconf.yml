@@ -17,6 +17,75 @@
     mode: "0755"
   become: true
 
+- name: Verify that the EFI filesystem is mounted at /boot
+  tags: sysconf,boot-theme
+  ansible.builtin.command: mountpoint -q /boot
+  changed_when: false
+  become: true
+
+- name: Install the Flame Frappé Plymouth theme
+  tags: sysconf,boot-theme
+  ansible.builtin.copy:
+    src: plymouth/flame-frappe/
+    dest: /usr/share/plymouth/themes/flame-frappe/
+    owner: root
+    group: root
+    mode: preserve
+  notify: Rebuild initramfs
+  become: true
+
+- name: Select the Flame Frappé Plymouth theme
+  tags: sysconf,boot-theme
+  ansible.builtin.copy:
+    src: plymouth/plymouthd.conf
+    dest: /etc/plymouth/plymouthd.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Rebuild initramfs
+  become: true
+
+- name: Enable Plymouth before encrypted root discovery
+  tags: sysconf,boot-theme
+  ansible.builtin.lineinfile:
+    path: /etc/mkinitcpio.conf
+    regexp: '^HOOKS='
+    line: 'HOOKS=(base systemd plymouth autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt btrfs filesystems fsck)'
+  notify: Rebuild initramfs
+  become: true
+
+- name: Install the Catppuccin Frappé GRUB theme on /boot
+  tags: sysconf,boot-theme
+  ansible.builtin.copy:
+    src: grub/catppuccin-frappe-grub-theme/
+    dest: /boot/grub/themes/catppuccin-frappe-grub-theme/
+    owner: root
+    group: root
+    mode: preserve
+  notify: Rebuild GRUB configuration
+  become: true
+
+- name: Create the GRUB defaults drop-in directory
+  tags: sysconf,boot-theme
+  ansible.builtin.file:
+    path: /etc/default/grub.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  become: true
+
+- name: Configure the GRUB theme and Plymouth kernel arguments
+  tags: sysconf,boot-theme
+  ansible.builtin.copy:
+    src: grub/10-theme.cfg
+    dest: /etc/default/grub.d/10-theme.cfg
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Rebuild GRUB configuration
+  become: true
+
 - name: Create the tuigreet state directory
   tags: sysconf
   ansible.builtin.file:

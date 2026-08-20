@@ -1,7 +1,8 @@
+---
 - name: Stow all user configuration
   tags: stow
   ansible.builtin.command:
-    cmd: "stow -v -d ~/dotfiles/stow -t ~ {{ item }}"
+    cmd: "stow -v -d /home/{{ user }}/dotfiles/stow -t /home/{{ user }} {{ item }}"
   loop:
     - zsh
 
@@ -27,6 +28,7 @@
     - wireshark
 
     - kvantum
+    - qt6ct
     - mpd
     - mpv
     - neomutt

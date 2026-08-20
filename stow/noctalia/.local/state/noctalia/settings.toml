@@ -1,0 +1,159 @@
+config_version = 12
+
+[bar.default]
+border_width = 1.5
+capsule = true
+capsule_thickness = 0.72999998740851879
+center = [ "workspaces" ]
+concave_edge_corners = false
+end = [ "group:g1", "group:g2", "group:g3" ]
+icon_color = "primary"
+margin_edge = 5
+margin_opposite_edge = 2
+start = [ "control-center", "clock", "media" ]
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    enabled = true
+    fill = "surface_variant"
+    id = "g1"
+    members = [ "tray", "notifications" ]
+    opacity = 1.0
+    padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    enabled = true
+    fill = "surface_variant"
+    id = "g2"
+    members = [ "network", "bluetooth" ]
+    opacity = 1.0
+    padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    enabled = true
+    fill = "surface_variant"
+    id = "g3"
+    members = [ "volume", "brightness" ]
+    opacity = 1.0
+    padding = 6.0
+
+[desktop_widgets]
+schema_version = 2
+widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-0000000000000002" ]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 480.0
+    box_width = 448.0
+    cx = 768.0
+    cy = 432.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "fancy_audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        background = false
+        visualization_mode = "all"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000002]
+    box_height = 288.0
+    box_width = 272.0
+    cx = 160.0
+    cy = 208.0
+    output = "eDP-1"
+    rotation = -0.0
+    type = "calendar"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
+        show_events = false
+        show_week_numbers = false
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 768.0
+    cy = 682.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[plugins]
+enabled = [ "noctalia/bongocat" ]
+
+[shell]
+font_family = "RecMonoCasual Nerd Font"
+screen_time_enabled = true
+telemetry_enabled = true
+
+    [shell.panel]
+    control_center_placement = "floating"
+    control_center_position = "center"
+    transparency_mode = "glass"
+
+[theme]
+builtin = "Nord"
+community_palette = "Oxocarbon"
+mode = "dark"
+wallpaper_scheme = "vibrant"
+
+    [theme.templates]
+    builtin_ids = [ "qt" ]
+
+[wallpaper]
+directory = "/usr/share/wallpapers/Favorites/"
+transition_on_startup = true
+
+    [wallpaper.automation]
+    enabled = true
+    recursive = false
+
+    [wallpaper.default]
+    path = "/usr/share/wallpapers/Favorites/underwater.png"
+
+    [wallpaper.last]
+    path = "/usr/share/wallpapers/Favorites/underwater.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/usr/share/wallpapers/Favorites/underwater.png"
+
+[widget.workspaces]
+anchor = true
+capsule = true
+capsule_border = "primary"
+scale = 1.25
+style = "focus_hint"

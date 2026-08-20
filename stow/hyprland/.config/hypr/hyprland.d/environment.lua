@@ -13,5 +13,6 @@ hl.env("XCURSOR_THEME", "Nordic-cursors")
 hl.env("XCURSOR_SIZE", "32")
 
 hl.env("GTK_APPLICATION_PREFER_DARK_THEME", "1")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("QT_STYLE_OVERRIDE", "kvantum")
 hl.env("GDK_BACKEND", "wayland,x11")

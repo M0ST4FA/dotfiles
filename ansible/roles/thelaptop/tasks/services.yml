@@ -4,7 +4,6 @@
     name: "{{ item }}"
     enabled: true
   loop:
-    - nord-console.service
     - greetd.service
 
     - kmsconvt@tty2.service

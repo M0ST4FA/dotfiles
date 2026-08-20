@@ -1,5 +1,5 @@
 - name: Trust the Pharo repository signing key
-  tags: thelaptop,packages
+  tags: packages
   community.general.pacman_key:
     id: 536316AFF4E2E8B89ECD38E5CD55515EEBDB2B90
     url: https://download.opensuse.org/repositories/devel:/languages:/pharo:/stable/Arch/x86_64/devel_languages_pharo_stable_Arch.key
@@ -7,27 +7,27 @@
     ensure_trusted: true
 
 - name: Update pacman cache and upgrade
-  tags: thelaptop,packages
+  tags: packages,upgrade
   community.general.pacman:
     update_cache: yes
     upgrade: yes
 
 - name: Check if paru is installed
-  tags: thelaptop,packages
+  tags: packages
   ansible.builtin.command: pacman -Qs paru
   register: paru_check
   failed_when: false
   changed_when: false
 
 - name: Clone paru repo
-  tags: thelaptop,packages
+  tags: packages
   ansible.builtin.git:
     repo: https://aur.archlinux.org/paru.git
     dest: /tmp/paru
   when: paru_check.rc != 0
 
 - name: Change ownership of paru build directory
-  tags: thelaptop,packages
+  tags: packages
   ansible.builtin.file:
     path: /tmp/paru
     state: directory
@@ -37,7 +37,7 @@
   when: paru_check.rc != 0
 
 - name: Build and install paru
-  tags: thelaptop,packages
+  tags: packages
   ansible.builtin.command:
     cmd: makepkg -si --noconfirm
     chdir: /tmp/paru
@@ -46,12 +46,12 @@
   when: paru_check.rc != 0
 
 - name: Include variables referencing packages
-  tags: thelaptop,packages
+  tags: packages
   ansible.builtin.include_vars:
     dir: packages
 
 - name: Install all official and AUR packages
-  tags: thelaptop,packages
+  tags: packages
   kewlfft.aur.aur:
     use: "{{ aur_helper }}"
     name: "{{ core + security + desktop + fonts_and_themes }}"

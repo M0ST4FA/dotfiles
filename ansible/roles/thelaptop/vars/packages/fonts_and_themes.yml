@@ -2,6 +2,7 @@ fonts_and_themes:
   - qt6ct
   - kvantum
   - nwg-look
+  - plymouth
 
   - ttf-recursive-nerd
   - noto-fonts-cjk
@@ -11,9 +12,9 @@ fonts_and_themes:
   - ttf-firacode-nerd
   - ttf-jetbrains-mono-nerd
   - terminus-font
+  - ttf-dejavu
 
   - papirus-icon-theme
   - colloid-nord-gtk-theme-git
   - figlet
   - go-rainbow-git
-  - plymouth-theme-owl-git

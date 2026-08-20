@@ -1,0 +1,109 @@
+// Flame animation by Aditya Shakya (adi1090x), with a Frappé unlock dialog.
+
+screen.w = Window.GetWidth(0);
+screen.h = Window.GetHeight(0);
+screen.half.w = screen.w / 2;
+screen.half.h = screen.h / 2;
+
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+
+for (i = 0; i < 25; i++)
+  flame.image[i] = Image("progress-" + i + ".png");
+
+flame.sprite = Sprite();
+flame.sprite.SetX(screen.half.w - flame.image[0].GetWidth() / 2);
+flame.sprite.SetY(screen.half.h - flame.image[0].GetHeight() / 2);
+flame.frame = 0;
+
+fun RefreshCallback() {
+    flame.sprite.SetImage(flame.image[Math.Int(flame.frame / 2) % 25]);
+    flame.frame++;
+}
+
+Plymouth.SetRefreshFunction(RefreshCallback);
+
+dialog = null;
+bullets = null;
+question = null;
+answer = null;
+message = null;
+
+fun ClearDialog() {
+    dialog = null;
+    bullets = null;
+    question = null;
+    answer = null;
+}
+
+fun DisplayPasswordCallback(promptText, bulletCount) {
+    ClearDialog();
+
+    dialog.image = Image("dialog.png");
+    dialog.sprite = Sprite(dialog.image);
+    dialog.x = screen.half.w - dialog.image.GetWidth() / 2;
+    dialog.y = screen.half.h + 215;
+    if (dialog.y + dialog.image.GetHeight() > screen.h - 24)
+        dialog.y = screen.h - dialog.image.GetHeight() - 24;
+    dialog.sprite.SetPosition(dialog.x, dialog.y, 10000);
+
+    dialog.lock.image = Image("lock.png");
+    dialog.lock.sprite = Sprite(dialog.lock.image);
+    dialog.lock.sprite.SetPosition(dialog.x + 24, dialog.y + 24, 10001);
+
+    dialog.title.image = Image.Text("Unlock encrypted root", 0.776, 0.816, 0.961);
+    dialog.title.sprite = Sprite(dialog.title.image);
+    dialog.title.sprite.SetPosition(dialog.x + 72, dialog.y + 22, 10001);
+
+    dialog.subtitle.image = Image.Text("Enter passphrase to continue", 0.647, 0.678, 0.808);
+    dialog.subtitle.sprite = Sprite(dialog.subtitle.image);
+    dialog.subtitle.sprite.SetPosition(dialog.x + 72, dialog.y + 48, 10001);
+
+    bullet.image = Image("bullet.png");
+    bullet.spacing = bullet.image.GetWidth() + 7;
+    totalWidth = bulletCount * bullet.spacing;
+    if (bulletCount > 0)
+        totalWidth = totalWidth - 7;
+    startPos = screen.half.w - totalWidth / 2;
+
+    for (i = 0; i < bulletCount; i++) {
+        bullets[i].sprite = Sprite(bullet.image);
+        bullets[i].sprite.SetPosition(startPos + i * bullet.spacing, dialog.y + 91, 10001);
+    }
+}
+
+Plymouth.SetDisplayPasswordFunction(DisplayPasswordCallback);
+
+fun DisplayQuestionCallback(promptText, entryText) {
+    ClearDialog();
+    question.image = Image.Text(promptText, 0.776, 0.816, 0.961);
+    question.sprite = Sprite(question.image);
+    question.sprite.SetPosition(screen.half.w - question.image.GetWidth() / 2,
+                                screen.h - 4 * question.image.GetHeight(), 10000);
+
+    if (entryText == "")
+        entryText = "<answer>";
+    answer.image = Image.Text(entryText, 0.549, 0.667, 0.933);
+    answer.sprite = Sprite(answer.image);
+    answer.sprite.SetPosition(screen.half.w - answer.image.GetWidth() / 2,
+                              screen.h - 2 * answer.image.GetHeight(), 10000);
+}
+
+Plymouth.SetDisplayQuestionFunction(DisplayQuestionCallback);
+
+fun DisplayNormalCallback() {
+    ClearDialog();
+    message = null;
+}
+
+Plymouth.SetDisplayNormalFunction(DisplayNormalCallback);
+
+fun MessageCallback(text) {
+    message = null;
+    message.image = Image.Text(text, 0.906, 0.510, 0.518);
+    message.sprite = Sprite(message.image);
+    message.sprite.SetPosition(screen.half.w - message.image.GetWidth() / 2,
+                               screen.h - message.image.GetHeight() - 16, 10002);
+}
+
+Plymouth.SetDisplayMessageFunction(MessageCallback);
