@@ -9,6 +9,7 @@ hl.bind(mainMod .. " + period", hl.dsp.exec_cmd(vars.emojiPicker))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(vars.clipboardMenu))
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(vars.toggleSettings))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(vars.toggleNotification))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(vars.toggleDashboard))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd(vars.toggleBar))
 hl.bind("ALT + space", hl.dsp.exec_cmd(vars.menu))
 

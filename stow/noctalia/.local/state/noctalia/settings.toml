@@ -143,13 +143,19 @@ transition_on_startup = true
     recursive = false
 
     [wallpaper.default]
-    path = "/usr/share/wallpapers/Favorites/underwater.png"
+    path = "/usr/share/wallpapers/Favorites/linux-be-good-4k.png"
 
     [wallpaper.last]
-    path = "/usr/share/wallpapers/Favorites/underwater.png"
+    path = "/usr/share/wallpapers/Favorites/linux-be-good-4k.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/usr/share/wallpapers/Favorites/underwater.png"
+    path = "/usr/share/wallpapers/Favorites/linux-be-good-4k.png"
+
+[widget.clock]
+format = "{:%b %d, %I:%M %p}"
+
+[widget.control-center]
+glyph = "navigation-filled"
 
 [widget.workspaces]
 anchor = true

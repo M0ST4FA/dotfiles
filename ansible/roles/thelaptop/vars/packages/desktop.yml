@@ -12,6 +12,7 @@ desktop:
   - grim
   - slurp
   - pavucontrol
+  - brightnessctl
   - switcheroo-control
   - supergfxctl
   - bluez
