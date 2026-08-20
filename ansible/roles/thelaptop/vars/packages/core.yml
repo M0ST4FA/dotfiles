@@ -4,12 +4,21 @@ core:
   - linux
   - linux-firmware
   - linux-headers
-  - networkmanager
   - grub
   - efibootmgr
   - intel-ucode
+  - ntfsprogs
+  - xfsprogs
+
   - git
   - stow
+
+  - neovim
+  - libvirt
+  - openai-codex
+  - typescript
+
+  - kmscon
   - zsh
   - zsh-autosuggestions
   - zsh-syntax-highlighting
@@ -21,16 +30,16 @@ core:
   - btop
   - htop
   - yazi
-  - neovim
   - jq
   - rsync
   - wget
   - zip
   - unzip
-  - tlp
-  - typescript
-  - kmscon
+  - ripgrep
+  - libqalculate
+
+  - networkmanager
   - iwd
   - chrony
+  - tlp
   - reflector
-  - libvirt

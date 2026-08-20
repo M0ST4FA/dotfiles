@@ -4,11 +4,14 @@ security:
   - iaito
   - pwndbg
   - checksec
+
   - bettercap
   - wireshark-qt
   - wireshark-cli
   - nmap
-  - gocryptfs
-  - bitwarden
   - docker
   - docker-compose
+
+  - gocryptfs
+
+  - bitwarden

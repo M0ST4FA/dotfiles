@@ -4,27 +4,29 @@ desktop:
   - hyprlock
   - hyprsunset
   - hyprpolkitagent
-  - nwg-look
+  - greetd-tuigreet
+
   - wl-clipboard
+  - cliphist
   - grim
   - slurp
+  - pavucontrol
+  - switcheroo-control
+  - supergfxctl
+  - bluez
+  - bluez-utils
+  - xdg-desktop-portal-hyprland
+  - xdg-desktop-portal-wlr
+  - electron-32-bin # Many depend on it; downloads -git by default, so this forces -bin
+
   - kitty
   - wezterm
   - foot
+
+  - waydroid
+  - gimp
   - firefox
   - discord
   - obsidian
-  - pavucontrol
   - mpd
-  - bluez
-  - bluez-utils
-  - greetd-tuigreet
-  - xdg-desktop-portal-hyprland
-  - xdg-desktop-portal-wlr
-  - qt6ct
-  - kvantum
-  - waydroid
   - polychromatic
-  - gimp
-  - switcheroo-control
-  - supergfxctl

@@ -1,4 +1,9 @@
 fonts_and_themes:
+  - qt6ct
+  - kvantum
+  - nwg-look
+
+  - ttf-recursive-nerd
   - noto-fonts-cjk
   - noto-fonts-emoji
   - ttf-meslo-nerd
@@ -6,9 +11,9 @@ fonts_and_themes:
   - ttf-firacode-nerd
   - ttf-jetbrains-mono-nerd
   - terminus-font
+
   - papirus-icon-theme
   - colloid-nord-gtk-theme-git
-  - bibata-cursor-theme-bin
-  - archlinux-wallpaper
   - figlet
   - go-rainbow-git
+  - plymouth-theme-owl-git
