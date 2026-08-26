@@ -50,11 +50,23 @@
   ansible.builtin.include_vars:
     dir: packages
 
+- name: Assemble the package catalog
+  tags: packages
+  ansible.builtin.set_fact:
+    workstation_packages: "{{ query('ansible.builtin.vars', *package_groups) | flatten }}"
+
+- name: Ensure every package belongs to exactly one category
+  tags: packages
+  ansible.builtin.assert:
+    that:
+      - workstation_packages | unique | length == workstation_packages | length
+    fail_msg: A package is listed in more than one vars/packages category.
+
 - name: Install all official and AUR packages
   tags: packages
   kewlfft.aur.aur:
     use: "{{ aur_helper }}"
-    name: "{{ core + security + desktop + fonts_and_themes }}"
+    name: "{{ workstation_packages }}"
     state: present
     extra_args: --skipreview
   become: true

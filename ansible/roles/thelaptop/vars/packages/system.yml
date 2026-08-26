@@ -1,0 +1,11 @@
+packages_system:
+  - base
+  - linux
+  - linux-headers
+  - grub
+  - efibootmgr
+  - ntfsprogs
+  - xfsprogs
+  - kmscon
+  - stow
+

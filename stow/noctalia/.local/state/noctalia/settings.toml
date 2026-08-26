@@ -157,13 +157,13 @@ transition_on_startup = true
     recursive = false
 
     [wallpaper.default]
-    path = "/usr/share/wallpapers/Favorites/elementaryos.png"
+    path = "/usr/share/wallpapers/Favorites/ign-0011.png"
 
     [wallpaper.last]
-    path = "/usr/share/wallpapers/Favorites/elementaryos.png"
+    path = "/usr/share/wallpapers/Favorites/ign-0011.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/usr/share/wallpapers/Favorites/elementaryos.png"
+    path = "/usr/share/wallpapers/Favorites/ign-0011.png"
 
 [widget.clock]
 format = "{:%b %d, %I:%M %p}"

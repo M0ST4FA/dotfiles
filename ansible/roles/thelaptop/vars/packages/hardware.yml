@@ -1,0 +1,11 @@
+packages_hardware:
+  - linux-firmware
+  - intel-ucode
+  - brightnessctl
+  - switcheroo-control
+  - supergfxctl
+  - bluez
+  - bluez-utils
+  - tlp
+  - polychromatic
+

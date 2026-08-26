@@ -1,0 +1,25 @@
+packages_terminal:
+  - kitty
+  - wezterm
+  - foot
+
+  - zsh
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+
+  - zoxide
+  - eza
+  - fd
+  - fzf
+  - bat
+  - btop
+  - htop
+  - yazi
+  - jq
+  - rsync
+  - wget
+  - zip
+  - unzip
+  - ripgrep
+  - libqalculate
+  - ncdu

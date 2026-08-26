@@ -1,0 +1,15 @@
+packages_desktop_session:
+  - hyprland
+  - hypridle
+  - hyprlock
+  - hyprsunset
+  - hyprpolkitagent
+  - greetd-tuigreet
+  - noctalia
+  - wl-clipboard
+  - cliphist
+  - grim
+  - slurp
+  - xdg-desktop-portal-hyprland
+  - xdg-desktop-portal-wlr
+

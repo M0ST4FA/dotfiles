@@ -1,0 +1,13 @@
+packages_documents:
+  - obsidian
+  - rnote
+
+  - zathura
+  - zathura-pdf-mupdf
+
+  - tesseract-data-eng
+  - tesseract-data-ara
+
+  - perl-image-exiftool
+  - perl-archive-zip
+  - perl-io-compress-brotli

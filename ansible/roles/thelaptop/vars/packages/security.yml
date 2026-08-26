@@ -1,4 +1,4 @@
-security:
+packages_security:
   - ghidra
   - radare2
   - iaito
@@ -9,9 +9,5 @@ security:
   - wireshark-qt
   - wireshark-cli
   - nmap
-  - docker
-  - docker-compose
-
   - gocryptfs
-
   - bitwarden

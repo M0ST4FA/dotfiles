@@ -1,0 +1,5 @@
+packages_media:
+  - mpd
+  - imv
+  - pavucontrol
+  - gimp

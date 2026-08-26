@@ -1,0 +1,6 @@
+packages_networking:
+  - networkmanager
+  - iwd
+  - chrony
+  - reflector
+

@@ -1,9 +1,12 @@
-fonts_and_themes:
+packages_appearance:
   - qt6ct
   - kvantum
   - nwg-look
   - plymouth
-
+  - papirus-icon-theme
+  - colloid-nord-gtk-theme-git
+  - figlet
+  - go-rainbow-git
   - ttf-recursive-nerd
   - noto-fonts
   - noto-fonts-cjk
@@ -15,7 +18,3 @@ fonts_and_themes:
   - terminus-font
   - ttf-dejavu
 
-  - papirus-icon-theme
-  - colloid-nord-gtk-theme-git
-  - figlet
-  - go-rainbow-git

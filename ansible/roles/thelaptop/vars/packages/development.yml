@@ -1,0 +1,13 @@
+packages_development:
+  - base-devel
+  - cmake
+  - cmake-extras
+  - git
+
+  - neovim
+  - neovide
+
+  - openai-codex
+  - antigravity-cli
+
+  - typescript

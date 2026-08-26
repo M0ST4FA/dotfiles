@@ -1,0 +1,8 @@
+packages_communication:
+  - firefox
+  - discord
+  - telegram-desktop-bin # Statically compiled; the dynamic package has caused problems.
+  - neomutt
+  - w3m
+  - urlscan
+
