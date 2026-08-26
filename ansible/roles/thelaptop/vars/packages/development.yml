@@ -11,3 +11,7 @@ packages_development:
   - antigravity-cli
 
   - typescript
+
+  - android-cli
+  - jdk17-openjdk
+  - fvm

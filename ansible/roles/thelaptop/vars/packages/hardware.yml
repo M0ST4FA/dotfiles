@@ -8,4 +8,4 @@ packages_hardware:
   - bluez-utils
   - tlp
   - polychromatic
-
+  - android-udev

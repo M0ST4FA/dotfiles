@@ -1,6 +1,6 @@
 aur_helper: paru
 user: m0st4fa
-system_groups: wireshark, docker, libvirt, input, wheel, tss, android-sdk, openrazer
+system_groups: wireshark, docker, libvirt, input, wheel, tss, openrazer
 
 # Variable names loaded from vars/packages/*.yml and combined by packages.yml.
 package_groups:

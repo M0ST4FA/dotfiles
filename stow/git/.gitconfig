@@ -16,3 +16,7 @@
 	defaultBranch = main
 [diff]
 	tool = nvimdiff
+[merge]
+	tool = nvimdiff
+[mergetool]
+	prompt = false

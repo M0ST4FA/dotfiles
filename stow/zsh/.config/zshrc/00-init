@@ -1,10 +1,12 @@
 # -----------------------------------------------------
 # Exports
 # -----------------------------------------------------
+# typeset -U path PATH
+
 export EDITOR=nvim
 export SYSTEMD_EDITOR=nvim
 export ZSH="$HOME/.oh-my-zsh"
-export PATH="/home/m0st4fa/.local/bin:/home/m0st4fa/go/bin:$PATH"
+PATH="/home/m0st4fa/.local/bin:/home/m0st4fa/go/bin:$PATH"
 
 # This variable tells zsh about what to consider part of a word.
 # I remove some characters so that zsh considers them word boundaries.
@@ -21,18 +23,10 @@ source "$ZINIT_HOME/zinit.zsh"
 # -----------------------------------------------------
 
 # Export Android Home
-export ANDROID_HOME=/opt/android-sdk
-export ANDROID_SDK_ROOT=/opt/android-sdk
-export ANDROID_AVD_HOME=$HOME/.config/.android/avd
+export ANDROID_HOME="$HOME/Android/Sdk"
 
 # Add tools to PATH
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-
-# Flutter
-export PATH=$PATH:/opt/flutter/bin
+PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
 
 # Haskell
 [ -f "/home/m0st4fa/.ghcup/env" ] && source "/home/m0st4fa/.ghcup/env" # ghcup-env

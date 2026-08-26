@@ -10,12 +10,12 @@ hash = "33982a6e2d6df07619a2a0fc163a0950"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "044c3cc"
+rev = "c591a36"
 hash = "f281261ff04ad7ec867c3f802a50835f"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "044c3cc"
+rev = "c591a36"
 hash = "5bb0bfab901d3601c370eafdd66edd31"
 
 [[flavor.deps]]
