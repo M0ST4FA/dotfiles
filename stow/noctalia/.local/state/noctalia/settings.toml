@@ -157,13 +157,13 @@ transition_on_startup = true
     recursive = false
 
     [wallpaper.default]
-    path = "/usr/share/wallpapers/Favorites/archlinux.png"
+    path = "/usr/share/wallpapers/Favorites/elementaryos.png"
 
     [wallpaper.last]
-    path = "/usr/share/wallpapers/Favorites/archlinux.png"
+    path = "/usr/share/wallpapers/Favorites/elementaryos.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/usr/share/wallpapers/Favorites/archlinux.png"
+    path = "/usr/share/wallpapers/Favorites/elementaryos.png"
 
 [widget.clock]
 format = "{:%b %d, %I:%M %p}"

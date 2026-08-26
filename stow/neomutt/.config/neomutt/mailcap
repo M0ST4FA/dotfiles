@@ -1,0 +1,6 @@
+text/html; w3m -I %{charset} -T text/html -dump %s; copiousoutput
+application/pdf; xdg-open %s >/dev/null 2>&1 &
+image/*; xdg-open %s >/dev/null 2>&1 &
+audio/*; xdg-open %s >/dev/null 2>&1 &
+video/*; xdg-open %s >/dev/null 2>&1 &
+application/octet-stream; xdg-open %s >/dev/null 2>&1 &

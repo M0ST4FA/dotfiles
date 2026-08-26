@@ -1,24 +1,88 @@
-# User metadata
-set realname = "Nerdio Infrastructure"
-set from = "infra@nerdio.app"
+# Core behaviour
+set editor = "nvim"
+set charset = "utf-8"
+set send_charset = "utf-8"
 set use_from = yes
+set envelope_from = yes
+set edit_headers = yes
+set include = yes
+set fast_reply = yes
+set ask_cc = no
+set ask_bcc = no
+set abort_nosubject = ask-yes
+set delete = ask-yes
+set move = no
+set quit = ask-yes
+set beep = no
+set wait_key = no
+set mark_old = no
 
-# Incoming mail settings
-set imap_user = "infra@nerdio.app"
-source ~/.config/neomutt/credentials.rc
+# Network and cache
+set ssl_force_tls = yes
+set account_command = "~/.local/bin/neomutt-credentials"
+set header_cache = "~/.cache/neomutt/headers"
+set message_cachedir = "~/.cache/neomutt/bodies"
+set message_cache_clean = yes
+set mail_check = 60
+set timeout = 15
+set imap_keepalive = 300
+set imap_check_subscribed = yes
 
-# IMAP config (port 993)
-set folder = "imaps://mail.nerdio.app:993/"
+# Index, pager, and sidebar
+set sort = reverse-threads
+set sort_aux = last-date-received
+set pager_index_lines = 8
+set pager_context = 3
+set pager_stop = yes
+set markers = no
+set smart_wrap = yes
+set menu_scroll = yes
+set menu_move_off = no
+set status_on_top = yes
+set help = no
+set sidebar_visible = yes
+set sidebar_width = 28
+set sidebar_short_path = yes
+set sidebar_divider_char = "│"
+set sidebar_format = " %D%*  %<N?%N />%S "
+set status_format = " %D  %<n?%n new · >%m messages%>  %P "
+set compose_format = " Compose  %a attachments · approximately %l bytes%> "
+set index_format = " %4C %Z  %<[y?%<[m?%<[d?%[%H:%M]&%[%a %d]>&%[%b %d]>&%[%Y-%m-%d]>  %-20.20F  %s"
+source ~/.config/neomutt/colors-nord.rc
+
+# MIME and HTML mail
+set mailcap_path = "~/.config/neomutt/mailcap"
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+# Keep the pager focused on useful headers.
+ignore *
+unignore From To Cc Bcc Date Subject Reply-To Organization User-Agent X-Mailer
+hdr_order From To Cc Date Subject
+
+# Accounts and account-switching hooks
+source ~/.config/neomutt/accounts/infra.rc
+source ~/.config/neomutt/accounts/support.rc
+source ~/.config/neomutt/accounts/gmail.rc
+
+# Start in the infrastructure inbox.
+set real_name = "Nerdio Infrastructure"
+set from = "infra@nerdio.app"
+set folder = "imaps://infra@nerdio.app@mail.nerdio.app:993/"
 set spoolfile = "+INBOX"
 set postponed = "+drafts"
 set record = "+sent"
 set trash = "+trash"
+set smtp_url = "smtps://infra@nerdio.app@mail.nerdio.app:465/"
 
-# Outgoing mail settings
-set smtp_url = "smtps://infra@nerdio.app:HfE9gDEzZv6PsE8oZfrKBa@mail.nerdio.app:465/"
+# Navigation
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
+bind index,pager B sidebar-toggle-visible
+macro index,pager \cb "<pipe-message>urlscan<Enter>" "Select a URL from the message"
 
-# Connection and cache enhancements
-set header_cache = "~/.config/neomutt/cache/headers"
-set message_cachedir = "~/.config/neomutt/cache/bodies"
-set imap_keepalive = 300
-set mail_check = 60
+# F2/F3/F4 switch accounts from either the index or pager.
+macro index,pager <F2> "<change-folder>imaps://infra@nerdio.app@mail.nerdio.app:993/INBOX<Enter>" "Open infra@nerdio.app"
+macro index,pager <F3> "<change-folder>imaps://support@nerdio.app@mail.nerdio.app:993/INBOX<Enter>" "Open support@nerdio.app"
+macro index,pager <F4> "<change-folder>imaps://mostafa2018a3s@gmail.com@imap.gmail.com:993/INBOX<Enter>" "Open mostafa2018a3s@gmail.com"

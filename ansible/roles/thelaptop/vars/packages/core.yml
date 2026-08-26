@@ -33,6 +33,7 @@ core:
   - btop
   - htop
   - yazi
+  - perl-image-exiftool
   - jq
   - rsync
   - wget
@@ -41,6 +42,9 @@ core:
   - ripgrep
   - libqalculate
   - ncdu
+  - neomutt
+  - w3m
+  - urlscan
 
   - networkmanager
   - iwd

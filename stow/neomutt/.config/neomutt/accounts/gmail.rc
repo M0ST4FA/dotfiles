@@ -1,0 +1,1 @@
+folder-hook 'imaps://mostafa2018a3s@gmail\.com@imap\.gmail\.com(:993)?/' 'set real_name="Mostafa" from="mostafa2018a3s@gmail.com" folder="imaps://mostafa2018a3s@gmail.com@imap.gmail.com:993/" spoolfile="+INBOX" postponed="+[Gmail]/Drafts" trash="+[Gmail]/Trash" smtp_url="smtps://mostafa2018a3s@gmail.com@smtp.gmail.com:465/"; unset record'

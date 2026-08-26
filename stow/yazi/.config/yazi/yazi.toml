@@ -34,4 +34,6 @@ group = "git"
 image_alloc      = 1073741824        # = 1024*1024*1024 = 1024MB
 
 [opener]
-open = [{ run = 'xdg-open "$@"', orphan = true }]
+open = [
+  { run = 'xdg-open %s1', desc = "Open", orphan = true, for = "linux" },
+]

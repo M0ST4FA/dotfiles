@@ -13,6 +13,7 @@ stow/mpd/.config/mpd/state
 stow/mpd/.config/mpd/sticker.sql
 stow/yazi/.config/yazi/plugins/
 stow/yazi/.config/yazi/flavors/
+stow/**/.local/share/applications/mimeinfo.cache
 stow/mame/.mame/nvram/
 stow/mame/.mame/snap/
 stow/mame/.mame/sta/

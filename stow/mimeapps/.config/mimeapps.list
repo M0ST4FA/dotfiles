@@ -1,0 +1,24 @@
+[Default Applications]
+text/plain=nvim.desktop;neovide.desktop;
+text/markdown=nvim.desktop;neovide.desktop;
+text/x-cmake=nvim.desktop;neovide.desktop;
+application/json=nvim.desktop;neovide.desktop;
+application/x-yaml=nvim.desktop;neovide.desktop;
+message/rfc822=neomutt.desktop;
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
+image/png=imv.desktop;
+image/jpeg=imv.desktop;
+image/gif=imv.desktop;
+image/webp=imv.desktop;
+video/mp4=mpv.desktop;
+video/x-matroska=mpv.desktop;
+video/webm=mpv.desktop;
+audio/aac=mpv.desktop;
+audio/mpeg=mpv.desktop;
+audio/ogg=mpv.desktop;
+audio/flac=mpv.desktop;
+x-scheme-handler/mailto=neomutt.desktop;
+x-scheme-handler/bitwarden=bitwarden.desktop;
+application/x-pcapng=org.wireshark.Wireshark.desktop;
+application/vnd.android.package-archive=waydroid.app.install.desktop;
+inode/directory=yazi.desktop

@@ -1,0 +1,1 @@
+folder-hook 'imaps://support@nerdio\.app@mail\.nerdio\.app(:993)?/' 'set real_name="Nerdio Support" from="support@nerdio.app" folder="imaps://support@nerdio.app@mail.nerdio.app:993/" spoolfile="+INBOX" postponed="+drafts" record="+sent" trash="+trash" smtp_url="smtps://support@nerdio.app@mail.nerdio.app:465/"'
