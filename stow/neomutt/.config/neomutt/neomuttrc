@@ -24,7 +24,7 @@ set ssl_force_tls = yes
 set account_command = "~/.local/bin/neomutt-credentials"
 set header_cache = "~/.cache/neomutt/headers"
 set message_cachedir = "~/.cache/neomutt/bodies"
-set message_cache_clean = yes
+set message_cache_clean = no
 set mail_check = 60
 set timeout = 15
 set imap_keepalive = 300
@@ -68,6 +68,8 @@ hdr_order From To Cc Date Subject
 # Accounts and account-switching hooks
 source ~/.config/neomutt/accounts/nerdio.rc
 source ~/.config/neomutt/accounts/gmail.rc
+source ~/.config/neomutt/aliases.rc
+set alias_file = "~/.config/neomutt/aliases.rc"
 
 # Start in the infrastructure inbox.
 set real_name = "Nerdio Infrastructure"
