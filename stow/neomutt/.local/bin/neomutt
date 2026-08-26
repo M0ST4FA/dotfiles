@@ -1,0 +1,14 @@
+#!/bin/sh
+# NeoMutt requires a terminfo entry that advertises direct colours. Kitty
+# implements them, but xterm-kitty intentionally advertises a 256-colour
+# palette, so use xterm-direct for NeoMutt alone.
+
+case "${TERM:-}" in
+  xterm-kitty*)
+    exec env TERM=xterm-direct /usr/bin/neomutt "$@"
+    ;;
+  *)
+    exec /usr/bin/neomutt "$@"
+    ;;
+esac
+

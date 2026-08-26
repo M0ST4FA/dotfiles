@@ -1,0 +1,67 @@
+# Nord palette for terminals with reliable true-colour support.
+# Use the terminal's default background for the message area, so Kitty's
+# background opacity remains visible.
+color normal                   #D8DEE9 default
+color tilde                    #4C566A default
+color status                   #ECEFF4 #3B4252
+color indicator                bold #2E3440 #88C0D0
+color tree                     #81A1C1 default
+color message                  #B48EAD default
+color warning                  #EBCB8B default
+color error                    bold #ECEFF4 #BF616A
+color prompt                   bold #88C0D0 default
+color options                  bold #EBCB8B default
+color progress                 #2E3440 #81A1C1
+color markers                  #EBCB8B default
+color search                   #2E3440 #EBCB8B
+color attachment               bold #88C0D0 default
+color bold                     bold #ECEFF4 default
+color underline                underline #81A1C1 default
+color signature                #4C566A default
+
+# Sidebar
+color sidebar_background       #D8DEE9 default
+color sidebar_divider          #4C566A default
+color sidebar_ordinary         #D8DEE9 default
+color sidebar_spool_file       bold #81A1C1 default
+color sidebar_new              bold #88C0D0 default
+color sidebar_unread           #81A1C1 default
+color sidebar_flagged          bold #EBCB8B default
+color sidebar_highlight        #ECEFF4 #434C5E
+color sidebar_indicator        bold #2E3440 #88C0D0
+
+# Message index
+color index                    #D8DEE9 default "~A"
+color index                    #4C566A default "~R"
+color index                    bold #ECEFF4 default "~N"
+color index                    bold #88C0D0 default "~U"
+color index                    #B48EAD default "~Q"
+color index                    bold #EBCB8B default "~F"
+color index                    #B48EAD default "~T"
+color index                    #BF616A default "~D"
+color index_author             #81A1C1 default
+color index_date               #4C566A default
+color index_flags              #81A1C1 default
+color index_number             #5E81AC default
+color index_subject            #D8DEE9 default
+color index_collapsed          #B48EAD default
+
+# Pager headers and message body
+color hdrdefault               #81A1C1 default
+color header                   bold #81A1C1 default "^(From|To|Cc|Bcc):"
+color header                   bold #ECEFF4 default "^Subject:"
+color header                   #4C566A default "^Date:"
+color quoted                   #81A1C1 default
+color quoted1                  #81A1C1 default
+color quoted2                  #B48EAD default
+color quoted3                  #5E81AC default
+color body                     #88C0D0 default "(https?|ftp)://[^[:space:]<>]+"
+color body                     #B48EAD default "[[:alnum:]._%+-]+@[[:alnum:].-]+\\.[[:alpha:]]{2,}"
+
+# Compose screen
+color compose_header           bold #88C0D0 default
+color compose_security_none    #4C566A default
+color compose_security_sign    #B48EAD default
+color compose_security_encrypt #81A1C1 default
+color compose_security_both    bold #81A1C1 default
+

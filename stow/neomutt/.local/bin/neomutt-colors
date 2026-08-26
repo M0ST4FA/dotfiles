@@ -1,0 +1,14 @@
+#!/bin/sh
+# Emit a NeoMutt colour file suited to the terminal that started NeoMutt.
+
+case "${TERM:-}" in
+  xterm-direct*)
+    # This must precede every direct-colour command.
+    printf '%s\n' 'set color_directcolor = yes'
+    cat "$HOME/.config/neomutt/colors-nord-truecolor.rc"
+    ;;
+  *)
+    printf '%s\n' 'set color_directcolor = no'
+    cat "$HOME/.config/neomutt/colors-nord.rc"
+    ;;
+esac

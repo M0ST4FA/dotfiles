@@ -2,7 +2,7 @@
 Type=Application
 Name=NeoMutt
 Comment=Terminal email client
-Exec=kitty --class neomutt -e neomutt %u
+Exec=kitty --class neomutt -e /home/m0st4fa/.local/bin/neomutt %u
 Icon=mail-unread-symbolic
 Terminal=false
 Categories=Network;Email;

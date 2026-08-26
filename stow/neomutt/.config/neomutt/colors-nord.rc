@@ -1,64 +1,66 @@
-# Nord palette mapped to portable xterm-256 colours.
-color normal                   color254 color237
-color tilde                    color240 color237
-color status                   color255 color238
-color indicator                bold color237 color110
-color tree                     color109 color237
-color message                  color144 color237
-color warning                  color186 color237
-color error                    bold color255 color131
-color prompt                   bold color110 color237
-color options                  bold color186 color237
-color progress                 color237 color109
-color markers                  color186 color237
-color search                   color237 color186
-color attachment               bold color110 color237
-color bold                     bold color255 color237
-color underline                underline color109 color237
-color signature                color240 color237
+# Portable Nord theme using the terminal's ANSI palette.
+# Foot, Kitty and WezTerm all define slots 0-15 as Nord. `default` preserves
+# each terminal's configured background colour and transparency.
+color normal                   default default
+color tilde                    color8 default
+color status                   color15 color0
+color indicator                bold color0 color6
+color tree                     color4 default
+color message                  color5 default
+color warning                  color3 default
+color error                    bold color15 color1
+color prompt                   bold color6 default
+color options                  bold color3 default
+color progress                 color0 color4
+color markers                  color3 default
+color search                   color0 color3
+color attachment               bold color6 default
+color bold                     bold color15 default
+color underline                underline color4 default
+color signature                color8 default
 
 # Sidebar
-color sidebar_background       color254 color237
-color sidebar_divider          color239 color237
-color sidebar_ordinary         color254 color237
-color sidebar_spool_file       bold color109 color237
-color sidebar_new              bold color110 color237
-color sidebar_unread           color109 color237
-color sidebar_flagged          bold color186 color237
-color sidebar_highlight        color255 color239
-color sidebar_indicator        bold color237 color110
+color sidebar_background       default default
+color sidebar_divider          color8 default
+color sidebar_ordinary         default default
+color sidebar_spool_file       bold color4 default
+color sidebar_new              bold color6 default
+color sidebar_unread           color4 default
+color sidebar_flagged          bold color3 default
+color sidebar_highlight        color15 color0
+color sidebar_indicator        bold color0 color6
 
 # Message index
-color index                    color254 color237 "~A"
-color index                    color240 color237 "~R"
-color index                    bold color255 color237 "~N"
-color index                    bold color110 color237 "~U"
-color index                    color144 color237 "~Q"
-color index                    bold color186 color237 "~F"
-color index                    color139 color237 "~T"
-color index                    color131 color237 "~D"
-color index_author             color109 color237
-color index_date               color240 color237
-color index_flags              color109 color237
-color index_number             color67 color237
-color index_subject            color254 color237
-color index_collapsed          color139 color237
+color index                    default default "~A"
+color index                    color8 default "~R"
+color index                    bold color15 default "~N"
+color index                    bold color6 default "~U"
+color index                    color5 default "~Q"
+color index                    bold color3 default "~F"
+color index                    color5 default "~T"
+color index                    color1 default "~D"
+color index_author             color4 default
+color index_date               color8 default
+color index_flags              color4 default
+color index_number             color12 default
+color index_subject            default default
+color index_collapsed          color5 default
 
 # Pager headers and message body
-color hdrdefault               color109 color237
-color header                   bold color109 color237 "^(From|To|Cc|Bcc):"
-color header                   bold color255 color237 "^Subject:"
-color header                   color240 color237 "^Date:"
-color quoted                   color109 color237
-color quoted1                  color109 color237
-color quoted2                  color139 color237
-color quoted3                  color67 color237
-color body                     color110 color237 "(https?|ftp)://[^[:space:]<>]+"
-color body                     color139 color237 "[[:alnum:]._%+-]+@[[:alnum:].-]+\\.[[:alpha:]]{2,}"
+color hdrdefault               color4 default
+color header                   bold color4 default "^(From|To|Cc|Bcc):"
+color header                   bold color15 default "^Subject:"
+color header                   color8 default "^Date:"
+color quoted                   color4 default
+color quoted1                  color4 default
+color quoted2                  color5 default
+color quoted3                  color12 default
+color body                     color6 default "(https?|ftp)://[^[:space:]<>]+"
+color body                     color5 default "[[:alnum:]._%+-]+@[[:alnum:].-]+\\.[[:alpha:]]{2,}"
 
 # Compose screen
-color compose_header           bold color110 color237
-color compose_security_none    color240 color237
-color compose_security_sign    color144 color237
-color compose_security_encrypt color109 color237
-color compose_security_both    bold color109 color237
+color compose_header           bold color6 default
+color compose_security_none    color8 default
+color compose_security_sign    color5 default
+color compose_security_encrypt color4 default
+color compose_security_both    bold color4 default
