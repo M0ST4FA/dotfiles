@@ -1,6 +1,8 @@
 core:
   - base
   - base-devel
+  - cmake
+  - cmake-extras
   - linux
   - linux-firmware
   - linux-headers
@@ -16,6 +18,7 @@ core:
   - neovim
   - libvirt
   - openai-codex
+  - antigravity-cli
   - typescript
 
   - kmscon
@@ -37,6 +40,7 @@ core:
   - unzip
   - ripgrep
   - libqalculate
+  - ncdu
 
   - networkmanager
   - iwd

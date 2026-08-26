@@ -1,27 +1,27 @@
 [[plugin.deps]]
 use = "boydaihungst/mediainfo"
-rev = "6fbed8d"
-hash = "57ae6b43c477e117802f176683b78e74"
+rev = "73a3658"
+hash = "884c3d74866db9c7831844f19359e106"
 
 [[plugin.deps]]
 use = "AnirudhG07/rich-preview"
-rev = "7d616ad"
-hash = "d64feec9761392cbc250d199ab4b8a3a"
+rev = "02597c4"
+hash = "33982a6e2d6df07619a2a0fc163a0950"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "1962818"
-hash = "6fa6a05a81c98dd000fbca3cca6e9682"
+rev = "044c3cc"
+hash = "f281261ff04ad7ec867c3f802a50835f"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "1962818"
-hash = "26db011a778f261d730d4f5f8bf24b3f"
+rev = "044c3cc"
+hash = "5bb0bfab901d3601c370eafdd66edd31"
 
 [[flavor.deps]]
 use = "AdithyanA2005/nord"
-rev = "bdf0bd4"
-hash = "816970e00d643d3e8213b430d2148aec"
+rev = "34970be"
+hash = "6e1d257f00b540acbeb194082ce073c2"
 
 [[flavor.deps]]
 use = "dangooddd/kanagawa"

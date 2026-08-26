@@ -30,7 +30,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = { title = "btop" },
+	match = { title = "btop|Telegram" },
 	workspace = "4 silent",
 })
 

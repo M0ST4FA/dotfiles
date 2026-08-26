@@ -32,7 +32,9 @@ desktop:
   - firefox
   - discord
   - obsidian
+  - telegram-desktop-bin # Statically-compiled. I've had so many problems with the dynamic one.
   - mpd
   - polychromatic
   - zathura
   - zathura-pdf-mupdf
+  - rnote
