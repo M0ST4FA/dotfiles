@@ -25,8 +25,12 @@ prepend_previewers = [
 ]
 
 [[plugin.prepend_fetchers]]
-id   = "git"
 url  = "*"
+run  = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+url  = "*/"
 run  = "git"
 group = "git"
 

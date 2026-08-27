@@ -1,6 +1,11 @@
 packages_virtualization:
+  - qemu-base
   - libvirt
   - docker
   - docker-compose
   - waydroid
 
+package_feature_sets_virtualization:
+  qemu:
+    - qemu-ui-gtk
+    - qemu-audio-pipewire

@@ -3,11 +3,10 @@ packages_documents:
   - rnote
 
   - zathura
-  - zathura-pdf-mupdf
 
   - tesseract-data-eng
   - tesseract-data-ara
 
-  - perl-image-exiftool
-  - perl-archive-zip
-  - perl-io-compress-brotli
+package_feature_sets_documents:
+  zathura:
+    - zathura-pdf-mupdf

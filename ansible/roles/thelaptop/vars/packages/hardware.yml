@@ -1,11 +1,15 @@
 packages_hardware:
   - linux-firmware
   - intel-ucode
+  - nvidia-open
+
   - brightnessctl
   - switcheroo-control
   - supergfxctl
+
   - bluez
   - bluez-utils
+
   - tlp
   - polychromatic
   - android-udev

@@ -4,8 +4,6 @@ packages_terminal:
   - foot
 
   - zsh
-  - zsh-autosuggestions
-  - zsh-syntax-highlighting
 
   - zoxide
   - eza
@@ -23,3 +21,22 @@ packages_terminal:
   - ripgrep
   - libqalculate
   - ncdu
+  - yt-dlp
+
+package_feature_sets_terminal:
+  zsh:
+    - zsh-autosuggestions
+    - zsh-syntax-highlighting
+  yt_dlp:
+    - python-brotli
+    - python-xattr
+    - python-secretstorage
+    - python-pycryptodomex
+    - python-websockets
+    - python-curl_cffi
+    - python-mutagen
+    - atomicparsley
+  yazi:
+    - perl-image-exiftool
+    - perl-archive-zip
+    - perl-io-compress-brotli
