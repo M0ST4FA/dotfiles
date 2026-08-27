@@ -1,5 +1,6 @@
 -- local ipc = "qs -c noctalia-shell ipc call"
 local ipc = "noctalia msg "
+local screenshot_cmd = os.getenv("HOME") .. "/.local/bin/screenshot "
 
 local vars = {
 	terminal = "kitty",
@@ -7,16 +8,6 @@ local vars = {
 	browser = "firefox",
 	fileManager = "kitty -f yazi",
 	readingApp = "zathura",
-
-	-- menu = ipc .. " launcher toggle",
-	-- clipboardMenu = ipc .. " launcher clipboard",
-	-- emojiPicker = ipc .. " launcher emoji",
-	--
-	-- toggleBar = ipc .. " bar toggle",
-	-- toggleNotification = ipc .. " notifications toggleHistory",
-	-- toggleDashboard = ipc .. " controlCenter toggle",
-	-- togglePowerMenu = ipc .. " sessionMenu toggle",
-	-- toggleSettings = ipc .. " settings toggle",
 
 	menu = ipc .. "panel-toggle launcher",
 	clipboardMenu = ipc .. "panel-toggle clipboard",
@@ -28,16 +19,15 @@ local vars = {
 	togglePowerMenu = ipc .. "panel-toggle session",
 	toggleSettings = ipc .. "settings-toggle",
 
-	-- shell = "qs -c noctalia-shell --no-duplicate",
 	shell = "noctalia",
 	storePastedText = "wl-paste --type text --watch cliphist store",
 	storePastedImage = "wl-paste --type image --watch cliphist store",
 	lockScreen = "hyprlock",
 
-	screenshot = "grimblast --notify copysave output",
-	areaScreenshot = "grimblast --notify copysave area",
-	editScreenshot = "grimblast --notify edit output",
-	activeScreenshot = "grimblast --notify copysave active",
+	screenshot = screenshot_cmd .. "output",
+	areaScreenshot = screenshot_cmd .. "area",
+	activeScreenshot = screenshot_cmd .. "active",
+	editScreenshot = screenshot_cmd .. "edit",
 }
 
 return vars

@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+mode="${1:-}"
+pictures_dir="$HOME/Pictures"
+screenshots_dir="$pictures_dir/Screenshots"
+
+mkdir -p "$screenshots_dir"
+
+timestamp="$(date '+%Y-%m-%d_%H-%M-%S')"
+file="$screenshots_dir/Screenshot_$timestamp.png"
+
+require() {
+	command -v "$1" >/dev/null || { printf 'screenshot: missing dependency: %s\n' "$1" >&2; exit 1; }
+}
+
+select_area() {
+	slurp \
+		-b '#2E3440cc' \
+  		-c '#88C0D0ff' \
+  		-s '#5E81ACcc' \
+		-w 2
+}
+
+notify_saved() {
+	notify-send \
+		--app-name="Screenshot" \
+		--icon="$file" \
+		--expire-time=3000 \
+		"Screenshot saved" \
+		"$(basename "$file") — copied to clipboard" \
+		>/dev/null 2>&1 || true
+}
+
+capture() {
+	case "$1" in
+		output)
+			local output
+			output="$(hyprctl monitors -j | jq -er '.[] | select(.focused) | .name')"
+			grim -o "$output" "$file"
+			;;
+		
+		area)
+			local geometry
+			geometry="$(select_area)" || exit 0
+			grim -g "$geometry" "$file"
+			;;
+
+		active)
+			local geometry
+			geometry="$(hyprctl activewindow -j | jq -er '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')"
+			grim -g "$geometry" "$file"
+			;;
+
+		*)
+			printf 'screenshot: unknown capture mode: %s\n' "$1" >&2
+			exit 2
+			;;
+	esac
+}
+
+require grim
+require slurp
+require wl-copy
+require hyprctl
+require jq
+
+case "$mode" in
+	output | area | active)
+		capture "$mode"
+		wl-copy --type image/png < "$file"
+		notify_saved
+		printf '%s\n' "$file"
+		;;
+
+	edit)
+		require satty
+
+		geometry="$(select_area)" || exit 0
+
+		# PPM is lossless so there's no unecessary PNG encode/decode before editing.
+		# Satty saves the final annotated image as PNG
+		grim -g "$geometry" -t ppm - |
+			satty \
+				--filename - \
+				--fullscreen \
+				--output-filename "$file" \
+				--initial-tool arrow \
+				--copy-command wl-copy \
+				--actions-on-enter 'save-to-file,save-to-clipboard,exit' \
+				--actions-on-escape 'exit'
+		if [[ -s "$file" ]]; then
+			notify_saved
+			printf '%s\n' "$file"
+		fi
+		;;
+
+	*)
+		printf 'Usage: screenshot {output|area|active|edit}\n' >&2
+		exit 2
+		;;
+esac

@@ -6,10 +6,15 @@ packages_desktop_session:
   - hyprpolkitagent
   - greetd-tuigreet
   - noctalia
+
   - wl-clipboard
   - cliphist
+  - libnotify
+
   - grim
   - slurp
-  - xdg-desktop-portal-hyprland
-  - xdg-desktop-portal-wlr
+  - satty
 
+  - xdg-desktop-portal-hyprland
+  - xdg-desktop-portal-gtk
+  - gnome-keyring

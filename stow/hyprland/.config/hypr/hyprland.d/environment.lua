@@ -2,7 +2,6 @@ hl.env("AQ_DRM_DEVICES", "/dev/dri/igpu:/dev/dri/dgpu")
 hl.env("HYPRCURSOR_SIZE", "32")
 hl.env("SSH_AUTH_SOCK", "/run/user/1000/ssh-agent.socket")
 
-hl.env("GRIMBLAST_EDITOR", "satty --filename")
 hl.env("XWAYLAND_SCALE", "1")
 
 hl.env("OZONE_PLATFORM", "wayland")

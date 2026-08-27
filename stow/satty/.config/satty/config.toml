@@ -13,13 +13,28 @@ disable-notifications = false
 [font]
 family = "JetBrainsMono Nerd Font"
 
-#
-# [colors]
-# background = "#2E3440"  # nord0
-# foreground = "#D8DEE9"  # nord4
-# primary = "#88C0D0"     # nord8
-# secondary = "#81A1C1"   # nord9
-# accent = "#5E81AC"      # nord10
-# error = "#BF616A"       # nord11
-# warning = "#EBCB8B"     # nord13
-# success = "#A3BE8C"     # nord14
+[color-palette]
+# Nord colours for annotations.  Keys 1–9 select these in order.
+palette = [
+  "#88C0D0ff", # frost cyan
+  "#81A1C1ff", # frost blue
+  "#5E81ACff", # frost deep blue
+  "#A3BE8Cff", # green
+  "#EBCB8Bff", # yellow
+  "#D08770ff", # orange
+  "#BF616Aff", # red
+  "#B48EADff", # purple
+  "#ECEFF4ff", # snow
+]
+
+# Keep Nord colours readily available in Satty's colour picker too.
+custom = [
+  "#88C0D0",
+  "#81A1C1",
+  "#5E81AC",
+  "#A3BE8C",
+  "#EBCB8B",
+  "#D08770",
+  "#BF616A",
+  "#B48EAD",
+]

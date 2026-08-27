@@ -3,10 +3,12 @@ packages_appearance:
   - kvantum
   - nwg-look
   - plymouth
+
   - papirus-icon-theme
   - colloid-nord-gtk-theme-git
   - figlet
   - go-rainbow-git
+
   - ttf-recursive-nerd
   - noto-fonts
   - noto-fonts-cjk
@@ -17,4 +19,3 @@ packages_appearance:
   - ttf-jetbrains-mono-nerd
   - terminus-font
   - ttf-dejavu
-

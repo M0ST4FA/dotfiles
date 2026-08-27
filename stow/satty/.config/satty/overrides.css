@@ -1,0 +1,36 @@
+/* Nord surfaces for Satty's toolbars and controls. */
+@define-color nord0 #2E3440;
+@define-color nord1 #3B4252;
+@define-color nord2 #434C5E;
+@define-color nord4 #D8DEE9;
+@define-color nord8 #88C0D0;
+@define-color nord9 #81A1C1;
+
+.outer_box,
+.toolbar {
+  color: @nord4;
+  background-color: #2E3440e6;
+}
+
+.toolbar {
+  border-color: @nord2;
+}
+
+.toolbar button,
+.toolbar entry,
+.toolbar spinbutton {
+  color: @nord4;
+  background-color: @nord1;
+  border-color: @nord2;
+}
+
+.toolbar button:hover {
+  color: @nord0;
+  background-color: @nord8;
+}
+
+.toolbar button:checked,
+.toolbar button:active {
+  color: @nord0;
+  background-color: @nord9;
+}
