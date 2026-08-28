@@ -4,6 +4,7 @@ packages_terminal:
   - foot
 
   - zsh
+  - bash-completion
 
   - zoxide
   - eza
@@ -22,6 +23,8 @@ packages_terminal:
   - libqalculate
   - ncdu
   - yt-dlp
+  - taskwarrior
+  - tldr
 
 package_feature_sets_terminal:
   zsh:

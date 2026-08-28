@@ -10,8 +10,12 @@ packages_development:
   - openai-codex
   - antigravity-cli
 
+  # Languages & Frameworks
   - typescript
-
   - android-cli
   - jdk17-openjdk
   - fvm
+
+  # Libraries
+  - cglm
+  - glm

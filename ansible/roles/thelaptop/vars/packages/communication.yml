@@ -3,6 +3,8 @@ packages_communication:
   - discord
   - telegram-desktop-bin # Statically compiled; the dynamic package has caused problems.
   - neomutt
-  - w3m
-  - urlscan
 
+package_feature_sets_communication:
+  neomutt:
+    - w3m
+    - urlscan

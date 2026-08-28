@@ -1,6 +1,3 @@
 [flavor]
-light = "kanagawa"
-dark  = "kanagawa"
-
-[mgr]
-border_style = { fg = "#54546d" }
+light = "nord"
+dark = "nord"
