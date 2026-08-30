@@ -31,7 +31,7 @@ alias flutter="fvm flutter"
 
 alias gdb="gdb -q"
 
-alias man="batman"
+# alias man="batman"
 alias diff="batdiff"
 
 alias f="yazi"

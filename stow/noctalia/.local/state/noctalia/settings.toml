@@ -124,10 +124,15 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
 [nightlight]
 enabled = true
 
+[notification]
+history_retention_hours = 6
+layer = "overlay"
+
 [plugins]
 enabled = [ "noctalia/bongocat" ]
 
 [shell]
+clipboard_auto_paste = "off"
 font_family = "RecMonoCasual Nerd Font"
 screen_time_enabled = true
 telemetry_enabled = true
@@ -157,13 +162,13 @@ transition_on_startup = true
     recursive = false
 
     [wallpaper.default]
-    path = "/usr/share/wallpapers/Favorites/windows-panic.png"
+    path = "/usr/share/wallpapers/Favorites/nixos.png"
 
     [wallpaper.last]
-    path = "/usr/share/wallpapers/Favorites/windows-panic.png"
+    path = "/usr/share/wallpapers/Favorites/nixos.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/usr/share/wallpapers/Favorites/windows-panic.png"
+    path = "/usr/share/wallpapers/Favorites/nixos.png"
 
 [widget.clock]
 format = "{:%b %d, %I:%M %p}"

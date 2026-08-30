@@ -26,6 +26,10 @@
     - fastfetch
     - btop
 
+    - taskwarrior
+    - taskwarrior-tui
+    - timewarrior
+
     - wireshark
 
     - kvantum

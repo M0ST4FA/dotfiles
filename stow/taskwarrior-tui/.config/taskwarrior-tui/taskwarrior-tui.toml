@@ -1,0 +1,28 @@
+[style]
+# Main Surface & Text
+bg = "#3b4252"                   # groupBorderColorInactive2 (Nord1)
+fg = "#d8dee9"                   # borderColor2 (Nord6 Snow)
+
+# Focus & Active Panes
+border_fg = "#88c0d0"            # borderColor1 / leaderBorderColor1 (Nord8 Cyan)
+header_fg = "#81a1c1"            # groupIndicatorColor (Nord9 Frost Blue)
+
+# Selection Highlight
+highlight_bg = "#434c5e"        # groupBorderColorInactive1 (Nord2)
+highlight_fg = "#d8dee9"        # borderColor2
+
+# Status & Command Bar
+command_bg = "#434c5e"
+command_fg = "#d8dee9"
+
+# Task State Accents
+active_fg = "#8fbcbb"           # groupBorderColor1 (Nord7 Frost Teal)
+pending_fg = "#81a1c1"          # groupIndicatorColor
+due_fg = "#5e81ac"              # groupBorderColor2 (Nord10 Dark Blue)
+completed_fg = "#4c566a"        # groupIndicatorColorInactive (Nord3 Muted)
+deleted_fg = "#bf616a"          # Nord Red
+
+[layout]
+padding = 1
+show_line_numbers = false
+show_motion = true
