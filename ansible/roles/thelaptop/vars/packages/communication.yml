@@ -8,3 +8,6 @@ package_feature_sets_communication:
   neomutt:
     - w3m
     - urlscan
+    - isync
+    - notmuch
+    - msmtp

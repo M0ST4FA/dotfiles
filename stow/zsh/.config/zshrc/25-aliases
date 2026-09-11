@@ -22,7 +22,7 @@ export WS=/home/m0st4fa/workspace
 alias w="cd $WS"
 alias wl="cd $WS/learning"
 alias wp="cd $WS/projects"
-alias wx="cd $WS/experiments"
+alias wx="cd $WS/labs"
 alias wk="cd $WS/kernel"
 alias ..='cd ..'
 unalias zi
@@ -37,3 +37,5 @@ alias diff="batdiff"
 alias f="yazi"
 
 alias getmusic="yt-dlp -x --audio-format opus --embed-metadata --embed-thumbnail --remux-video opus"
+
+alias ssh="kitten ssh"

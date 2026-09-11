@@ -71,13 +71,16 @@ bindkey '\e^?' tcsh-backward-delete-word
 # History and completion
 # -----------------------------------------------------
 # Completion setup
-autoload -Uz compinit
+autoload -Uz compinit bashcompinit
 
 if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
   compinit
 else
   compinit -C
 fi
+
+# Enable Bash-style completion scripts, including Codex's generated completion.
+bashcompinit
 
 # General Completion Styles
 zstyle ':completion:*' menu select

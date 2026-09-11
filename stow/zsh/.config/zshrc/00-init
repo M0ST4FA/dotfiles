@@ -31,6 +31,3 @@ PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
 # Haskell
 [ -f "/home/m0st4fa/.ghcup/env" ] && source "/home/m0st4fa/.ghcup/env" # ghcup-env
 
-# Vagrant
-export VAGRANT_DEFAULT_PROVIDER=libvirt
-export VAGRANT_HOME="$HOME/workspace/infra/vagrant"

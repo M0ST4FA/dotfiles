@@ -3,3 +3,4 @@ packages_media:
   - imv
   - pavucontrol
   - gimp
+  - imagemagick

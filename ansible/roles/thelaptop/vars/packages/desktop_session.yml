@@ -14,6 +14,7 @@ packages_desktop_session:
   - grim
   - slurp
   - satty
+  - wf-recorder
 
   - xdg-desktop-portal-hyprland
   - xdg-desktop-portal-gtk

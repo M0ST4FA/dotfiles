@@ -3,4 +3,4 @@ packages_networking:
   - iwd
   - chrony
   - reflector
-
+  - bind

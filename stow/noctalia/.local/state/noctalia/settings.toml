@@ -1,4 +1,4 @@
-config_version = 13
+config_version = 14
 
 [bar.default]
 border_width = 1.5
@@ -81,6 +81,25 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
         show_events = false
         show_week_numbers = false
 
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+pre_action_fade_seconds = 5
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = false
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 2700.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
 [location]
 auto_locate = true
 
@@ -162,13 +181,13 @@ transition_on_startup = true
     recursive = false
 
     [wallpaper.default]
-    path = "/usr/share/wallpapers/Favorites/nixos.png"
+    path = "/usr/share/wallpapers/Favorites/ign_chomusuke.png"
 
     [wallpaper.last]
-    path = "/usr/share/wallpapers/Favorites/nixos.png"
+    path = "/usr/share/wallpapers/Favorites/ign_chomusuke.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/usr/share/wallpapers/Favorites/nixos.png"
+    path = "/usr/share/wallpapers/Favorites/ign_chomusuke.png"
 
 [widget.clock]
 format = "{:%b %d, %I:%M %p}"

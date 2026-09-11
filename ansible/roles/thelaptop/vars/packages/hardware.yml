@@ -13,3 +13,8 @@ packages_hardware:
   - tlp
   - polychromatic
   - android-udev
+
+  - intel-media-driver
+  - libva-utils
+
+  - nvme-cli

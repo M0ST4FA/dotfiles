@@ -68,10 +68,11 @@ and are intentionally not stored here.
 
 ## Private and stateful data
 
-NeoMutt reads its password from
-`~/.config/neomutt/credentials.rc`. Restore that file separately with mode
-`0600`; it must contain the private `set imap_pass = ...` setting and must
-never be committed.
+NeoMutt credentials are stored in GNOME Keyring and retrieved with
+`secret-tool`; no password file belongs in this repository. See the
+[local-first mail migration tutorial](docs/neomutt-local-first/README.md) for
+the credential attributes, bounded Maildir mirror, offline submission queue,
+and Notmuch setup.
 
 The following are backup/restore data, not Stow packages:
 

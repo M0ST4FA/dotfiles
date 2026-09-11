@@ -10,6 +10,7 @@ local conf_dir = os.getenv("HOME") .. "/.config/hypr/hyprland.d/"
 package.path = package.path .. ";" .. conf_dir .. "?.lua"
 
 require("environment")
+require("permissions")
 require("autostart")
 require("keybinds")
 require("windowrules")

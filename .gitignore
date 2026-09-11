@@ -17,6 +17,7 @@ stow/**/.local/share/applications/mimeinfo.cache
 stow/mame/.mame/nvram/
 stow/mame/.mame/snap/
 stow/mame/.mame/sta/
+docs*/
 
 # Noctalia v5 keeps mutable state and downloaded plugins beside its settings.
 stow/noctalia/.local/state/noctalia/*

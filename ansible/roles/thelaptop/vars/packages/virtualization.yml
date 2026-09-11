@@ -2,6 +2,7 @@ packages_virtualization:
   - qemu-base
   - libvirt
   - docker
+  - podman
   - docker-compose
   - waydroid
 

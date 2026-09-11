@@ -4,36 +4,47 @@ packages_terminal:
   - foot
 
   - zsh
-  - bash-completion
 
   - zip
   - unzip
   - 7zip
 
+  - libqalculate
+  - taskwarrior
+  - timewarrior
+
   - zoxide
   - eza
   - fd
-  - fzf
+  - yazi
+
   - bat
   - bat-extras
+  - tree
+
   - man-db
+  - tldr
+
   - btop
   - htop
-  - yazi
+
   - jq
+  - ripgrep
+  - fzf
+  - ncdu
+  - pet-bin
+
   - rsync
   - wget
-  - ripgrep
-  - libqalculate
-  - ncdu
   - yt-dlp
-  - taskwarrior
-  - tldr
 
 package_feature_sets_terminal:
   zsh:
+    - bash-completion
     - zsh-autosuggestions
     - zsh-syntax-highlighting
+    - zsh-completions
+    - zsh-lovers
   yt_dlp:
     - python-brotli
     - python-xattr
@@ -47,3 +58,4 @@ package_feature_sets_terminal:
     - perl-image-exiftool
     - perl-archive-zip
     - perl-io-compress-brotli
+    - mediainfo

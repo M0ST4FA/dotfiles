@@ -4,6 +4,8 @@ packages_documents:
 
   - zathura
 
+  - libreoffice-fresh
+
   - tesseract-data-eng
   - tesseract-data-ara
 
