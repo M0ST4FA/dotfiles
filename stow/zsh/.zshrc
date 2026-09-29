@@ -36,3 +36,7 @@ if [[ ! -f ~/.last_zsh_run ]] || [[ "$(cat ~/.last_zsh_run)" != "$(date +%Y-%m-%
 
   date +%Y-%m-%d > ~/.last_zsh_run
 fi
+
+# >>> Codex installer >>>
+export PATH="/home/m0st4fa/.local/bin:$PATH"
+# <<< Codex installer <<<

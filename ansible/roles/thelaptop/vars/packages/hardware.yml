@@ -2,6 +2,7 @@ packages_hardware:
   - linux-firmware
   - intel-ucode
   - nvidia-open
+  - vulkan-intel
 
   - brightnessctl
   - switcheroo-control

@@ -18,7 +18,7 @@ start = [ "control-center", "clock", "media" ]
     enabled = true
     fill = "surface_variant"
     id = "g1"
-    members = [ "tray", "notifications" ]
+    members = [ "tray", "notifications", "volume" ]
     opacity = 1.0
     padding = 6.0
 
@@ -38,7 +38,7 @@ start = [ "control-center", "clock", "media" ]
     enabled = true
     fill = "surface_variant"
     id = "g3"
-    members = [ "volume", "brightness" ]
+    members = [ "brightness", "battery" ]
     opacity = 1.0
     padding = 6.0
 
@@ -80,6 +80,9 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
         [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
         show_events = false
         show_week_numbers = false
+
+[dock]
+smart_auto_hide = true
 
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
@@ -181,19 +184,22 @@ transition_on_startup = true
     recursive = false
 
     [wallpaper.default]
-    path = "/usr/share/wallpapers/Favorites/ign_chomusuke.png"
+    path = "/usr/share/wallpapers/Favorites/ign_soupKong.png"
 
     [wallpaper.last]
-    path = "/usr/share/wallpapers/Favorites/ign_chomusuke.png"
+    path = "/usr/share/wallpapers/Favorites/ign_soupKong.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/usr/share/wallpapers/Favorites/ign_chomusuke.png"
+    path = "/usr/share/wallpapers/Favorites/ign_soupKong.png"
 
 [widget.clock]
 format = "{:%b %d, %I:%M %p}"
 
 [widget.control-center]
 glyph = "navigation-filled"
+
+[widget.media]
+hide_when_no_media = true
 
 [widget.workspaces]
 anchor = true

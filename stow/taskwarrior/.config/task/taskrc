@@ -20,3 +20,4 @@ include default.theme
 #include solarized-dark-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
+urgency.user.project.work.coefficient=2.9

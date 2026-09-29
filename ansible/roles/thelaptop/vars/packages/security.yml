@@ -1,9 +1,9 @@
 packages_security:
-  - ghidra
+  # - ghidra
   - radare2
-  - iaito
-  - pwndbg
-  - checksec
+  # - iaito
+  # - pwndbg
+  # - checksec
 
   - bettercap
   - wireshark-qt

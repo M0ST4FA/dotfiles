@@ -25,7 +25,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = { class = "qemu|mame|Waydroid|blender" },
+	match = { class = "qemu|mame|Waydroid|blender|com.freerdp.client.sdl3" },
 	workspace = "3 silent",
 })
 

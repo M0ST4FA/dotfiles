@@ -8,6 +8,7 @@ hl.config({
 		animate_mouse_windowdragging = true,
 		animate_manual_resizes = true,
 		enable_swallow = false,
+		vrr = 3,
 		-- swallow_regex = ".*"
 	},
 	ecosystem = {

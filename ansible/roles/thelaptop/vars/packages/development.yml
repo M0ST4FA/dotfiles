@@ -23,3 +23,8 @@ packages_development:
   - glm
 
   - freerdp
+
+package_feature_sets_developemnt:
+  neovim:
+    - tree-sitter
+    - tree-sitter-cli

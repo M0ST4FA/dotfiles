@@ -51,6 +51,7 @@ return {
 				"haskell",
 				"yaml",
 				"markdown",
+				"gdscript",
 			},
 		},
 		config = function(_, opts)

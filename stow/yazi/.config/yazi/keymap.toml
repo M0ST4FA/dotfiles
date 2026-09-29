@@ -1,0 +1,14 @@
+[[mgr.prepend_keymap]]
+on   = [ "g", "w" ]
+run  = "cd ~/workspace/"
+desc = "Go to Workspace"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "m" ]
+run  = "cd ~/workspace/medicine/"
+desc = "Go to Medicine"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "v" ]
+run  = "cd ~/Videos/"
+desc = "Go to Videos"
