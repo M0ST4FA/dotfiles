@@ -8,6 +8,11 @@ if [ "${1:-}" = --online ]; then
   set -- -F "$HOME/.config/neomutt/online/neomuttrc" "$@"
 fi
 
+# Desktop launchers do not necessarily inherit the shell's user-bin PATH.
+# All mail helpers must also be discoverable by NeoMutt's shell commands.
+PATH="$HOME/.local/bin:${PATH:-/usr/local/bin:/usr/bin:/bin}"
+export PATH
+
 umask 077
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/mail-sync"
 mkdir -p "$state_dir"

@@ -219,7 +219,9 @@ for future sessions, use `systemctl --user disable mail-sync.timer`. Queued subm
 can still trigger the delivery service; stop that service separately when investigating
 an uncertain SMTP outcome.
 
-The NeoMutt launcher disables terminal Ctrl-S/Ctrl-Q flow control for the client
+The NeoMutt launcher adds `~/.local/bin` to its PATH so desktop-launched sessions
+can find mail helpers without inheriting an interactive shell's environment. It
+also disables terminal Ctrl-S/Ctrl-Q flow control for the client
 session and restores the previous terminal settings on exit. This lets Ctrl-S reach
 the synchronization macro. If an older session freezes after Ctrl-S, press Ctrl-Q,
 then close and reopen NeoMutt. Manual synchronization runs in the foreground and
