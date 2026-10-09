@@ -1,0 +1,207 @@
+#!/usr/bin/env python3
+"""Private, durable offline SMTP queue. Interrupted deliveries require explicit retry."""
+import fcntl
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+import uuid
+
+ACCOUNTS = ('nerdio-infra', 'nerdio-support', 'nerdio-mostafa', 'gmail-mostafa')
+ROOT = Path(os.getenv('XDG_STATE_HOME', str(Path.home()/'.local/state')))/'mail-queue'
+MAIL = Path(os.getenv('XDG_DATA_HOME', str(Path.home()/'.local/share')))/'mail'
+
+
+def checked_account(account):
+    if account not in ACCOUNTS:
+        raise ValueError(f'unknown account: {account}')
+    return account
+
+
+def durable_directory(path):
+    descriptor = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def move(job, destination):
+    source = job.parent
+    target = destination/job.name
+    job.rename(target)
+    durable_directory(source)
+    durable_directory(destination)
+    return target
+
+
+def account_root(account):
+    root = ROOT/checked_account(account)
+    root.mkdir(parents=True, exist_ok=True, mode=0o700)
+    for directory in (ROOT, root):
+        directory.chmod(0o700)
+    for state in ('tmp', 'new', 'sending', 'held', 'delivered'):
+        (root/state).mkdir(exist_ok=True, mode=0o700)
+        (root/state).chmod(0o700)
+    return root
+
+
+def trigger():
+    try:
+        result = subprocess.run(['systemctl', '--user', 'start', '--no-block', 'mail-delivery.service'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=2)
+        if result.returncode == 0:
+            return
+    except (OSError, subprocess.TimeoutExpired):
+        pass
+    # Works in a terminal without an active user service manager as well.
+    with (ROOT/'worker.log').open('ab') as log:
+        subprocess.Popen([sys.executable, str(Path(__file__).resolve()), 'flush'], stdin=subprocess.DEVNULL, stdout=log, stderr=log, start_new_session=True, close_fds=True)
+
+
+def submit(account, arguments):
+    root = account_root(account)
+    job = Path(tempfile.mkdtemp(prefix=f'{time.time_ns()}-{uuid.uuid4().hex}-', dir=root/'tmp'))
+    try:
+        with (job/'message').open('wb') as output:
+            shutil.copyfileobj(sys.stdin.buffer, output)
+            output.flush()
+            os.fsync(output.fileno())
+        with (job/'arguments.json').open('w') as output:
+            json.dump(arguments, output)
+            output.flush()
+            os.fsync(output.fileno())
+        durable_directory(job)
+        move(job, root/'new')
+    except BaseException:
+        if job.exists():
+            shutil.rmtree(job)
+        raise
+    # Submission is successful once committed, even if the trigger fails.
+    try:
+        trigger()
+    except OSError as error:
+        print(f'mail-submit: queued; worker trigger failed: {error}', file=sys.stderr)
+
+
+def sent_copy(job, account):
+    if account == 'gmail-mostafa':
+        return
+    sent = MAIL/account/'Sent'
+    for part in ('tmp', 'new', 'cur'):
+        (sent/part).mkdir(parents=True, exist_ok=True, mode=0o700)
+    target = sent/'cur'/f'{job.name}:2,S'
+    if target.exists():
+        return
+    temporary = sent/'tmp'/job.name
+    with (job/'message').open('rb') as source, temporary.open('wb') as output:
+        shutil.copyfileobj(source, output)
+        output.flush()
+        os.fsync(output.fileno())
+    os.replace(temporary, target)
+    durable_directory(sent/'cur')
+
+
+def finish_delivery(job, account):
+    session = ROOT.parent/'mail-sync'
+    session.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with (session/'view.lock').open('a') as view:
+        fcntl.flock(view, fcntl.LOCK_SH)
+        sent_copy(job, account)
+    shutil.rmtree(job)
+    durable_directory(job.parent)
+
+
+def flush(accounts):
+    failed = False
+    for account in accounts:
+        root = account_root(account)
+        with (root/'.lock').open('a') as lock:
+            try:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                continue
+            # A crash may have occurred after SMTP accepted the message.
+            for job in sorted((root/'sending').iterdir()):
+                move(job, root/'held')
+                print(f'{account}: held {job.name}; SMTP outcome uncertain', file=sys.stderr)
+            # Confirmed jobs need only a Sent copy, never another SMTP attempt.
+            for job in sorted((root/'delivered').iterdir()):
+                try:
+                    finish_delivery(job, account)
+                except OSError as error:
+                    failed = True
+                    print(f'{account}: Sent copy pending: {error}', file=sys.stderr)
+            for pending in sorted((root/'new').iterdir()):
+                job = move(pending, root/'sending')
+                try:
+                    arguments = json.loads((job/'arguments.json').read_text())
+                    if not isinstance(arguments, list) or not all(isinstance(arg, str) for arg in arguments):
+                        raise ValueError('invalid recipient arguments')
+                    with (job/'message').open('rb') as message:
+                        result = subprocess.run(['msmtp', f'--account={account}', *arguments], stdin=message)
+                except (OSError, ValueError) as error:
+                    move(job, root/'held')
+                    print(f'{account}: held malformed/unavailable job: {error}', file=sys.stderr)
+                    failed = True
+                    break
+                if result.returncode != 0:
+                    move(job, root/'new')
+                    failed = True
+                    break
+                job = move(job, root/'delivered')
+                try:
+                    finish_delivery(job, account)
+                except OSError as error:
+                    print(f'{account}: delivered; Sent copy pending: {error}', file=sys.stderr)
+                    failed = True
+    return int(failed)
+
+
+def main():
+    os.umask(0o077)
+    name = Path(sys.argv[0]).name
+    arguments = sys.argv[1:]
+    if name == 'mail-submit':
+        if not arguments:
+            raise ValueError('usage: mail-submit ACCOUNT [SENDMAIL-ARGS...]')
+        submit(checked_account(arguments[0]), arguments[1:])
+        return 0
+    if name == 'mail-queue-flush':
+        if len(arguments) > 1:
+            raise ValueError('usage: mail-queue-flush [ACCOUNT]')
+        return flush([checked_account(arguments[0])] if arguments else ACCOUNTS)
+    if not arguments:
+        raise ValueError('usage: mail-queue status | retry ACCOUNT [JOB] | flush [ACCOUNT]')
+    command, *arguments = arguments
+    if command == 'flush' and len(arguments) <= 1:
+        return flush([checked_account(arguments[0])] if arguments else ACCOUNTS)
+    if command == 'status' and not arguments:
+        for account in ACCOUNTS:
+            root = ROOT/account
+            for state in ('new', 'sending', 'held', 'delivered'):
+                for job in sorted((root/state).glob('*')):
+                    print(f'{account}\t{state}\t{job.name}')
+        return 0
+    if command == 'retry' and len(arguments) in (1, 2):
+        root = account_root(arguments[0])
+        if len(arguments) == 2 and (Path(arguments[1]).name != arguments[1] or arguments[1] in ('.', '..')):
+            raise ValueError('JOB must be a queue job name')
+        with (root/'.lock').open('a') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            jobs = list((root/'held').iterdir()) if len(arguments) == 1 else [root/'held'/arguments[1]]
+            for job in jobs:
+                move(job, root/'new')
+        print('Held jobs released for retry. Run mail-queue-flush to deliver; duplicate delivery is possible.')
+        return 0
+    raise ValueError('usage: mail-queue status | retry ACCOUNT [JOB] | flush [ACCOUNT]')
+
+
+if __name__ == '__main__':
+    try:
+        raise SystemExit(main())
+    except (OSError, ValueError) as error:
+        raise SystemExit(f'mail-queue: {error}')

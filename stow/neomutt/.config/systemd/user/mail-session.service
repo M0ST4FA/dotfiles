@@ -1,0 +1,10 @@
+[Unit]
+Description=Tie the graphical mail session to the Wayland display lifetime
+Requires=graphical-session.target
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=%h/.local/bin/mail-session
+UMask=0077

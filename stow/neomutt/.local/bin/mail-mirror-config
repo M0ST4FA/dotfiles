@@ -1,0 +1,113 @@
+#!/usr/bin/env python3
+"""Build private per-folder mbsync limits for 100 ordinary messages plus protected mail."""
+import argparse
+import imaplib
+import os
+from pathlib import Path
+import re
+import shlex
+import subprocess
+import sys
+
+ACCOUNTS = ('nerdio-infra', 'nerdio-support', 'nerdio-mostafa', 'gmail-mostafa')
+
+
+def folder_limit(all_uids, ordinary_uids, limit=100):
+    ordinary = sorted(set(ordinary_uids))
+    if len(ordinary) < limit:
+        return max(1, len(all_uids))
+    cutoff = ordinary[-limit]
+    return sum(uid >= cutoff for uid in all_uids)
+
+
+def needs_history(local_ordinary_count, remote_ordinary_count):
+    return local_ordinary_count < min(100, remote_ordinary_count)
+
+
+def local_ordinary_count(path):
+    count = 0
+    for directory in ('cur', 'new'):
+        for message in (path/directory).glob('*'):
+            flags = message.name.partition(':2,')[2]
+            if message.is_file() and 'S' in flags and 'F' not in flags and 'T' not in flags:
+                count += 1
+    return count
+
+
+def search_uids(client, criteria):
+    status, data = client.uid('SEARCH', None, *criteria)
+    if status != 'OK':
+        raise ValueError('IMAP UID search failed')
+    return [int(uid) for uid in data[0].split()] if data and data[0] else []
+
+
+def generate(source, account):
+    # Retain account/store definitions and global safety options; expand only this channel.
+    definitions = source.split('\nGroup ', 1)[0]
+    pattern = r'(?m)^Channel ([\w-]+)\nFar [\s\S]*?(?=\n\n|\Z)'
+    channels = list(re.finditer(pattern, definitions))
+    selected = next(match for match in channels if match.group(1) == account)
+    block = selected.group(0)
+    account_block = re.search(r'(?m)^IMAPAccount '+re.escape(account)+r'\n([\s\S]*?)(?=\n\n|\Z)', source).group(1)
+    options = dict(line.split(None, 1) for line in account_block.splitlines() if line.strip() and not line.startswith('#'))
+    command = shlex.split(shlex.split(options['PassCmd'])[0])
+    command[0] = os.path.expanduser(command[0])
+    password = subprocess.run(command, check=True, capture_output=True, text=True).stdout.strip()
+    if not password:
+        raise ValueError('keyring returned no password')
+    client = imaplib.IMAP4_SSL(options['Host'], int(options.get('Port', 993)), timeout=30)
+    try:
+        client.login(options['User'], password)
+        folders = shlex.split(re.search(r'(?m)^Patterns (.+)$', block).group(1))
+        blocks = []
+        names = []
+        for index, folder in enumerate(folders):
+            # IMAP mailbox names containing spaces must be quoted on the wire.
+            quoted = '"'+folder.replace('\\', '\\\\').replace('"', '\\"')+'"'
+            status, _ = client.select(quoted, readonly=True)
+            if status != 'OK':
+                raise ValueError(f'cannot select mirrored folder {folder}')
+            all_uids = search_uids(client, ['ALL'])
+            ordinary = search_uids(client, ['SEEN', 'UNFLAGGED'])
+            quota = folder_limit(all_uids, ordinary)
+            name = f'{account}-{index}'
+            names.append(name)
+            expanded = block.rstrip().replace('Channel '+account+'\n', 'Channel '+name+'\n', 1)
+            expanded = re.sub(r'(?m)^Patterns .+$', 'Patterns "'+folder+'"', expanded)
+            expanded = re.sub(r'(?m)^MaxMessages \d+$', f'MaxMessages {quota}', expanded)
+            local_path = re.search(r'(?m)^MaildirStore '+re.escape(account)+r'-local\nPath (.+)$', source).group(1)
+            local = Path(os.path.expanduser(local_path))/folder
+            if needs_history(local_ordinary_count(local), len(ordinary)):
+                # Old restores history skipped by a smaller previous bound. Never push Old.
+                sync = re.search(r'(?m)^Sync (.+)$', block)
+                policy = sync.group(1) if sync else re.search(r'(?m)^Sync (.+)$', source).group(1)
+                if policy == 'Pull':
+                    expanded += '\nSync Pull New Old Gone Flags'
+                else:
+                    expanded += '\nSync New Gone Flags PullOld'
+            expanded += f'\n# Remote messages: {len(all_uids)}; ordinary: {len(ordinary)}; local ordinary: {local_ordinary_count(local)}'
+            blocks.append(expanded)
+        definitions = re.sub(pattern, '', definitions)
+        return definitions+'\n\n'+'\n\n'.join(blocks)+'\n\nGroup mail\n'+''.join('Channel '+name+'\n' for name in names)
+    finally:
+        try:
+            client.logout()
+        except (OSError, imaplib.IMAP4.error):
+            pass
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--account', required=True, choices=ACCOUNTS)
+    parser.add_argument('--config', type=Path, default=Path(os.getenv('XDG_CONFIG_HOME', str(Path.home()/'.config')))/'isync/mbsyncrc')
+    args = parser.parse_args()
+    try:
+        print(generate(args.config.read_text(), args.account), end='')
+    except (OSError, ValueError, imaplib.IMAP4.error, subprocess.CalledProcessError) as error:
+        print(f'mail-mirror-config: {args.account}: {error}', file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

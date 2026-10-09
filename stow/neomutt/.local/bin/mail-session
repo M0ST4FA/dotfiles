@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+"""Keep the systemd graphical mail session alive until its Wayland display closes."""
+import os
+from pathlib import Path
+import socket
+
+name = os.environ['WAYLAND_DISPLAY']
+address = Path(name) if name.startswith('/') else Path(os.environ['XDG_RUNTIME_DIR'])/name
+with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as display:
+    display.connect(str(address))
+    while display.recv(4096):
+        pass

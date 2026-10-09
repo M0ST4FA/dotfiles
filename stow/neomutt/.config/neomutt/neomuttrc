@@ -61,25 +61,28 @@ auto_view text/html
 alternative_order text/plain text/enriched text/html
 
 # Keep the pager focused on useful headers.
+set weed = yes
 ignore *
-unignore From To Cc Bcc Date Subject Reply-To Organization User-Agent X-Mailer
+unignore From To Cc Date Subject
 hdr_order From To Cc Date Subject
 
 # Accounts and account-switching hooks
-source ~/.config/neomutt/accounts/nerdio.rc
-source ~/.config/neomutt/accounts/gmail.rc
+source ~/.config/neomutt/accounts/local.rc
+source ~/.config/neomutt/notmuch.rc
 source ~/.config/neomutt/aliases.rc
 set alias_file = "~/.config/neomutt/aliases.rc"
 
 # Start in the infrastructure inbox.
 set real_name = "Nerdio Infrastructure"
 set from = "infra@nerdio.app"
-set folder = "imaps://infra@nerdio.app@mail.nerdio.app:993/"
+unset smtp_url record
+set mbox_type = Maildir
+set folder = "~/.local/share/mail/nerdio-infra"
 set spoolfile = "+INBOX"
 set postponed = "+Drafts"
-set record = "+Sent"
 set trash = "+Trash"
-set smtp_url = "smtps://infra@nerdio.app@mail.nerdio.app:465/"
+set sendmail = "~/.local/bin/mail-submit nerdio-infra"
+set sendmail_wait = 0
 
 # Navigation
 bind index,pager \CP sidebar-prev
@@ -91,7 +94,10 @@ bind pager k previous-line
 macro index,pager V "<enter-command>set pipe_decode=yes<enter><pipe-message>nvim -R -c 'setlocal filetype=mail' -<enter><enter-command>unset pipe_decode<enter>" "View decoded message in read-only Neovim"
 macro index,pager \cU "<pipe-message>urlscan<Enter>" "Select a URL from the message"
 
-# F2/F3/F4 switch accounts from either the index or pager.
-macro index,pager <F2> "<change-folder>imaps://infra@nerdio.app@mail.nerdio.app:993/INBOX<Enter>" "Open infra@nerdio.app"
-macro index,pager <F3> "<change-folder>imaps://support@nerdio.app@mail.nerdio.app:993/INBOX<Enter>" "Open support@nerdio.app"
-macro index,pager <F4> "<change-folder>imaps://mostafa2018a3s@gmail.com@imap.gmail.com:993/INBOX<Enter>" "Open mostafa2018a3s@gmail.com"
+
+# F2–F5 switch local accounts. Alt-X searches the local index.
+macro index,pager <F2> "<change-folder>~/.local/share/mail/nerdio-infra/INBOX<Enter>" "Open nerdio-infra"
+macro index,pager <F3> "<change-folder>~/.local/share/mail/nerdio-support/INBOX<Enter>" "Open nerdio-support"
+macro index,pager <F4> "<change-folder>~/.local/share/mail/nerdio-mostafa/INBOX<Enter>" "Open nerdio-mostafa"
+macro index,pager <F5> "<change-folder>~/.local/share/mail/gmail-mostafa/INBOX<Enter>" "Open gmail-mostafa"
+macro index,pager \cs "<shell-escape>mail-sync<Enter>" "Synchronize and index mail"

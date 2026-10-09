@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""Synchronize mail and index it even when SMTP delivery or receiving fails."""
+import fcntl
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+os.umask(0o077)
+state = Path(os.getenv('XDG_STATE_HOME', str(Path.home()/'.local/state')))/'mail-sync'
+state.mkdir(parents=True, exist_ok=True, mode=0o700)
+config = Path(os.getenv('XDG_CONFIG_HOME', str(Path.home()/'.config')))/'isync/mbsyncrc'
+with (state/'lock').open('a') as lock:
+    try:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        sys.exit(0)
+    status = 0
+    def run(command):
+        try:
+            return int(subprocess.run(command).returncode != 0)
+        except OSError as error:
+            print(f'mail-sync: {error}', file=sys.stderr)
+            return 1
+    for account in ('nerdio-infra', 'nerdio-support', 'nerdio-mostafa', 'gmail-mostafa'):
+        try:
+            generated = subprocess.run(['mail-mirror-config', '--account', account, '--config', str(config)], capture_output=True, text=True)
+            if generated.returncode:
+                print(generated.stderr, end='', file=sys.stderr)
+                status = 1
+                continue
+            runtime = state/(account+'.mbsyncrc')
+            runtime.write_text(generated.stdout)
+            status = max(status, run(['mbsync', '-c', str(runtime), 'mail']))
+        except OSError as error:
+            print(f'mail-sync: {account}: {error}', file=sys.stderr)
+            status = 1
+    status = max(status, run(['notmuch', 'new']))
+    status = max(status, run(['mail-queue-flush']))
+    sys.exit(status)

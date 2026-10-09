@@ -1,0 +1,100 @@
+# Core behaviour
+set editor = "nvim"
+set charset = "utf-8"
+set send_charset = "utf-8"
+
+# Options for sending
+set use_from = yes
+set envelope_from = yes
+set edit_headers = yes
+set include = yes
+set fast_reply = yes
+set ask_cc = no
+set ask_bcc = no
+set abort_nosubject = ask-yes
+set delete = ask-yes
+set move = no
+set quit = ask-yes
+set beep = no
+set wait_key = no
+set mark_old = no
+
+# Network and cache
+set ssl_force_tls = yes
+set account_command = "~/.local/bin/neomutt-credentials"
+set header_cache = "~/.cache/neomutt/headers"
+set message_cachedir = "~/.cache/neomutt/bodies"
+set message_cache_clean = no
+set mail_check = 60
+set timeout = 15
+set imap_keepalive = 300
+set imap_check_subscribed = yes
+
+# Index, pager, and sidebar
+set sort = reverse-threads
+set sort_aux = last-date-received
+set pager_index_lines = 8
+set pager_context = 3
+set pager_stop = yes
+set markers = no
+set smart_wrap = yes
+set menu_scroll = yes
+set menu_move_off = no
+set status_on_top = yes
+set help = no
+set sidebar_visible = yes
+set sidebar_width = 28
+set sidebar_short_path = yes
+set sidebar_divider_char = "│"
+
+set sidebar_format = " %D%*  %<N?%N />%S "
+set status_format = " %D  %<n?%n new · >%m messages%>  %P "
+set compose_format = " Compose  %a attachments · approximately %l bytes%> "
+set index_format = " %4C %Z  %<[y?%<[m?%<[d?%[%H:%M]&%[%a %d]>&%[%b %d]>&%[%Y-%m-%d]>  %-20.20F  %s"
+
+# Kitty receives Nord RGB values; other terminals retain portable xterm-256 colours.
+source ~/.local/bin/neomutt-colors|
+
+# MIME and HTML mail
+set mailcap_path = "~/.config/neomutt/mailcap"
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+# Keep the pager focused on useful headers.
+set weed = yes
+ignore *
+unignore From To Cc Date Subject
+hdr_order From To Cc Date Subject
+
+# Accounts and account-switching hooks
+source ~/.config/neomutt/online/accounts/nerdio.rc
+source ~/.config/neomutt/online/accounts/gmail.rc
+source ~/.config/neomutt/aliases.rc
+set alias_file = "~/.config/neomutt/aliases.rc"
+
+# Start in the infrastructure inbox.
+set real_name = "Nerdio Infrastructure"
+set from = "infra@nerdio.app"
+set folder = "imaps://infra@nerdio.app@mail.nerdio.app:993/"
+set spoolfile = "+INBOX"
+set postponed = "+Drafts"
+set record = "+Sent"
+set trash = "+Trash"
+set smtp_url = "smtps://infra@nerdio.app@mail.nerdio.app:465/"
+
+# Navigation
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
+bind index,pager B sidebar-toggle-visible
+bind pager j next-line
+bind pager k previous-line
+macro index,pager V "<enter-command>set pipe_decode=yes<enter><pipe-message>nvim -R -c 'setlocal filetype=mail' -<enter><enter-command>unset pipe_decode<enter>" "View decoded message in read-only Neovim"
+macro index,pager \cU "<pipe-message>urlscan<Enter>" "Select a URL from the message"
+
+# F2/F3/F4 switch accounts from either the index or pager.
+macro index,pager <F2> "<change-folder>imaps://infra@nerdio.app@mail.nerdio.app:993/INBOX<Enter>" "Open infra@nerdio.app"
+macro index,pager <F3> "<change-folder>imaps://support@nerdio.app@mail.nerdio.app:993/INBOX<Enter>" "Open support@nerdio.app"
+macro index,pager <F4> "<change-folder>imaps://mostafa2018a3s@gmail.com@imap.gmail.com:993/INBOX<Enter>" "Open mostafa2018a3s@gmail.com"
+
+macro index,pager <F5> "<change-folder>imaps://m0st4fa@nerdio.app@mail.nerdio.app:993/INBOX<Enter>" "Open m0st4fa@nerdio.app"

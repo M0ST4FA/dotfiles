@@ -1,0 +1,8 @@
+[Unit]
+Description=Deliver pending offline mail submissions
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/mail-queue-flush
+UMask=0077
+TimeoutStartSec=10min

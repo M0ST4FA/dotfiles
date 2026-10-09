@@ -1,0 +1,17 @@
+[database]
+path=/home/m0st4fa/.local/share/mail
+
+[user]
+name=Mostafa
+primary_email=m0st4fa@nerdio.app
+other_email=infra@nerdio.app;support@nerdio.app;mostafa2018a3s@gmail.com;
+
+[new]
+tags=unread;
+ignore=.mbsyncstate;.uidvalidity;.isyncuidmap.db
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true

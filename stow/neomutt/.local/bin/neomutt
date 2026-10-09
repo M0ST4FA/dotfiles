@@ -3,12 +3,22 @@
 # implements them, but xterm-kitty intentionally advertises a 256-colour
 # palette, so use xterm-direct for NeoMutt alone.
 
+if [ "${1:-}" = --online ]; then
+  shift
+  set -- -F "$HOME/.config/neomutt/online/neomuttrc" "$@"
+fi
+
+umask 077
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/mail-sync"
+mkdir -p "$state_dir"
+view_lock="$state_dir/view.lock"
+
 case "${TERM:-}" in
   xterm-kitty*)
-    exec env TERM=xterm-direct /usr/bin/neomutt "$@"
+    exec flock --shared "$view_lock" env TERM=xterm-direct /usr/bin/neomutt "$@"
     ;;
   *)
-    exec /usr/bin/neomutt "$@"
+    exec flock --shared "$view_lock" /usr/bin/neomutt "$@"
     ;;
 esac
 

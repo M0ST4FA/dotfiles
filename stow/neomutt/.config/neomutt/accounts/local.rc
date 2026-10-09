@@ -1,0 +1,8 @@
+folder-hook 'nerdio-infra/' 'unset smtp_url record; set real_name="Nerdio Infrastructure" from="infra@nerdio.app" folder="~/.local/share/mail/nerdio-infra" spoolfile="+INBOX" postponed="+Drafts" trash="+Trash" sendmail="~/.local/bin/mail-submit nerdio-infra"'
+named-mailboxes "nerdio-infra" "~/.local/share/mail/nerdio-infra/INBOX"
+folder-hook 'nerdio-support/' 'unset smtp_url record; set real_name="Nerdio Support" from="support@nerdio.app" folder="~/.local/share/mail/nerdio-support" spoolfile="+INBOX" postponed="+Drafts" trash="+Trash" sendmail="~/.local/bin/mail-submit nerdio-support"'
+named-mailboxes "nerdio-support" "~/.local/share/mail/nerdio-support/INBOX"
+folder-hook 'nerdio-mostafa/' 'unset smtp_url record; set real_name="Mostafa" from="m0st4fa@nerdio.app" folder="~/.local/share/mail/nerdio-mostafa" spoolfile="+INBOX" postponed="+Drafts" trash="+Trash" sendmail="~/.local/bin/mail-submit nerdio-mostafa"'
+named-mailboxes "nerdio-mostafa" "~/.local/share/mail/nerdio-mostafa/INBOX"
+folder-hook 'gmail-mostafa/' 'unset smtp_url record; set real_name="Mostafa" from="mostafa2018a3s@gmail.com" folder="~/.local/share/mail/gmail-mostafa" spoolfile="+INBOX" postponed="+[Gmail]/Drafts" trash="+[Gmail]/Trash" sendmail="~/.local/bin/mail-submit gmail-mostafa"'
+named-mailboxes "gmail-mostafa" "~/.local/share/mail/gmail-mostafa/INBOX"

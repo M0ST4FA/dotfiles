@@ -1,0 +1,13 @@
+# Search views over the bounded local mirror. These are views, not copies.
+set nm_default_url = "notmuch:///home/m0st4fa/.local/share/mail"
+set nm_query_type = "messages"
+
+named-mailboxes "Local · All"       "notmuch://?query=*"
+named-mailboxes "Local · Unread"    "notmuch://?query=tag:unread"
+named-mailboxes "Local · Flagged"   "notmuch://?query=tag:flagged"
+named-mailboxes "Search · Infra"    "notmuch://?query=path:nerdio-infra/**"
+named-mailboxes "Search · Support"  "notmuch://?query=path:nerdio-support/**"
+named-mailboxes "Search · Mostafa"  "notmuch://?query=path:nerdio-mostafa/**"
+named-mailboxes "Search · Gmail"    "notmuch://?query=path:gmail-mostafa/**"
+
+bind index,pager \eX vfolder-from-query

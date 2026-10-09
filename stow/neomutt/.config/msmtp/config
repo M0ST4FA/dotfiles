@@ -1,0 +1,37 @@
+defaults
+auth on
+timeout 30
+tls on
+tls_trust_file system
+
+account nerdio-infra
+host mail.nerdio.app
+port 465
+tls_starttls off
+from infra@nerdio.app
+user infra@nerdio.app
+passwordeval "~/.local/bin/neomutt-credentials --password-only --username infra@nerdio.app --hostname mail.nerdio.app --type smtps"
+
+account nerdio-support
+host mail.nerdio.app
+port 465
+tls_starttls off
+from support@nerdio.app
+user support@nerdio.app
+passwordeval "~/.local/bin/neomutt-credentials --password-only --username support@nerdio.app --hostname mail.nerdio.app --type smtps"
+
+account nerdio-mostafa
+host mail.nerdio.app
+port 465
+tls_starttls off
+from m0st4fa@nerdio.app
+user m0st4fa@nerdio.app
+passwordeval "~/.local/bin/neomutt-credentials --password-only --username m0st4fa@nerdio.app --hostname mail.nerdio.app --type smtps"
+
+account gmail-mostafa
+host smtp.gmail.com
+port 465
+tls_starttls off
+from mostafa2018a3s@gmail.com
+user mostafa2018a3s@gmail.com
+passwordeval "~/.local/bin/neomutt-credentials --password-only --username mostafa2018a3s@gmail.com --hostname smtp.gmail.com --type smtps"

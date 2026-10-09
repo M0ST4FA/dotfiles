@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""Pull one account into a separate mirror, then promote only while NeoMutt is closed."""
+import argparse
+import datetime
+import fcntl
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+
+ACCOUNTS = ('nerdio-infra', 'nerdio-support', 'nerdio-mostafa', 'gmail-mostafa')
+
+
+def fingerprint(root):
+    return sorted((str(message.relative_to(root)), message.stat().st_size, message.stat().st_mtime_ns)
+                  for part in ('cur', 'new') for directory in root.rglob(part)
+                  for message in directory.iterdir() if message.is_file())
+
+
+def promote(stage, live, backup, index):
+    live.rename(backup)
+    try:
+        stage.rename(live)
+        index()
+    except BaseException:
+        if live.exists():
+            live.rename(stage)
+        backup.rename(live)
+        raise
+
+
+def main():
+    os.umask(0o077)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('account', choices=ACCOUNTS)
+    args = parser.parse_args()
+    state = Path(os.getenv('XDG_STATE_HOME', str(Path.home()/'.local/state')))
+    mail = Path(os.getenv('XDG_DATA_HOME', str(Path.home()/'.local/share')))/'mail'/args.account
+    session = state/'mail-sync'
+    session.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with (session/'lock').open('a') as synchronization:
+        fcntl.flock(synchronization, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        before = fingerprint(mail)
+        stamp = datetime.datetime.now().strftime('%Y%m%d-%H%M%S-%f')
+        root = state/'mail-bootstrap'/f'{args.account}-{stamp}'
+        stage = root/'staged-maildir'
+        stage.mkdir(parents=True, mode=0o700)
+        source = subprocess.run(['mail-mirror-config', '--account', args.account], check=True, capture_output=True, text=True).stdout
+        local_store = args.account+'-local'
+        source = re.sub(r'(?m)^MaildirStore '+re.escape(local_store)+r'\nPath .+\nInbox .+',
+                        f'MaildirStore {local_store}\nPath {stage}/\nInbox {stage}/INBOX', source)
+        source = re.sub(r'(?m)^Sync .+$', 'Sync Pull New Old Gone Flags', source)
+        source = re.sub(r'(?m)^Expunge .+$', 'Expunge None', source)
+        source = re.sub(r'(?m)^SyncState .+$', 'SyncState *', source)
+        config = root/'mbsyncrc'
+        config.write_text(source)
+        subprocess.run(['mbsync', '-c', str(config), 'mail'], check=True)
+        # Validate actual folder counts, not merely a successful network exit.
+        blocks = re.findall(r'(?m)^Channel [\w-]+\nFar [\s\S]*?(?=\n\n|\Z)', source)
+        for block in blocks:
+            folder = re.search(r'(?m)^Patterns "(.+)"$', block).group(1)
+            expected = min(100, int(re.search(r'ordinary: (\d+);', block).group(1)))
+            count = sum('S' in file.name.partition(':2,')[2] and 'F' not in file.name.partition(':2,')[2]
+                        for part in ('cur', 'new') for file in (stage/folder/part).glob('*'))
+            if count != expected:
+                raise ValueError(f'{folder}: expected {expected} ordinary messages, found {count}; staged mirror retained at {root}')
+        with (session/'view.lock').open('a') as view:
+            fcntl.flock(view, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            # Also guard clients started before the launcher acquired shared locks.
+            if subprocess.run(['pgrep', '-u', str(os.getuid()), '-x', 'neomutt'], stdout=subprocess.DEVNULL).returncode == 0:
+                raise ValueError(f'close NeoMutt before promotion; staged mirror retained at {root}')
+            if fingerprint(mail) != before:
+                raise ValueError(f'live mailbox changed during bootstrap; staged mirror retained at {root}')
+            if not mail.exists():
+                mail.mkdir(parents=True, mode=0o700)
+            def index():
+                subprocess.run(['notmuch', 'new'], check=True)
+            try:
+                promote(stage, mail, root/'previous-maildir', index)
+            except BaseException:
+                subprocess.run(['notmuch', 'new'])
+                raise
+        print(f'Validated and promoted {args.account}; previous mailbox retained at {root}/previous-maildir')
+    return 0
+
+
+if __name__ == '__main__':
+    try:
+        sys.exit(main())
+    except (OSError, ValueError, subprocess.CalledProcessError) as error:
+        sys.exit(f'mail-bootstrap: {error}')

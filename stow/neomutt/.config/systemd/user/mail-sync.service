@@ -1,0 +1,10 @@
+[Unit]
+Description=Receive, deliver and index local mail
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/mail-sync
+UMask=0077
+TimeoutStartSec=10min

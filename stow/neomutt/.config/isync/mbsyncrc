@@ -1,0 +1,116 @@
+# Safe bootstrap mode: remote changes flow toward the local Maildir only.
+# Do not change this until every account has passed the tutorial's tests.
+Sync Pull
+Create Near
+Remove None
+Expunge None
+CopyArrivalDate yes
+SyncState *
+
+IMAPAccount nerdio-infra
+Host mail.nerdio.app
+Port 993
+Timeout 30
+User infra@nerdio.app
+PassCmd "~/.local/bin/neomutt-credentials --password-only --username infra@nerdio.app --hostname mail.nerdio.app --type imaps"
+TLSType IMAPS
+
+IMAPStore nerdio-infra-remote
+Account nerdio-infra
+
+MaildirStore nerdio-infra-local
+Path ~/.local/share/mail/nerdio-infra/
+Inbox ~/.local/share/mail/nerdio-infra/INBOX
+SubFolders Verbatim
+
+Channel nerdio-infra
+Sync New Gone Flags
+Expunge Both
+Far :nerdio-infra-remote:
+Near :nerdio-infra-local:
+Patterns "INBOX" "Sent" "Drafts" "Trash"
+MaxMessages 100
+ExpireSide Near
+ExpireUnread no
+
+IMAPAccount nerdio-support
+Host mail.nerdio.app
+Port 993
+Timeout 30
+User support@nerdio.app
+PassCmd "~/.local/bin/neomutt-credentials --password-only --username support@nerdio.app --hostname mail.nerdio.app --type imaps"
+TLSType IMAPS
+
+IMAPStore nerdio-support-remote
+Account nerdio-support
+
+MaildirStore nerdio-support-local
+Path ~/.local/share/mail/nerdio-support/
+Inbox ~/.local/share/mail/nerdio-support/INBOX
+SubFolders Verbatim
+
+Channel nerdio-support
+Sync New Gone Flags
+Expunge Both
+Far :nerdio-support-remote:
+Near :nerdio-support-local:
+Patterns "INBOX" "Sent" "Drafts" "Trash"
+MaxMessages 100
+ExpireSide Near
+ExpireUnread no
+
+IMAPAccount nerdio-mostafa
+Host mail.nerdio.app
+Port 993
+Timeout 30
+User m0st4fa@nerdio.app
+PassCmd "~/.local/bin/neomutt-credentials --password-only --username m0st4fa@nerdio.app --hostname mail.nerdio.app --type imaps"
+TLSType IMAPS
+
+IMAPStore nerdio-mostafa-remote
+Account nerdio-mostafa
+
+MaildirStore nerdio-mostafa-local
+Path ~/.local/share/mail/nerdio-mostafa/
+Inbox ~/.local/share/mail/nerdio-mostafa/INBOX
+SubFolders Verbatim
+
+Channel nerdio-mostafa
+Sync New Gone Flags
+Expunge Both
+Far :nerdio-mostafa-remote:
+Near :nerdio-mostafa-local:
+Patterns "INBOX" "Sent" "Drafts" "Trash"
+MaxMessages 100
+ExpireSide Near
+ExpireUnread no
+
+IMAPAccount gmail-mostafa
+Host imap.gmail.com
+Port 993
+Timeout 30
+User mostafa2018a3s@gmail.com
+PassCmd "~/.local/bin/neomutt-credentials --password-only --username mostafa2018a3s@gmail.com --hostname imap.gmail.com --type imaps"
+TLSType IMAPS
+
+IMAPStore gmail-mostafa-remote
+Account gmail-mostafa
+
+MaildirStore gmail-mostafa-local
+Path ~/.local/share/mail/gmail-mostafa/
+Inbox ~/.local/share/mail/gmail-mostafa/INBOX
+SubFolders Verbatim
+
+Channel gmail-mostafa
+Far :gmail-mostafa-remote:
+Near :gmail-mostafa-local:
+Patterns "INBOX" "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Trash"
+MaxMessages 100
+ExpireSide Near
+ExpireUnread no
+
+Group mail
+Channel nerdio-infra
+Channel nerdio-support
+Channel nerdio-mostafa
+Channel gmail-mostafa

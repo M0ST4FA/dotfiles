@@ -1,0 +1,12 @@
+[Unit]
+Description=Sync mail two minutes into the session, then five minutes after completion
+PartOf=graphical-session.target
+
+[Timer]
+OnActiveSec=2m
+OnUnitInactiveSec=5m
+AccuracySec=15s
+Unit=mail-sync.service
+
+[Install]
+WantedBy=graphical-session.target
