@@ -1,10 +1,8 @@
-config_version = 14
-
 [bar.default]
 border_width = 1.5
 capsule = true
 capsule_thickness = 0.72999998740851879
-center = [ "workspaces" ]
+center = [ "workspaces", "cat" ]
 concave_edge_corners = false
 end = [ "group:g1", "group:g2", "group:g3" ]
 icon_color = "primary"
@@ -84,6 +82,12 @@ widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-000000000000
 [dock]
 smart_auto_hide = true
 
+[hot_corners]
+delay_ms = 300
+
+    [hot_corners.top_left]
+    action = "window_switcher"
+
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
 pre_action_fade_seconds = 5
@@ -106,10 +110,13 @@ pre_action_fade_seconds = 5
 [location]
 auto_locate = true
 
+[lockscreen]
+blurred_desktop = true
+
 [lockscreen_widgets]
-enabled = false
+enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1" ]
+widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000001" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -143,6 +150,35 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
         show_unlock_hint = true
         show_weather = true
 
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1121.5
+    cy = 493.0
+    output = "eDP-1"
+    placement_height = 864.0
+    placement_width = 1536.0
+    rotation = 0.0
+    type = "yocraft/battery-widget:widget"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = true
+        background_color = "surface"
+        background_opacity = 0.80000000000000004
+        background_padding = 10
+        background_radius = 12
+        battery = "auto"
+        battery_name = "BAT0"
+        charging_color = "on_surface"
+        color = "on_surface"
+        hide_full = false
+        hide_plugged = false
+        label_content = "percent"
+        layout = "horizontal"
+        show_glyph = true
+        show_label = true
+        warning_color = "error"
+
 [nightlight]
 enabled = true
 
@@ -150,14 +186,24 @@ enabled = true
 history_retention_hours = 6
 layer = "overlay"
 
+[plugin_settings."noctalia/bitwarden"]
+serve_port = 7625
+
 [plugins]
-enabled = [ "noctalia/bongocat" ]
+enabled = [ "noctalia/bitwarden", "liamwh/emoji-picker", "oldirtty/color_picker", "dotnetrob/cat", "yocraft/battery-widget" ]
 
 [shell]
 clipboard_auto_paste = "off"
 font_family = "RecMonoCasual Nerd Font"
+password_style = "random"
 screen_time_enabled = true
 telemetry_enabled = true
+
+    [shell.launcher.providers.emoji]
+    global = true
+
+        [shell.launcher.providers.panels]
+    global = true
 
     [shell.panel]
     control_center_placement = "floating"
@@ -181,16 +227,17 @@ transition_on_startup = true
 
     [wallpaper.automation]
     enabled = true
+    interval_seconds = 600
     recursive = false
 
     [wallpaper.default]
-    path = "/usr/share/wallpapers/Favorites/ign_soupKong.png"
-
-    [wallpaper.last]
-    path = "/usr/share/wallpapers/Favorites/ign_soupKong.png"
+    path = "/usr/share/wallpapers/Favorites/ign-0008.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/usr/share/wallpapers/Favorites/ign_soupKong.png"
+    path = "/usr/share/wallpapers/Favorites/ign-0008.png"
+
+[widget.cat]
+type = "dotnetrob/cat:cat"
 
 [widget.clock]
 format = "{:%b %d, %I:%M %p}"

@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""Explicitly capture Noctalia preferences or clear local GUI overrides."""
+import argparse
+import datetime
+import fcntl
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import tempfile
+import tomlkit
+
+
+def atomic_write(path, text):
+    with tempfile.NamedTemporaryFile(mode='w', dir=path.parent, prefix='.'+path.name, delete=False) as stream:
+        temporary = Path(stream.name)
+        try:
+            stream.write(text)
+            stream.flush()
+            os.fsync(stream.fileno())
+        except BaseException:
+            temporary.unlink(missing_ok=True)
+            raise
+    try:
+        os.replace(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('command', choices=['capture', 'reset-overrides'])
+    args = parser.parse_args()
+    config = Path(os.getenv('NOCTALIA_CONFIG_HOME', os.getenv('XDG_CONFIG_HOME', str(Path.home()/'.config'))))/'noctalia/config.toml'
+    state_root = Path(os.getenv('NOCTALIA_STATE_HOME', os.getenv('XDG_STATE_HOME', str(Path.home()/'.local/state'))))
+    settings = state_root/'noctalia/settings.toml'
+    backups = state_root/'noctalia-dotfiles/backups'
+    backups.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with (backups.parent/'lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        stamp = datetime.datetime.now().strftime('%Y%m%d-%H%M%S-%f')
+        if args.command == 'capture':
+            target = config.resolve(strict=True)
+            exported = subprocess.run(['noctalia', 'config', 'export', 'merged'], check=True, capture_output=True, text=True).stdout
+            document = tomlkit.parse(exported)
+            if not document:
+                raise ValueError('refusing an empty export')
+            document.pop('config_version', None)
+            if 'wallpaper' in document:
+                document['wallpaper'].pop('last', None)
+            text = tomlkit.dumps(document)
+            with tempfile.TemporaryDirectory() as temporary:
+                candidate = Path(temporary)/'config.toml'
+                candidate.write_text(text)
+                subprocess.run(['noctalia', 'config', 'validate', str(candidate)], check=True)
+            shutil.copy2(target, backups/f'base-{stamp}.toml')
+            atomic_write(target, text)
+            print(f'Captured preferences to {target}; no commit was made.')
+        else:
+            if settings.is_symlink():
+                raise ValueError('settings.toml must be a local ordinary file before clearing overrides')
+            if not settings.exists():
+                print('No GUI overrides to clear.')
+                return
+            old = tomlkit.parse(settings.read_text())
+            document = tomlkit.document()
+            if 'config_version' in old:
+                document['config_version'] = old['config_version']
+            if 'last' in old.get('wallpaper', {}):
+                document['wallpaper'] = {'last': old['wallpaper']['last']}
+            shutil.copy2(settings, backups/f'overrides-{stamp}.toml')
+            atomic_write(settings, tomlkit.dumps(document))
+            print('GUI overrides cleared; runtime markers and other state retained.')
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (OSError, ValueError, subprocess.CalledProcessError) as error:
+        raise SystemExit(f'noctalia-dotfiles: {error}')

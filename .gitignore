@@ -21,9 +21,13 @@ docs*/
 
 # Noctalia v5 keeps mutable state and downloaded plugins beside its settings.
 stow/noctalia/.local/state/noctalia/*
-!stow/noctalia/.local/state/noctalia/settings.toml
 
 # nwg-look can export generated GTK4 theme links into the stow package.
 stow/nwg-look/.config/gtk-4.0/assets
 stow/nwg-look/.config/gtk-4.0/gtk.css
 stow/nwg-look/.config/gtk-4.0/gtk-dark.css
+
+# App state stays local; only selected preference files are managed.
+stow/codex/.codex/auth*
+stow/pet/**/credentials*
+__pycache__/
