@@ -100,4 +100,4 @@ macro index,pager <F2> "<change-folder>~/.local/share/mail/nerdio-infra/INBOX<En
 macro index,pager <F3> "<change-folder>~/.local/share/mail/nerdio-support/INBOX<Enter>" "Open nerdio-support"
 macro index,pager <F4> "<change-folder>~/.local/share/mail/nerdio-mostafa/INBOX<Enter>" "Open nerdio-mostafa"
 macro index,pager <F5> "<change-folder>~/.local/share/mail/gmail-mostafa/INBOX<Enter>" "Open gmail-mostafa"
-macro index,pager \cs "<shell-escape>mail-sync<Enter>" "Synchronize and index mail"
+macro index,pager \cs "<enter-command>set mail_check=0<Enter><shell-escape>mail-sync<Enter><enter-command>reset mail_check<Enter>" "Synchronize and index mail"

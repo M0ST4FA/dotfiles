@@ -102,6 +102,8 @@ Inbox ~/.local/share/mail/gmail-mostafa/INBOX
 SubFolders Verbatim
 
 Channel gmail-mostafa
+Sync New Gone Flags
+Expunge Both
 Far :gmail-mostafa-remote:
 Near :gmail-mostafa-local:
 Patterns "INBOX" "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Trash"

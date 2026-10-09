@@ -50,6 +50,25 @@ class QueueTests(unittest.TestCase):
    finally:
     if worker.poll() is None:worker.kill()
     worker.communicate()
+ def test_recovery_recognizes_mbsync_renamed_sent_copy(self):
+  self.submit();job=self.jobs()[0];delivered=job.parent.parent/'delivered';job=job.rename(delivered/job.name)
+  sent=self.root/'data/mail/nerdio-infra/Sent/cur';sent.mkdir(parents=True)
+  (sent/(job.name+',U=42:2,FS')).write_bytes(MESSAGE)
+  self.assertEqual(self.run_cmd('mail-queue-flush').returncode,0)
+  self.assertEqual(len(list(sent.iterdir())),1);self.assertFalse((self.root/'smtp.log').exists())
+ def test_worker_does_not_overlap_native_sync(self):
+  self.submit();session=self.root/'state/mail-sync';session.mkdir()
+  with (session/'lock').open('a') as lock:
+   fcntl.flock(lock,fcntl.LOCK_EX)
+   self.assertEqual(self.run_cmd('mail-queue-flush').returncode,0)
+   self.assertFalse((self.root/'smtp.log').exists());self.assertEqual(len(self.jobs()),1)
+ def test_worker_accepts_inherited_sync_lock_without_deadlock(self):
+  self.submit();session=self.root/'state/mail-sync';session.mkdir()
+  with (session/'lock').open('a') as lock:
+   fcntl.flock(lock,fcntl.LOCK_EX)
+   result=subprocess.run([str(BIN/'mail-queue-flush'),'nerdio-infra'],env=dict(self.env,MAIL_SYNC_LOCK_FD=str(lock.fileno())),pass_fds=(lock.fileno(),),capture_output=True,timeout=5)
+   self.assertEqual(result.returncode,0,result.stderr)
+   self.assertEqual(len((self.root/'smtp.log').read_text().splitlines()),1)
  def test_unknown_account_does_not_queue(self):
   self.assertNotEqual(self.run_cmd('mail-submit','bad',input=MESSAGE).returncode,0); self.assertFalse(self.jobs())
 if __name__=='__main__': unittest.main()

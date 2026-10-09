@@ -47,6 +47,9 @@ def account_root(account):
     for state in ('tmp', 'new', 'sending', 'held', 'delivered'):
         (root/state).mkdir(exist_ok=True, mode=0o700)
         (root/state).chmod(0o700)
+    # Persist newly created queue directories before acknowledging submission.
+    for directory in (root, ROOT, ROOT.parent):
+        durable_directory(directory)
     return root
 
 
@@ -94,7 +97,9 @@ def sent_copy(job, account):
     for part in ('tmp', 'new', 'cur'):
         (sent/part).mkdir(parents=True, exist_ok=True, mode=0o700)
     target = sent/'cur'/f'{job.name}:2,S'
-    if target.exists():
+    # mbsync assigns a UID and clients can rename the flag suffix.
+    if any(file.name.split(':2,', 1)[0].split(',U=', 1)[0] == job.name
+           for part in ('cur', 'new') for file in (sent/part).iterdir()):
         return
     temporary = sent/'tmp'/job.name
     with (job/'message').open('rb') as source, temporary.open('wb') as output:
@@ -103,6 +108,8 @@ def sent_copy(job, account):
         os.fsync(output.fileno())
     os.replace(temporary, target)
     durable_directory(sent/'cur')
+    durable_directory(sent)
+    durable_directory(sent.parent)
 
 
 def finish_delivery(job, account):
@@ -115,7 +122,7 @@ def finish_delivery(job, account):
     durable_directory(job.parent)
 
 
-def flush(accounts):
+def flush_locked(accounts):
     failed = False
     for account in accounts:
         root = account_root(account)
@@ -159,6 +166,27 @@ def flush(accounts):
                     print(f'{account}: delivered; Sent copy pending: {error}', file=sys.stderr)
                     failed = True
     return int(failed)
+
+
+def flush(accounts):
+    session = ROOT.parent/'mail-sync'
+    session.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with (session/'lock').open('a') as lock:
+        inherited = os.environ.get('MAIL_SYNC_LOCK_FD')
+        if inherited is not None:
+            # mail-sync passes its already-locked descriptor to avoid deadlock.
+            descriptor = int(inherited)
+            owned = os.fstat(descriptor)
+            expected = os.fstat(lock.fileno())
+            if (owned.st_dev, owned.st_ino) != (expected.st_dev, expected.st_ino):
+                raise ValueError('invalid inherited synchronization lock')
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        else:
+            try:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                return 0
+        return flush_locked(accounts)
 
 
 def main():

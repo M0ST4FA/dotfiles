@@ -18,6 +18,8 @@ with (state/'lock').open('a') as lock:
     status = 0
     def run(command):
         try:
+            if command[0] == 'mail-queue-flush':
+                return int(subprocess.run(command, env=dict(os.environ, MAIL_SYNC_LOCK_FD=str(lock.fileno())), pass_fds=(lock.fileno(),)).returncode != 0)
             return int(subprocess.run(command).returncode != 0)
         except OSError as error:
             print(f'mail-sync: {error}', file=sys.stderr)

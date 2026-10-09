@@ -22,6 +22,22 @@ class BootstrapTests(unittest.TestCase):
    called=[]
    module.promote(stage,live,backup,lambda:called.append((live/'new').read_text()))
    self.assertEqual(called,['new']);self.assertEqual((backup/'old').read_text(),'old')
+ def test_bootstrap_rejects_native_unsynchronized_local_edits(self):
+  module=self.load()
+  with tempfile.TemporaryDirectory() as temporary:
+   root=pathlib.Path(temporary)
+   for side in ('far','near'):
+    for part in ('cur','new','tmp'):(root/side/'INBOX'/part).mkdir(parents=True)
+   (root/'far/INBOX/new/remote').write_text('Message-ID: <remote@fixture>\n\nfixture\n')
+   config=root/'mbsyncrc';config.write_text(f'Sync New Gone Flags\nSyncState *\n\nMaildirStore far\nPath {root}/far/\nInbox {root}/far/INBOX\n\nMaildirStore near\nPath {root}/near/\nInbox {root}/near/INBOX\n\nChannel test\nFar :far:\nNear :near:\nPatterns INBOX\n')
+   result=subprocess.run(['mbsync','-c',str(config),'test'],capture_output=True,text=True);self.assertEqual(result.returncode,0,result.stderr)
+   module.verify_clean(root/'near')
+   local=root/'near/INBOX/new/local';local.write_text('unsent draft')
+   with self.assertRaisesRegex(ValueError,'unsynchronized'):module.verify_clean(root/'near')
+   local.unlink();message=next((root/'near/INBOX/new').iterdir());changed=message.with_name(message.name.split(':2,')[0]+':2,FS');message.rename(changed)
+   with self.assertRaisesRegex(ValueError,'unsynchronized'):module.verify_clean(root/'near')
+   changed.unlink()
+   with self.assertRaisesRegex(ValueError,'deletion'):module.verify_clean(root/'near')
  def test_failed_index_rolls_back_the_live_mailbox(self):
   module=self.load()
   with tempfile.TemporaryDirectory() as temporary:

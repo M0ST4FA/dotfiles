@@ -44,7 +44,7 @@ def search_uids(client, criteria):
 def generate(source, account):
     # Retain account/store definitions and global safety options; expand only this channel.
     definitions = source.split('\nGroup ', 1)[0]
-    pattern = r'(?m)^Channel ([\w-]+)\nFar [\s\S]*?(?=\n\n|\Z)'
+    pattern = r'(?m)^Channel ([\w-]+)\n[\s\S]*?(?=\n\n|\Z)'
     channels = list(re.finditer(pattern, definitions))
     selected = next(match for match in channels if match.group(1) == account)
     block = selected.group(0)
@@ -52,7 +52,7 @@ def generate(source, account):
     options = dict(line.split(None, 1) for line in account_block.splitlines() if line.strip() and not line.startswith('#'))
     command = shlex.split(shlex.split(options['PassCmd'])[0])
     command[0] = os.path.expanduser(command[0])
-    password = subprocess.run(command, check=True, capture_output=True, text=True).stdout.strip()
+    password = subprocess.run(command, check=True, capture_output=True, text=True).stdout.rstrip('\n')
     if not password:
         raise ValueError('keyring returned no password')
     client = imaplib.IMAP4_SSL(options['Host'], int(options.get('Port', 993)), timeout=30)
@@ -82,9 +82,13 @@ def generate(source, account):
                 sync = re.search(r'(?m)^Sync (.+)$', block)
                 policy = sync.group(1) if sync else re.search(r'(?m)^Sync (.+)$', source).group(1)
                 if policy == 'Pull':
-                    expanded += '\nSync Pull New Old Gone Flags'
+                    history_policy = 'Sync Pull New Old Gone Flags'
                 else:
-                    expanded += '\nSync New Gone Flags PullOld'
+                    history_policy = 'Sync New Gone Flags PullOld'
+                if sync:
+                    expanded = re.sub(r'(?m)^Sync .+$', history_policy, expanded)
+                else:
+                    expanded += '\n'+history_policy
             expanded += f'\n# Remote messages: {len(all_uids)}; ordinary: {len(ordinary)}; local ordinary: {local_ordinary_count(local)}'
             blocks.append(expanded)
         definitions = re.sub(pattern, '', definitions)

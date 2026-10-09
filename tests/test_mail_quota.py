@@ -22,7 +22,7 @@ class QuotaTests(unittest.TestCase):
    root=pathlib.Path(temporary)
    for store in ('far','near'):
     for part in ('cur','new','tmp'):(root/store/'INBOX'/part).mkdir(parents=True)
-   source=f"Sync Pull\nCreate Near\nRemove None\nExpunge None\nSyncState *\n\nIMAPAccount nerdio-infra\nHost fixture\nUser test\nPassCmd \"/bin/echo fixture-password\"\n\nMaildirStore nerdio-infra-remote\nPath {root}/far/\nInbox {root}/far/INBOX\n\nMaildirStore nerdio-infra-local\nPath {root}/near/\nInbox {root}/near/INBOX\n\nChannel nerdio-infra\nFar :nerdio-infra-remote:\nNear :nerdio-infra-local:\nPatterns INBOX\nMaxMessages 100\nExpireUnread no\nExpireSide Near\n\nGroup mail\nChannel nerdio-infra\n"
+   source=f"Sync Pull\nCreate Near\nRemove None\nExpunge None\nSyncState *\n\nIMAPAccount nerdio-infra\nHost fixture\nUser test\nPassCmd \"/bin/echo fixture-password\"\n\nMaildirStore nerdio-infra-remote\nPath {root}/far/\nInbox {root}/far/INBOX\n\nMaildirStore nerdio-infra-local\nPath {root}/near/\nInbox {root}/near/INBOX\n\nChannel nerdio-infra\nSync New Gone Flags\nExpunge Both\nFar :nerdio-infra-remote:\nNear :nerdio-infra-local:\nPatterns INBOX\nMaxMessages 100\nExpireUnread no\nExpireSide Near\n\nGroup mail\nChannel nerdio-infra\n"
    client=MagicMock();client.select.return_value=('OK',[]);client.uid.return_value=('OK',[b' '.join(str(n).encode() for n in range(1,141))])
    with patch.object(module.imaplib,'IMAP4_SSL',return_value=client):generated=module.generate(source,'nerdio-infra')
    config=root/'mbsyncrc';config.write_text(generated)

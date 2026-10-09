@@ -3,6 +3,7 @@ Description=Deliver pending offline mail submissions
 
 [Service]
 Type=oneshot
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin
 ExecStart=%h/.local/bin/mail-queue-flush
 UMask=0077
 TimeoutStartSec=10min

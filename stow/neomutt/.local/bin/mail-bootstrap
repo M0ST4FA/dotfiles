@@ -18,6 +18,41 @@ def fingerprint(root):
                   for message in directory.iterdir() if message.is_file())
 
 
+def verify_clean(root):
+    """Refuse replacement when native state cannot prove local edits are synced."""
+    for directory in root.rglob('cur'):
+        folder = directory.parent
+        files = [file for part in ('cur', 'new') for file in (folder/part).glob('*') if file.is_file()]
+        state = folder/'.mbsyncstate'
+        if not state.exists():
+            if files:
+                raise ValueError(f'{folder.name}: messages without synchronization state; sync before bootstrap')
+            continue
+        if any((folder/name).exists() for name in ('.mbsyncstate.journal', '.mbsyncstate.new')):
+            raise ValueError(f'{folder.name}: unfinished synchronization; sync before bootstrap')
+        records = {}
+        for line in state.read_text().splitlines():
+            if not line or not re.match(r'^-?\d+ ', line):
+                continue
+            fields = line.split()
+            if len(fields) < 2:
+                raise ValueError('unrecognized synchronization state')
+            far, near = map(int, fields[:2])
+            if near > 0:
+                records[near] = (far, fields[2] if len(fields) > 2 else '')
+        present = set()
+        for file in files:
+            uid = re.search(r',U=(\d+)(?=[:,]|$)', file.name)
+            near = int(uid.group(1)) if uid else None
+            record = records.get(near)
+            flags = file.name.partition(':2,')[2]
+            if record is None or record[0] <= 0 or set(flags) != set(record[1].replace('-', '')):
+                raise ValueError(f'{folder.name}: unsynchronized local message or flags; sync before bootstrap')
+            present.add(near)
+        if set(records) != present:
+            raise ValueError(f'{folder.name}: unsynchronized local deletion; sync before bootstrap')
+
+
 def promote(stage, live, backup, index):
     live.rename(backup)
     try:
@@ -41,6 +76,7 @@ def main():
     session.mkdir(parents=True, exist_ok=True, mode=0o700)
     with (session/'lock').open('a') as synchronization:
         fcntl.flock(synchronization, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        verify_clean(mail)
         before = fingerprint(mail)
         stamp = datetime.datetime.now().strftime('%Y%m%d-%H%M%S-%f')
         root = state/'mail-bootstrap'/f'{args.account}-{stamp}'
@@ -57,7 +93,7 @@ def main():
         config.write_text(source)
         subprocess.run(['mbsync', '-c', str(config), 'mail'], check=True)
         # Validate actual folder counts, not merely a successful network exit.
-        blocks = re.findall(r'(?m)^Channel [\w-]+\nFar [\s\S]*?(?=\n\n|\Z)', source)
+        blocks = re.findall(r'(?m)^Channel [\w-]+\n[\s\S]*?(?=\n\n|\Z)', source)
         for block in blocks:
             folder = re.search(r'(?m)^Patterns "(.+)"$', block).group(1)
             expected = min(100, int(re.search(r'ordinary: (\d+);', block).group(1)))
@@ -70,6 +106,7 @@ def main():
             # Also guard clients started before the launcher acquired shared locks.
             if subprocess.run(['pgrep', '-u', str(os.getuid()), '-x', 'neomutt'], stdout=subprocess.DEVNULL).returncode == 0:
                 raise ValueError(f'close NeoMutt before promotion; staged mirror retained at {root}')
+            verify_clean(mail)
             if fingerprint(mail) != before:
                 raise ValueError(f'live mailbox changed during bootstrap; staged mirror retained at {root}')
             if not mail.exists():

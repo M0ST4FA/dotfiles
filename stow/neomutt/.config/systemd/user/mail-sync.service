@@ -5,6 +5,7 @@ After=graphical-session.target
 
 [Service]
 Type=oneshot
+Environment=PATH=%h/.local/bin:/usr/local/bin:/usr/bin
 ExecStart=%h/.local/bin/mail-sync
 UMask=0077
 TimeoutStartSec=10min
