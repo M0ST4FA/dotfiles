@@ -1,0 +1,31 @@
+{
+  "allowNonWorkspaceAccess": true,
+  "altScreenMode": "always",
+  "artifactReviewPolicy": "agent-decides",
+  "model": "Gemini 3.8 Flash (High)",
+  "permissions": {
+    "allow": [
+      "command(*)"
+    ]
+  },
+  "statusLine": {
+    "type": "",
+    "command": "",
+    "enabled": true
+  },
+  "toolPermission": "always-proceed",
+  "trustedWorkspaces": [
+    "/home/m0st4fa/workspace/learning/opengl/learnopengl",
+    "/home/m0st4fa/workspace/medicine/mbset/zagazig/Y2",
+    "/home/m0st4fa/workspace/medicine/mbset/zagazig",
+    "/home/m0st4fa/workspace/medicine/mbset",
+    "/home/m0st4fa/workspace",
+    "/home/m0st4fa/workspace/learning/haskell/lyah",
+    "/home/m0st4fa/workspace/learning/godot/math",
+    "/home/m0st4fa",
+    "/home/m0st4fa/workspace/labs/opencl",
+    "/home/m0st4fa/workspace/learning/graphics/vulkan/howtovulkan",
+    "/home/m0st4fa/workspace/labs/graphics/opencl"
+  ],
+  "verbosity": "high"
+}

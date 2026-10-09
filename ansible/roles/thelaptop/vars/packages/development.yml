@@ -23,8 +23,10 @@ packages_development:
   - glm
 
   - freerdp
+  - godot
+  - rust
 
-package_feature_sets_developemnt:
+package_feature_sets_development:
   neovim:
     - tree-sitter
     - tree-sitter-cli

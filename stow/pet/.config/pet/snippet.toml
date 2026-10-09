@@ -1,0 +1,12 @@
+
+[[Snippets]]
+  Description = "Islamic greeting"
+  Output = ""
+  Tag = []
+  command = "السلام عليكم و رحمة الله و بركاته"
+
+[[Snippets]]
+  Description = "omar"
+  Output = ""
+  Tag = []
+  command = "عومر عبعليم"

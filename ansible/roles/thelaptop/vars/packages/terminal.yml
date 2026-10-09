@@ -37,6 +37,9 @@ packages_terminal:
   - rsync
   - wget
   - yt-dlp
+  - jrnl
+  - fastfetch
+  - taskwarrior-tui
 
 package_feature_sets_terminal:
   zsh:

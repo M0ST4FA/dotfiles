@@ -2,7 +2,7 @@
 - name: Stow all user configuration
   tags: stow
   ansible.builtin.command:
-    cmd: "stow -v -d /home/{{ user }}/dotfiles/stow -t /home/{{ user }} {{ item }}"
+    cmd: "stow --no-folding -v -d /home/{{ user }}/dotfiles/stow -t /home/{{ user }} {{ item }}"
   loop:
     - zsh
 
@@ -46,6 +46,17 @@
     - zathura
     - pavucontrol
     - mame
+    - mimeapps
+    - desktop-portal
+    - termfilechooser
+    - qalculate
+    - pet
+    - jrnl
+    - godot
+    - flow-state
+    - codex
+    - antigravity
+    - ghcup
   register: stow_res
   failed_when: stow_res.rc != 0
   changed_when:
@@ -61,5 +72,13 @@
   environment:
     GIT_CONFIG_GLOBAL: /dev/null
   changed_when: false
+  become: true
+  become_user: "{{ user }}"
+
+- name: Install pinned Flow State CLI
+  tags: stow
+  ansible.builtin.command:
+    cmd: cargo install flow_state --version 1.0.6 --locked
+    creates: "/home/{{ user }}/.cargo/bin/flow_state"
   become: true
   become_user: "{{ user }}"

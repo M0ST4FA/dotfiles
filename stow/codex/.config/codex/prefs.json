@@ -1,0 +1,26 @@
+{
+    "general": {
+        "saveFolder": "/home/m0st4fa/.config/codex",
+        "accentColor": "#ff7926",
+        "sidebarWidth": 300,
+        "locale": "en_US",
+        "theme": "light",
+        "titlebarStyle": "custom",
+        "autoSaveOnPageSwitch": true
+    },
+    "editor": {
+        "codeBlockTheme": "github-dark-dimmed",
+        "useTypographyExtension": false,
+        "border": true,
+        "width": "md",
+        "spellcheck": true,
+        "zoom": 1,
+        "openPDFonExport": true,
+        "recentCodeLangs": [],
+        "codeWordWrap": false,
+        "tabSize": 4
+    },
+    "misc": {
+        "lastOpenedVersion": "2.0.5"
+    }
+}

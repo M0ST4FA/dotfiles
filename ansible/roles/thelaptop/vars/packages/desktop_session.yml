@@ -19,3 +19,5 @@ packages_desktop_session:
   - xdg-desktop-portal-hyprland
   - xdg-desktop-portal-gtk
   - gnome-keyring
+  - xdg-desktop-portal-termfilechooser
+  - niri

@@ -1,3 +1,4 @@
 packages_dependencies:
   # Several apps require Electron 32; pin the binary package instead of -git.
   - electron32-bin
+  - python-tomlkit

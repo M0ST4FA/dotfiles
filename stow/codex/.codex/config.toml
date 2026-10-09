@@ -1,0 +1,110 @@
+model = "gpt-6.1-sol"
+model_reasoning_effort = "medium"
+service_tier = "fast"
+plan_mode_reasoning_effort = "xhigh"
+[projects."/home/m0st4fa/workspace/kernel/experiments/devices"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/medicine/mbset"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/projects/nerdio-mobile"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/experiments/sched"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/medicine/mbset/zagazig/Musclo"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/learning/opengl/learnopengl"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/learning/haskell/lyah/ch10"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/projects/nerdio-desktop"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/learning/haskell/lyah"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/learning/godot"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/learning/opengl"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/learning/haskell"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/medicine"]
+trust_level = "trusted"
+
+[tui]
+theme = "nord"
+status_line = ["model-with-reasoning", "current-dir", "context-remaining", "five-hour-limit", "weekly-limit", "thread-title"]
+status_line_use_colors = true
+pet = "null-signal"
+screen_reader_detection_done = true
+session_picker_view = "comfortable"
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+gpt-6-astra = 4
+"gpt-6.1-sol" = 2
+
+[notice]
+hide_rate_limit_model_nudge = true
+
+[notice.model_migrations]
+"gpt-5.6-sol" = "gpt-6-sol"
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/plugins/cache/openai-curated-remote/openai-templates/0.1.1/skills/artifact-template-financial-budget/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/plugins/cache/openai-curated-remote/openai-templates/0.1.1/skills/artifact-template-investment-committee-memo/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/plugins/cache/openai-curated-remote/openai-templates/0.1.1/skills/artifact-template-legal-memorandum/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/plugins/cache/openai-curated-remote/openai-templates/0.1.1/skills/artifact-template-operating-calendar/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/plugins/cache/openai-curated-remote/openai-templates/0.1.1/skills/artifact-template-operating-review/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/plugins/cache/openai-curated-remote/openai-templates/0.1.1/skills/artifact-template-sales-pipeline/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/plugins/cache/openai-curated-remote/openai-templates/0.1.1/skills/artifact-template-strategy-memorandum/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/plugins/cache/openai-curated-remote/openai-templates/0.1.1/skills/artifact-template-team-alignment/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/plugins/cache/openai-curated-remote/openai-templates/0.1.1/skills/artifact-template-three-statement-forecast/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/m0st4fa/.codex/skills/.system/imagegen/SKILL.md"
+enabled = false

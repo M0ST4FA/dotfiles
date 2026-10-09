@@ -1,0 +1,9 @@
+enable = true
+
+low_threshold = 20
+high_threshold = 85
+
+hour = 20
+minute = 30
+
+day_cutoff_hour = 2
