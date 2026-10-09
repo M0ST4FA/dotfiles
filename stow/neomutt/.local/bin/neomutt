@@ -13,12 +13,23 @@ state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/mail-sync"
 mkdir -p "$state_dir"
 view_lock="$state_dir/view.lock"
 
+# Let NeoMutt receive Ctrl-S instead of the terminal treating it as XOFF.
+# Keep this setting local to the client session and restore the caller's tty.
+if [ -t 0 ]; then
+  tty_settings=$(stty -g 2>/dev/null) || exit 1
+  trap 'stty "$tty_settings" 2>/dev/null' 0
+  trap 'exit 129' HUP
+  trap 'exit 130' INT
+  trap 'exit 143' TERM
+  stty -ixon || exit 1
+fi
+
 case "${TERM:-}" in
   xterm-kitty*)
-    exec flock --shared "$view_lock" env TERM=xterm-direct /usr/bin/neomutt "$@"
+    flock --shared "$view_lock" env TERM=xterm-direct /usr/bin/neomutt "$@"
     ;;
   *)
-    exec flock --shared "$view_lock" /usr/bin/neomutt "$@"
+    flock --shared "$view_lock" /usr/bin/neomutt "$@"
     ;;
 esac
 
