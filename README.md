@@ -2,6 +2,9 @@
 
 Personal Arch Linux configuration managed with GNU Stow and Ansible.
 
+See [CONFIGURATION.md](CONFIGURATION.md) for managed files, local state,
+Noctalia capture, offline mail, verification, and rollback.
+
 ## Install
 
 Clone the repository into the home directory:
@@ -14,13 +17,13 @@ The laptop Ansible role installs every package listed in
 `ansible/roles/thelaptop/tasks/stow.yml`. To install one package manually:
 
 ```sh
-stow -v -d ~/dotfiles/stow -t ~ <package>
+stow --no-folding -v -d ~/dotfiles/stow -t ~ <package>
 ```
 
 Preview it first when existing files may collide:
 
 ```sh
-stow --no -v -d ~/dotfiles/stow -t ~ <package>
+stow --no --no-folding -v -d ~/dotfiles/stow -t ~ <package>
 ```
 
 To remove only the links for a package:
