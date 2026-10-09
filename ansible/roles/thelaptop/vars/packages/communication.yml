@@ -11,3 +11,4 @@ package_feature_sets_communication:
     - isync
     - notmuch
     - msmtp
+    - libsecret # secret-tool provides the existing keyring credential interface.

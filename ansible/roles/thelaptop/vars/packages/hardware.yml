@@ -19,3 +19,4 @@ packages_hardware:
   - libva-utils
 
   - nvme-cli
+  - openrazer-daemon

@@ -74,3 +74,13 @@
     - hypridle.service
     - hyprpolkitagent.service
   become: true
+
+- name: Enable the graphical-session mail timer
+  tags: services
+  ansible.builtin.file:
+    src: "../mail-sync.timer"
+    dest: "/home/{{ user }}/.config/systemd/user/graphical-session.target.wants/mail-sync.timer"
+    state: link
+    owner: "{{ user }}"
+    group: "{{ user }}"
+  become: true

@@ -1,5 +1,6 @@
 packages_desktop_session:
   - hyprland
+  # Niri configs are preserved in Stow, but the compositor is intentionally not installed.
   - hypridle
   - hyprlock
   - hyprsunset
@@ -19,5 +20,4 @@ packages_desktop_session:
   - xdg-desktop-portal-hyprland
   - xdg-desktop-portal-gtk
   - gnome-keyring
-  - xdg-desktop-portal-termfilechooser
-  - niri
+  - xdg-desktop-portal-termfilechooser-hunkyburrito-git

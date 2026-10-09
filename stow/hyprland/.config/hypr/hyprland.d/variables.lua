@@ -6,7 +6,7 @@ local vars = {
 	terminal = "kitty",
 	secondaryTerminal = "foot",
 	browser = "firefox",
-	fileManager = "kitty -f yazi",
+	fileManager = "kitty yazi",
 	readingApp = "zathura",
 
 	menu = ipc .. "panel-toggle launcher",

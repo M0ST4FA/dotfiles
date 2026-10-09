@@ -4,3 +4,4 @@ packages_media:
   - pavucontrol
   - gimp
   - imagemagick
+  - mpv
