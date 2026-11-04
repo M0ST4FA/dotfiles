@@ -44,3 +44,13 @@ hl.window_rule({
 	maximize = true,
 	size = "1280 800",
 })
+
+-- Portal dialogs must stay visible above the scrolling workspace layout.
+hl.window_rule({
+	name = "termfilechooser-dialog",
+	match = { class = "^termfilechooser$" },
+	float = true,
+	size = "80% 80%",
+	center = true,
+	opaque = true,
+})
