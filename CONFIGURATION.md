@@ -26,7 +26,7 @@ All paths in this table are relative to `~`. Edit the linked file to customize i
 | Package | Managed files | Customization and local data |
 | --- | --- | --- |
 | desktop-portal | `.config/xdg-desktop-portal/hyprland-portals.conf` | Hyprland/GTK defaults, termfilechooser for file dialogs. The previous `config` filename was unsupported; it is backed up. |
-| termfilechooser | `.config/xdg-desktop-portal-termfilechooser/config` | Installed configuration copied out of `/usr/share`; Yazi chooser, Kitty terminal. Save/Open modes and help-file behavior are configurable here. |
+| termfilechooser | `.config/xdg-desktop-portal-termfilechooser/config` | Installed configuration copied out of `/usr/share`; Yazi chooser, Kitty terminal with a dedicated `termfilechooser` class. Save/Open modes and help-file behavior are configurable here. |
 | qalculate | `.config/qalculate/qalc.cfg` | Existing precision, display and calculation preferences. |
 | pet | `.config/pet/config.toml`, `.config/pet/snippet.toml` | Both existing snippets are entries in `snippet.toml`. Token fields are empty. Keep credentials in local environment/keyring configuration; never fill tokens in the tracked file. |
 | jrnl | `.config/jrnl/jrnl.yaml` | Encryption remains enabled; journal remains `~/.local/share/jrnl/journal.txt`. Journal content and its password/keyring stay local. |
@@ -82,6 +82,12 @@ Niri starts `noctalia` and its shortcuts use `noctalia msg` v5 commands. Hyprlan
 Yazi command is `kitty yazi`; the obsolete Quickshell lock command was replaced.
 The unused broken Kitty `theme.conf` link was removed; `current-theme.conf` remains.
 
+The file picker uses Kitty's dedicated `termfilechooser` class. A
+[Hyprland floating-window rule](https://wiki.hypr.land/configuring/core/rules/window-rules/)
+centers it above tiled windows so it stays visible in the scrolling layout. The
+underlying Yazi wrapper, file selection behavior, and save/open preferences remain
+provided by the installed termfilechooser package.
+
 ## Local mail
 
 Normal `neomutt` and the Noctalia launcher read local Maildirs. `neomutt --online`
@@ -100,9 +106,10 @@ and Subject. Press `h` to toggle full headers.
 | B | Toggle sidebar |
 | Alt-X | Notmuch query over downloaded mail |
 | `$` | Save local mailbox changes; may ask to purge messages marked for deletion |
-| Ctrl-S | Fetch all accounts, index, and refresh the current view |
+| Ctrl-S | Request background synchronization; continue reading immediately |
+| `,s` | Show whether synchronization is running, succeeded, or failed |
 | V | Read decoded mail in Neovim |
-| Ctrl-U | Select a message URL |
+| Ctrl-B | Select a message URL with urlscan |
 
 The online profile preserves its original F2/F3/F4 account order and adds F5 for
 Mostafa Nerdio. Account-specific Notmuch views cover all mirrored folders. In a
@@ -224,8 +231,20 @@ can find mail helpers without inheriting an interactive shell's environment. It
 also disables terminal Ctrl-S/Ctrl-Q flow control for the client
 session and restores the previous terminal settings on exit. This lets Ctrl-S reach
 the synchronization macro. If an older session freezes after Ctrl-S, press Ctrl-Q,
-then close and reopen NeoMutt. Manual synchronization runs in the foreground and
-can take a few seconds while all accounts are contacted.
+then close and reopen NeoMutt. Ctrl-S uses `mail-sync-ui` to request the existing
+systemd service without blocking the client or displaying progress output. Repeated
+requests while it is running do not create another service instance. Press `,s` to
+check progress or the last result; detailed errors remain in the user journal.
+Local mailbox checks run every five seconds, and new mail can appear while reading.
+These checks inspect local files; server synchronization keeps its existing timer.
+Running `mail-sync` directly in a terminal still runs in the foreground.
+
+Ctrl-B opens urlscan in both local and online profiles and also works
+in attachment and compose menus. This overrides `/etc/neomuttrc`, which otherwise
+binds Ctrl-B to the separate `urlview` program. Its terminal type
+is set to `xterm-256color` as recommended in urlscan's installed documentation; NeoMutt
+retains its direct-color theme. These shortcuts act on the selected message, rather
+than a clicked URL.
 
 ## Verification and rollback
 
@@ -307,7 +326,7 @@ to the home directory. Runtime state and downloaded submodules are described sep
 | mimeapps | `.config/mimeapps.list` |
 | mpd | `.config/mpd/mpd.conf` |
 | mpv | `.config/mpv/mpv.conf` |
-| neomutt | `.config/isync/mbsyncrc`<br>`.config/msmtp/config`<br>`.config/neomutt/accounts/gmail.rc`<br>`.config/neomutt/accounts/local.rc`<br>`.config/neomutt/accounts/nerdio.rc`<br>`.config/neomutt/aliases.rc`<br>`.config/neomutt/colors-nord-truecolor.rc`<br>`.config/neomutt/colors-nord.rc`<br>`.config/neomutt/mailcap`<br>`.config/neomutt/neomuttrc`<br>`.config/neomutt/notmuch.rc`<br>`.config/neomutt/online/accounts/gmail.rc`<br>`.config/neomutt/online/accounts/nerdio.rc`<br>`.config/neomutt/online/neomuttrc`<br>`.config/notmuch/default/config`<br>`.config/systemd/user/mail-delivery.service`<br>`.config/systemd/user/mail-session.service`<br>`.config/systemd/user/mail-sync.service`<br>`.config/systemd/user/mail-sync.timer`<br>`.local/bin/mail-bootstrap`<br>`.local/bin/mail-mirror-config`<br>`.local/bin/mail-queue`<br>`.local/bin/mail-queue-flush`<br>`.local/bin/mail-session`<br>`.local/bin/mail-submit`<br>`.local/bin/mail-sync`<br>`.local/bin/neomutt`<br>`.local/bin/neomutt-colors`<br>`.local/bin/neomutt-credentials`<br>`.local/bin/neomutt-store-password`<br>`.local/share/applications/neomutt.desktop` |
+| neomutt | `.config/isync/mbsyncrc`<br>`.config/msmtp/config`<br>`.config/neomutt/accounts/gmail.rc`<br>`.config/neomutt/accounts/local.rc`<br>`.config/neomutt/accounts/nerdio.rc`<br>`.config/neomutt/aliases.rc`<br>`.config/neomutt/colors-nord-truecolor.rc`<br>`.config/neomutt/colors-nord.rc`<br>`.config/neomutt/mailcap`<br>`.config/neomutt/neomuttrc`<br>`.config/neomutt/notmuch.rc`<br>`.config/neomutt/online/accounts/gmail.rc`<br>`.config/neomutt/online/accounts/nerdio.rc`<br>`.config/neomutt/online/neomuttrc`<br>`.config/notmuch/default/config`<br>`.config/systemd/user/mail-delivery.service`<br>`.config/systemd/user/mail-session.service`<br>`.config/systemd/user/mail-sync.service`<br>`.config/systemd/user/mail-sync.timer`<br>`.local/bin/mail-bootstrap`<br>`.local/bin/mail-mirror-config`<br>`.local/bin/mail-queue`<br>`.local/bin/mail-queue-flush`<br>`.local/bin/mail-session`<br>`.local/bin/mail-submit`<br>`.local/bin/mail-sync`<br>`.local/bin/mail-sync-ui`<br>`.local/bin/neomutt`<br>`.local/bin/neomutt-colors`<br>`.local/bin/neomutt-credentials`<br>`.local/bin/neomutt-store-password`<br>`.local/share/applications/neomutt.desktop` |
 | niri | `.config/niri/config.kdl`<br>`.config/niri/dms/alttab.kdl`<br>`.config/niri/dms/binds.kdl`<br>`.config/niri/dms/colors.kdl`<br>`.config/niri/dms/cursor.kdl`<br>`.config/niri/dms/layout.kdl`<br>`.config/niri/dms/outputs.kdl`<br>`.config/niri/dms/windowrules.kdl`<br>`.config/niri/dms/wpblur.kdl`<br>`.config/niri/niri.d/animations.kdl`<br>`.config/niri/niri.d/binds.kdl`<br>`.config/niri/niri.d/colors.kdl`<br>`.config/niri/niri.d/environment.kdl`<br>`.config/niri/niri.d/gestures.kdl`<br>`.config/niri/niri.d/input.kdl`<br>`.config/niri/niri.d/layerrules.kdl`<br>`.config/niri/niri.d/layout.kdl`<br>`.config/niri/niri.d/outputs.kdl`<br>`.config/niri/niri.d/windowrules.kdl`<br>`.config/niri/niri.d/workspaces.kdl` |
 | noctalia | `.config/noctalia/config.toml`<br>`.local/bin/noctalia-dotfiles` |
 | nvim | `.config/nvim/init.lua`<br>`.config/nvim/lua/core/colorscheme.lua`<br>`.config/nvim/lua/core/completion.lua`<br>`.config/nvim/lua/core/keymaps.lua`<br>`.config/nvim/lua/core/lazy.lua`<br>`.config/nvim/lua/core/neovide.lua`<br>`.config/nvim/lua/core/options.lua`<br>`.config/nvim/lua/plugins/dankcolors.lua`<br>`.config/nvim/lua/plugins/editor.lua`<br>`.config/nvim/lua/plugins/lsp.lua`<br>`.config/nvim/lua/plugins/misc.lua`<br>`.config/nvim/lua/plugins/theme.lua`<br>`.config/nvim/lua/plugins/ui.lua` |
