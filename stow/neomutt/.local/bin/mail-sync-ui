@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+"""Emit NeoMutt status commands without running network work in the client."""
+import json
+import subprocess
+import sys
+
+
+def main():
+    action = sys.argv[1] if len(sys.argv) == 2 else ''
+    if action not in ('request', 'status'):
+        raise SystemExit('usage: mail-sync-ui request|status')
+    try:
+        if action == 'request':
+            subprocess.run(['systemctl', '--user', 'start', '--no-block', 'mail-sync.service'],
+                           check=True, capture_output=True, text=True, timeout=3)
+            message = 'Mail sync requested in background. Keep reading; ,s shows status.'
+        else:
+            result = subprocess.run(['systemctl', '--user', 'show', 'mail-sync.service',
+                                     '--property=ActiveState', '--property=Result'],
+                                    check=True, capture_output=True, text=True, timeout=3)
+            values = dict(line.split('=', 1) for line in result.stdout.splitlines() if '=' in line)
+            if values.get('ActiveState') in ('active', 'activating', 'reloading'):
+                message = 'Mail sync is running in background.'
+            elif values.get('Result') == 'success':
+                message = 'Last mail sync completed successfully.'
+            else:
+                message = 'Mail sync failed; see journalctl --user -u mail-sync.service.'
+    except (OSError, subprocess.SubprocessError):
+        message = 'Mail sync service unavailable; see journalctl --user -u mail-sync.service.'
+    print('echo ' + json.dumps(message))
+
+
+if __name__ == '__main__':
+    main()

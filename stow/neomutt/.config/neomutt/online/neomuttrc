@@ -90,7 +90,8 @@ bind index,pager B sidebar-toggle-visible
 bind pager j next-line
 bind pager k previous-line
 macro index,pager V "<enter-command>set pipe_decode=yes<enter><pipe-message>nvim -R -c 'setlocal filetype=mail' -<enter><enter-command>unset pipe_decode<enter>" "View decoded message in read-only Neovim"
-macro index,pager \cU "<pipe-message>urlscan<Enter>" "Select a URL from the message"
+macro index,pager \cb "<pipe-message>TERM=xterm-256color urlscan --dedupe<Enter>" "Select a URL with urlscan"
+macro attach,compose \cb "<pipe-entry>TERM=xterm-256color urlscan --dedupe<Enter>" "Select a URL with urlscan"
 
 # F2/F3/F4 switch accounts from either the index or pager.
 macro index,pager <F2> "<change-folder>imaps://infra@nerdio.app@mail.nerdio.app:993/INBOX<Enter>" "Open infra@nerdio.app"

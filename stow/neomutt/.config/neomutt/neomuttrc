@@ -25,8 +25,8 @@ set account_command = "~/.local/bin/neomutt-credentials"
 set header_cache = "~/.cache/neomutt/headers"
 set message_cachedir = "~/.cache/neomutt/bodies"
 set message_cache_clean = no
-set mail_check = 60
-set timeout = 15
+set mail_check = 5
+set timeout = 5
 set imap_keepalive = 300
 set imap_check_subscribed = yes
 
@@ -92,7 +92,8 @@ bind index,pager B sidebar-toggle-visible
 bind pager j next-line
 bind pager k previous-line
 macro index,pager V "<enter-command>set pipe_decode=yes<enter><pipe-message>nvim -R -c 'setlocal filetype=mail' -<enter><enter-command>unset pipe_decode<enter>" "View decoded message in read-only Neovim"
-macro index,pager \cU "<pipe-message>urlscan<Enter>" "Select a URL from the message"
+macro index,pager \cb "<pipe-message>TERM=xterm-256color urlscan --dedupe<Enter>" "Select a URL with urlscan"
+macro attach,compose \cb "<pipe-entry>TERM=xterm-256color urlscan --dedupe<Enter>" "Select a URL with urlscan"
 
 
 # F2–F5 switch local accounts. Alt-X searches the local index.
@@ -100,4 +101,5 @@ macro index,pager <F2> "<change-folder>~/.local/share/mail/nerdio-infra/INBOX<En
 macro index,pager <F3> "<change-folder>~/.local/share/mail/nerdio-support/INBOX<Enter>" "Open nerdio-support"
 macro index,pager <F4> "<change-folder>~/.local/share/mail/nerdio-mostafa/INBOX<Enter>" "Open nerdio-mostafa"
 macro index,pager <F5> "<change-folder>~/.local/share/mail/gmail-mostafa/INBOX<Enter>" "Open gmail-mostafa"
-macro index,pager \cs "<enter-command>set mail_check=0<Enter><shell-escape>mail-sync<Enter><enter-command>reset mail_check<Enter>" "Synchronize and index mail"
+macro index,pager \cs "<enter-command>source \"~/.local/bin/mail-sync-ui request|\"<Enter>" "Request background mail sync"
+macro index,pager ,s "<enter-command>source \"~/.local/bin/mail-sync-ui status|\"<Enter>" "Show mail sync status"

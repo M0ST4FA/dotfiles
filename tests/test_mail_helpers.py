@@ -17,4 +17,17 @@ class HelpersTests(unittest.TestCase):
    p=self.mock/name; p.write_text(f'#!/bin/sh\nprintf "{name}\\n" >> "$SYNC_LOG"\nexit {rc}\n'); p.chmod(0o755)
   result=subprocess.run([str(BIN/'mail-sync')],env=self.env,capture_output=True,text=True)
   self.assertNotEqual(result.returncode,0); self.assertEqual((self.root/'sync.log').read_text().splitlines(),['mail-mirror-config','mbsync']*4+['notmuch','mail-queue-flush'])
+ def test_sync_ui_reports_completion_and_failure_without_raw_output(self):
+  import json
+  command=self.mock/'systemctl'
+  for active,result,expected in [('inactive','success','completed successfully'),('failed','exit-code','Mail sync failed')]:
+   command.write_text(f'#!/bin/sh\nprintf "ActiveState={active}\\nResult={result}\\n"\n');command.chmod(0o755)
+   response=subprocess.run([str(BIN/'mail-sync-ui'),'status'],env=self.env,capture_output=True,text=True)
+   self.assertEqual(response.returncode,0);self.assertTrue(response.stdout.startswith('echo '))
+   self.assertIn(expected,json.loads(response.stdout[5:]))
+ def test_sync_ui_handles_unavailable_service(self):
+  command=self.mock/'systemctl';command.write_text('#!/bin/sh\necho "raw systemd error" >&2\nexit 1\n');command.chmod(0o755)
+  response=subprocess.run([str(BIN/'mail-sync-ui'),'request'],env=self.env,capture_output=True,text=True)
+  self.assertEqual(response.returncode,0);self.assertIn('service unavailable',response.stdout)
+  self.assertNotIn('raw systemd error',response.stdout+response.stderr)
 if __name__=='__main__': unittest.main()
