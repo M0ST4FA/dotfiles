@@ -5,6 +5,9 @@ Personal Arch Linux configuration managed with GNU Stow and Ansible.
 See [CONFIGURATION.md](CONFIGURATION.md) for managed files, local state,
 Noctalia capture, offline mail, verification, and rollback.
 
+For an optional laptop-hosted task sync server, see the
+[Taskwarrior and Fatto setup guide](guides/taskwarrior-fatto-sync.md).
+
 ## Install
 
 Clone the repository into the home directory:
