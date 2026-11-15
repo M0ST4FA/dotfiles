@@ -34,3 +34,10 @@ __pycache__/
 
 # Device runtime state stays local, outside the managed preferences.
 stow/polychromatic/.config/polychromatic/states/
+
+# Local reference material and verification fixtures.
+/tests/
+/guides/
+
+# Sync credentials must remain ordinary private files outside Stow.
+/stow/taskwarrior/.config/task/sync.rc
