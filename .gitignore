@@ -43,8 +43,8 @@ stow/polychromatic/.config/polychromatic/states/
 /stow/taskwarrior/.config/task/sync.rc
 
 # Service credentials and runtime data stay local.
-/stow/services/.local/services/**/.env*
-/stow/services/.local/services/**/secrets/
-/stow/services/.local/services/**/data/
-/stow/services/.local/services/**/*.db*
-/stow/services/.local/services/**/*.sqlite*
+/stow/taskwarrior/.local/services/**/.env*
+/stow/taskwarrior/.local/services/**/secrets/
+/stow/taskwarrior/.local/services/**/data/
+/stow/taskwarrior/.local/services/**/*.db*
+/stow/taskwarrior/.local/services/**/*.sqlite*
