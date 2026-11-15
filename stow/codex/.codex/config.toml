@@ -1,6 +1,6 @@
 model = "gpt-6.1-sol"
-model_reasoning_effort = "medium"
-service_tier = "fast"
+model_reasoning_effort = "high"
+service_tier = "default"
 plan_mode_reasoning_effort = "xhigh"
 [projects."/home/m0st4fa/workspace/kernel/experiments/devices"]
 trust_level = "trusted"
@@ -50,6 +50,15 @@ trust_level = "trusted"
 [projects."/home/m0st4fa/workspace/medicine"]
 trust_level = "trusted"
 
+[projects."/home/m0st4fa/workspace/learning/graphics/vulkan/howtovulkan"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/workspace/learning/languages/forth"]
+trust_level = "trusted"
+
+[projects."/home/m0st4fa/.codex/worktrees/95bc/nerdio-desktop"]
+trust_level = "trusted"
+
 [tui]
 theme = "nord"
 status_line = ["model-with-reasoning", "current-dir", "context-remaining", "five-hour-limit", "weekly-limit", "thread-title"]
@@ -61,7 +70,7 @@ session_picker_view = "comfortable"
 [tui.model_availability_nux]
 "gpt-5.5" = 4
 gpt-6-astra = 4
-"gpt-6.1-sol" = 2
+"gpt-6.1-sol" = 4
 
 [notice]
 hide_rate_limit_model_nudge = true

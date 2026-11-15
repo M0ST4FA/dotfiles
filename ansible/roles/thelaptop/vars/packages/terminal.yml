@@ -35,8 +35,11 @@ packages_terminal:
   - pet-bin
 
   - rsync
+  - curl
   - wget
   - yt-dlp
+  - nethogs
+  - netcat
   - jrnl
   - fastfetch
   - taskwarrior-tui

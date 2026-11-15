@@ -48,7 +48,7 @@ return {
 				"go",
 				"kotlin",
 				"gnuplot",
-				"haskell",
+				-- "haskell", -- buggy
 				"yaml",
 				"markdown",
 				"gdscript",
@@ -63,7 +63,7 @@ return {
 					local ft = vim.bo[args.buf].filetype
 					local lang = vim.treesitter.language.get_lang(ft)
 
-					local ignore_ft = { "notify", "gas" }
+					local ignore_ft = { "notify", "gas", "haskell" }
 
 					for _, name in ipairs(ignore_ft) do
 						if ft == name then

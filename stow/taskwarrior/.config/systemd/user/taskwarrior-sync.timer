@@ -1,0 +1,12 @@
+[Unit]
+Description=Synchronize Taskwarrior while the laptop is awake
+
+[Timer]
+OnActiveSec=30s
+OnCalendar=*:0/5
+Persistent=true
+WakeSystem=false
+AccuracySec=15s
+
+[Install]
+WantedBy=timers.target

@@ -7,6 +7,22 @@
     group: root
   become: true
 
+- name: Unlock GNOME Keyring during greetd authentication
+  tags: sysconf
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/greetd
+    insertafter: '^auth\s+include\s+system-local-login$'
+    line: 'auth       optional     pam_gnome_keyring.so'
+  become: true
+
+- name: Start and unlock GNOME Keyring in the greetd session
+  tags: sysconf
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/greetd
+    insertafter: '^session\s+include\s+system-local-login$'
+    line: 'session    optional     pam_gnome_keyring.so auto_start'
+  become: true
+
 - name: Install local system scripts
   tags: sysconf
   ansible.builtin.copy:

@@ -64,10 +64,10 @@ hl.bind(mainMod .. " + CTRL + F", function()
 end)
 
 -- Window size
-hl.bind(mainMod .. " + minus", hl.dsp.window.resize({ x = -50, y = 0, relative = true }, { repeating = true }))
-hl.bind(mainMod .. " + equal", hl.dsp.window.resize({ x = 50, y = 0, relative = true }, { repeating = true }))
-hl.bind(mainMod .. " + SHIFT + minus", hl.dsp.window.resize({ x = 0, y = -50, relative = true }, { repeating = true }))
-hl.bind(mainMod .. " + SHIFT + equal", hl.dsp.window.resize({ x = 0, y = 50, relative = true }, { repeating = true }))
+hl.bind(mainMod .. " + minus", hl.dsp.window.resize({ x = -50, y = 0, relative = true, repeating = true }))
+hl.bind(mainMod .. " + equal", hl.dsp.window.resize({ x = 50, y = 0, relative = true, repeating = true }))
+hl.bind(mainMod .. " + SHIFT + minus", hl.dsp.window.resize({ x = 0, y = -50, relative = true, repeating = true }))
+hl.bind(mainMod .. " + SHIFT + equal", hl.dsp.window.resize({ x = 0, y = 50, relative = true, repeating = true }))
 
 -- Focus movement
 hl.bind(mainMod .. " + H", function()

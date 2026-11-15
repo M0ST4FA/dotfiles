@@ -20,7 +20,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = { class = "^WebApp.*|firefox" },
+	match = { class = "^WebApp.*|firefox|zen" },
 	workspace = "2 silent",
 })
 
@@ -43,6 +43,11 @@ hl.window_rule({
 	match = { class = "mame|qemu|Waydroid" },
 	maximize = true,
 	size = "1280 800",
+})
+
+hl.window_rule({
+	match = { class = "org.pwmt.zathura|com.github.flxzt.rnote" },
+	opaque = true,
 })
 
 -- Portal dialogs must stay visible above the scrolling workspace layout.

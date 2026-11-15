@@ -44,6 +44,10 @@ vim.filetype.add({
 	extension = {
 		S = "gas",
 		lua = "lua",
+		opencl = "c",
+		cl = "c",
+		tpp = "cpp",
+		forth = "forth",
 	},
 })
 vim.lsp.config.asm_lsp = {

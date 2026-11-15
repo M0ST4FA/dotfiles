@@ -3,6 +3,7 @@ packages_development:
   - cmake
   - cmake-extras
   - git
+  - bear
 
   - neovim
   - neovide
@@ -21,6 +22,9 @@ packages_development:
   # Libraries
   - cglm
   - glm
+  - opencl-mesa
+  - opencl-headers
+  - clinfo
 
   - freerdp
   - godot

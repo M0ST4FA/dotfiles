@@ -33,7 +33,7 @@ hl.config({
 				inactive = colors.groupIndicatorColorInactive,
 			},
 			render_titles = false,
-			height = 0,
+			height = 1,
 			rounding = 5,
 		},
 	},

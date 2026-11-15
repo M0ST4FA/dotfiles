@@ -17,6 +17,9 @@ hl.config({
 			output = "DP-1",
 		},
 	},
+	cursor = {
+		no_warps = true,
+	},
 	device = {
 		{
 			name = "razer-razer-deathadder-v2",
@@ -26,6 +29,11 @@ hl.config({
 			name = "wacom-one-by-wacom-m-pen",
 			transform = 0,
 			sensitivity = 5,
+		},
+		{
+			name = "mousebuds-pro-mouse",
+			scroll_factor = 0.3,
+			sensitivity = 1,
 		},
 	},
 })

@@ -5,6 +5,13 @@ hl.monitor({
 	scale = "1.25",
 })
 
+hl.monitor({
+	output = "DVI-I-2",
+	mode = "preferred",
+	position = "auto-left",
+	scale = "2",
+})
+
 -- Add hyprland.d to the Lua search path so we can require its contents directly
 local conf_dir = os.getenv("HOME") .. "/.config/hypr/hyprland.d/"
 package.path = package.path .. ";" .. conf_dir .. "?.lua"

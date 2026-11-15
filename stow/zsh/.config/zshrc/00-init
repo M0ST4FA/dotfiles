@@ -6,7 +6,10 @@
 export EDITOR=nvim
 export SYSTEMD_EDITOR=nvim
 export ZSH="$HOME/.oh-my-zsh"
-PATH="/home/m0st4fa/.local/bin:/home/m0st4fa/go/bin:$PATH:/home/m0st4fa/.cargo/bin"
+export PATH="/home/m0st4fa/.local/bin:/home/m0st4fa/go/bin:$PATH:/home/m0st4fa/.cargo/bin:$PATH"
+
+# Make OpenCL recognize the intel iris iGPU
+export RUSTICL_ENABLE=iris
 
 # This variable tells zsh about what to consider part of a word.
 # I remove some characters so that zsh considers them word boundaries.
@@ -26,8 +29,16 @@ source "$ZINIT_HOME/zinit.zsh"
 export ANDROID_HOME="$HOME/Android/Sdk"
 
 # Add tools to PATH
-PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin"
 
+# -----------------------------------------------------
 # Haskell
+# -----------------------------------------------------
+
 [ -f "/home/m0st4fa/.ghcup/env" ] && source "/home/m0st4fa/.ghcup/env" # ghcup-env
 
+
+# -----------------------------------------------------
+# Bitwarden
+# -----------------------------------------------------
+export BW_SESSION="$(tr -d '\n' < ~/.config/bw_session)"

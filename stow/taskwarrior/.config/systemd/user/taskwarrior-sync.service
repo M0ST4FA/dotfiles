@@ -1,0 +1,12 @@
+[Unit]
+Description=Synchronize Taskwarrior through the laptop server
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/.local/services/taskchampion
+Environment=TASKRC=%h/.config/task/taskrc
+Environment=PATH=/usr/local/bin:/usr/bin
+ExecStartPre=/usr/bin/docker compose up -d --wait
+ExecStart=/usr/bin/task sync
+TimeoutStartSec=2min
+UMask=0077

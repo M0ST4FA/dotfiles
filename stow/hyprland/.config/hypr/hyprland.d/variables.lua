@@ -5,7 +5,7 @@ local screenshot_cmd = os.getenv("HOME") .. "/.local/bin/screenshot "
 local vars = {
 	terminal = "kitty",
 	secondaryTerminal = "foot",
-	browser = "firefox",
+	browser = "zen-browser",
 	fileManager = "kitty yazi",
 	readingApp = "zathura",
 
