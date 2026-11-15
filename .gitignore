@@ -41,3 +41,10 @@ stow/polychromatic/.config/polychromatic/states/
 
 # Sync credentials must remain ordinary private files outside Stow.
 /stow/taskwarrior/.config/task/sync.rc
+
+# Service credentials and runtime data stay local.
+/stow/services/.local/services/**/.env*
+/stow/services/.local/services/**/secrets/
+/stow/services/.local/services/**/data/
+/stow/services/.local/services/**/*.db*
+/stow/services/.local/services/**/*.sqlite*

@@ -1,0 +1,17 @@
+name: taskchampion-sync
+services:
+  server:
+    image: ghcr.io/gothenburgbitfactory/taskchampion-sync-server:0.7.1
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:61473:8080"
+    environment:
+      LISTEN: "0.0.0.0:8080"
+      DATA_DIR: /var/lib/taskchampion-sync-server/data
+      CLIENT_ID: "${TASKCHAMPION_CLIENT_ID:?Set TASKCHAMPION_CLIENT_ID in .env}"
+      RUST_LOG: warn
+    volumes:
+      - data:/var/lib/taskchampion-sync-server/data
+volumes:
+  data:
+    name: taskchampion-sync-data
